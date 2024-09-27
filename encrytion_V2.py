@@ -23,7 +23,7 @@ class Encrytion:
 
 
         self.letter = ""
-        self.split_key = "###~~~123~~####~~3vgr~~~"
+        self.split_key = "###~~~123~~####~~qwer~~~"
 
     def encrypter(self,message,password,key):
         
