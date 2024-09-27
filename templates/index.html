@@ -22,7 +22,7 @@
                 <input id="password_to_encrypte" placeholder="Enter the password"><br>
                 <button onclick="encryptMessage()">Encrypt</button>
             </div>
-            <p>Encrypted Message: <span id="encrypted_message"></span></p>
+            <p>Encrypted Message: <span id="encrypted_message" class="message"></span></p>
             <p>Key: <span id="key"></span></p>
             <button onclick="Copy_text('encrypted_message')">Copy Message</button>
             <button onclick="Copy_text('key')">Copy Key</button>
@@ -36,7 +36,7 @@
                 <input id="password_to_decrypte" placeholder="Enter the password"><br>
                 <button onclick="decryptMessage()">Decrypt</button>
             </div>
-            <p>Decrypted Message: <span id="decrypted_message"></span></p>
+            <p>Decrypted Message: <span id="decrypted_message" class="message"></span></p>
         </div>
         <div id="Option_button">
             <button type="button" id="Encryption_button" onclick="show_encryption()">Encryption</button>

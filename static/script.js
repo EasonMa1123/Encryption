@@ -56,11 +56,7 @@ function show_decryption(){
     z.style.display = "Block";
 }
 function Copy_text(ID){
-    var copyText = document.getElementById(ID).textContent;
-
-    
-
-    
+    var copyText = document.getElementById(ID).textContent;    
     navigator.clipboard.writeText(copyText);
 
     if (copyText != "") {
@@ -68,4 +64,14 @@ function Copy_text(ID){
     } else {
         alert("No Text to copy!");
     }
+}
+
+function Create_txt_file (message){
+    const link = document.createElement("a");
+    const content = message;
+    const file = new Blob([content], { type: 'text/plain' });
+    link.href = URL.createObjectURL(file);
+    link.download = "sample.txt";
+    link.click();
+    URL.revokeObjectURL(link.href);
 }
