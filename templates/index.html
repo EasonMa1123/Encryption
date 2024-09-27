@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encryption App</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    
+</head>
+<body>
+    <h1>Encrypt and Decrypt Messages</h1>
+    <div id="content-wrapper">
+        <div id="encryption" class="Processor">
+            <div class="InOutPut">
+                <h2>Encrypt</h2>
+                <textarea id="message" placeholder="Enter your message"></textarea><br>
+                <input id="password_to_encrypte" placeholder="Enter the password"><br>
+                <button onclick="encryptMessage()">Encrypt</button>
+            </div>
+            <p>Encrypted Message: <span id="encrypted_message"></span></p>
+            <p>Key: <span id="key"></span></p>
+            <button onclick="Copy_text('encrypted_message')">Copy Message</button>
+            <button onclick="Copy_text('key')">Copy Key</button>
+        </div>
+
+        <div id="decryption" class="Processor">
+            <div class="InOutPut">
+                <h2>Decrypt</h2>
+                <textarea id="decrypt_message" placeholder="Enter encrypted message"></textarea><br>
+                <input id="decrypt_key" placeholder="Enter the key"><br>
+                <input id="password_to_decrypte" placeholder="Enter the password"><br>
+                <button onclick="decryptMessage()">Decrypt</button>
+            </div>
+            <p>Decrypted Message: <span id="decrypted_message"></span></p>
+        </div>
+        <div id="Option_button">
+            <button type="button" id="Encryption_button" onclick="show_encryption()">Encryption</button>
+            <button type="button" id="Decryption_button" onclick="show_decryption()">Decryption</button>
+        </div>
+    </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
