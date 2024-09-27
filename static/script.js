@@ -66,7 +66,8 @@ function Copy_text(ID){
     }
 }
 
-function Create_txt_file (message){
+function Create_txt_file (ID){
+    const message= document.getElementById(ID).value;
     const link = document.createElement("a");
     const content = message;
     const file = new Blob([content], { type: 'text/plain' });
