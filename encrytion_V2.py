@@ -75,14 +75,14 @@ class Encrytion:
     
     def check_password(self,message,password):
         message_splited=message.split(self.split_key)
-        print(message_splited) 
+        #print(message_splited) 
         real_password = message_splited[-2]
         
 
         if real_password == password:
             return True
         else:
-            print(message_splited)
+            #print(message_splited)
             return False
         
     def get_second_key(self,message):
@@ -132,7 +132,7 @@ class Encrytion:
 
     def unencryption(self,message,key:str,password:str):
         single_edecrypted_message= self.decrypter(message,key)
-        print(single_edecrypted_message)
+        #print(single_edecrypted_message)
         Correct=self.check_password(single_edecrypted_message,password)
         
         if Correct:
