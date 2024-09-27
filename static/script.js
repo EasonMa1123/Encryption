@@ -19,7 +19,6 @@ function encryptMessage() {
     });} else {
         alert("Invalid Message")
     }
-    
 }
 
 function decryptMessage() {
@@ -34,7 +33,6 @@ function decryptMessage() {
 
     }
 }
-
 function show_encryption(){
     var w = document.getElementById("Encryption_button");
     var x = document.getElementById("Decryption_button");
@@ -46,9 +44,6 @@ function show_encryption(){
     y.style.display = "block";
     z.style.display = "None";
 }
-
-
-
 function show_decryption(){
     var w = document.getElementById("Encryption_button");
     var x = document.getElementById("Decryption_button");
@@ -60,8 +55,6 @@ function show_decryption(){
     y.style.display = "None";
     z.style.display = "Block";
 }
-
-
 function Copy_text(ID){
     var copyText = document.getElementById(ID).textContent;
 
