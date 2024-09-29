@@ -15,6 +15,10 @@ h1 {
 }
 
 
+input {
+    margin: 15px;
+}
+
 #content-wrapper {
     display: flex;
     flex-direction: column;

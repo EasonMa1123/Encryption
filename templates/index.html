@@ -18,6 +18,7 @@
         <div id="encryption" class="Processor">
             <div class="InOutPut">
                 <h2>Encrypt</h2>
+                <input type="file" id="plain_text_message_file" placeholder="Upload message" accept=".txt"></br>
                 <textarea id="message" placeholder="Enter your message"></textarea><br>
                 <input id="password_to_encrypte" placeholder="Enter the password"><br>
                 <button onclick="encryptMessage()">Encrypt</button>
@@ -32,12 +33,14 @@
         <div id="decryption" class="Processor">
             <div class="InOutPut">
                 <h2>Decrypt</h2>
+                <input type="file" id="decrypt_message_file" placeholder="Upload encrypted message" accept=".txt"></br>
                 <textarea id="decrypt_message" placeholder="Enter encrypted message"></textarea><br>
                 <input id="decrypt_key" placeholder="Enter the key"><br>
                 <input id="password_to_decrypte" placeholder="Enter the password"><br>
                 <button onclick="decryptMessage()">Decrypt</button>
             </div>
             <p>Decrypted Message: <span id="decrypted_message" class="message"></span></p>
+            <button onclick="Create_txt_file('decrypted_message')">Download decrypted Message/Data</button>
         </div>
         <div id="Option_button">
             <button type="button" id="Encryption_button" onclick="show_encryption()">Encryption</button>
