@@ -27,6 +27,32 @@ function encryptMessage() {
     }
 }
 
+function disable_Input(IDToNotDisable){
+    const x_name = "plain_text_message_file"
+    const y_name = "image_file"
+    const z_name = "message"
+
+    var x = document.getElementById(x_name)
+    var y = document.getElementById(y_name)
+    var z = document.getElementById(z_name)
+
+    if (x_name == IDToNotDisable){
+        y.style.display = "None";
+        z.style.display = "None";
+        x.style.display = "Block";
+    } else if (y_name == IDToNotDisable) {
+        x.style.display = "None";
+        z.style.display = "None";
+        y.style.display = "Block";
+
+    } else if(z_name == IDToNotDisable){
+        y.style.display = "None";
+        x.style.display = "None";
+        z.style.display = "Block";
+
+    }
+}
+
 
 function encryptingMessage(message, password) {
     $.post("/encrypt", { message: message,password:password }, function(data) {
@@ -109,6 +135,20 @@ function Create_txt_file (ID){
     } else {
         alert("No Text to download!")
     }
+}
+
+function ConvertImageToText(){
+    const img = new Image();
+    img.src = document.getElementById("image_file");
+    img
+    .decode()
+    
+    .catch((encodingError) => {
+        alert("Invalid Image")
+    });
+
+    return img
+
 }
 
 

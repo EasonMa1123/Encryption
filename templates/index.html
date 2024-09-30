@@ -16,9 +16,22 @@
     <h1>Encrypt and Decrypt Messages</h1>
     <div id="content-wrapper">
         <div id="encryption" class="Processor">
+            <div id="input_switch" class="switch-toggle">
+
+                <input id="Text_switch" name="state-d" type="radio" checked="" />
+                <label for="Text_switch" onclick="disable_Input('plain_text_message_file')">Text</label>
+              
+                <input id="Message_switch" name="state-d" type="radio" checked="" />
+                <label for="Message_switch"  onclick="disable_Input('message')"">Message</label>
+              
+                <input id="Image_switch" name="state-d" type="radio" />
+                <label for="Image_switch" onclick="disable_Input('image_file')">Image</label>
+              
+            </div>
             <div class="InOutPut">
                 <h2>Encrypt</h2>
                 <input type="file" id="plain_text_message_file" placeholder="Upload message" accept=".txt"></br>
+                <input type="file" id="image_file" placeholder="Upload image" accept="/image"></br>
                 <textarea id="message" placeholder="Enter your message"></textarea><br>
                 <input id="password_to_encrypte" placeholder="Enter the password"><br>
                 <button onclick="encryptMessage()">Encrypt</button>
