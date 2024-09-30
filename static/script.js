@@ -11,19 +11,29 @@ z.style.display = "None";
 
 function encryptMessage() {
     var message_file = document.getElementById('plain_text_message_file').files[0];
+    var image_file = document.getElementById('image_file').files[0];
     var message = document.getElementById('message').value;
     var password = document.getElementById('password_to_encrypte').value;
-    if (message_file) {
+
+    if (image_file) {
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            var imageContent = event.target.result; // Base64 string of the image
+            encryptingMessage(imageContent, password); // Send the image string for encryption
+        };
+        reader.readAsDataURL(image_file); // Read the image file as Base64
+       
+    } else if (message_file) {
         var reader = new FileReader();
         reader.onload = function(event) {
             var fileContent = event.target.result;
-            encryptingMessage(fileContent,password);
+            encryptingMessage(fileContent, password);
         };
         reader.readAsText(message_file);
     } else if (message !== "") {
         encryptingMessage(message, password);
     } else {
-        alert("Invalid Message");
+        alert("Invalid Message or Image");
     }
 }
 
@@ -39,16 +49,16 @@ function disable_Input(IDToNotDisable){
     if (x_name == IDToNotDisable){
         y.style.display = "None";
         z.style.display = "None";
-        x.style.display = "Block";
+        x.style.display = "initial";
     } else if (y_name == IDToNotDisable) {
         x.style.display = "None";
         z.style.display = "None";
-        y.style.display = "Block";
+        y.style.display = "initial";
 
     } else if(z_name == IDToNotDisable){
         y.style.display = "None";
         x.style.display = "None";
-        z.style.display = "Block";
+        z.style.display = "initial";
 
     }
 }
@@ -85,8 +95,43 @@ function decryptMessage() {
 
 function decryptingMessage(message, key, password) {
     $.post("/decrypt", { message: message, key: key, password: password }, function(data) {
-        $('#decrypted_message').text(data.decrypted_message);
+        if (data.decrypted_message.startsWith('data:image/')) {
+            // If the decrypted message is an image (Base64 string)
+            showDecryptedImage(data.decrypted_message);
+        } else {
+            // If it's a text message
+            $('#decrypted_message').text(data.decrypted_message);
+        }
     });
+}
+
+function showDecryptedImage(base64Image) {
+    // Create an img element and set the src to the Base64 string
+    var img = document.createElement('img');
+    img.src = base64Image;
+    img.alt = "Decrypted Image";
+    img.style.maxWidth = "100%";
+    
+    // Clear previous decrypted content and append the image
+    var decryptedMessageContainer = document.getElementById('decrypted_message');
+    decryptedMessageContainer.innerHTML = ""; // Clear existing content
+    decryptedMessageContainer.appendChild(img);
+
+    // Optionally, provide a download button for the image
+    var downloadBtn = document.createElement('button');
+    downloadBtn.textContent = "Download Image";
+    downloadBtn.onclick = function() {
+        downloadImage(base64Image);
+    };
+    decryptedMessageContainer.appendChild(downloadBtn);
+}
+
+function downloadImage(base64Image) {
+    // Create a link to download the image
+    const link = document.createElement("a");
+    link.href = base64Image;
+    link.download = "decrypted_image.png"; // Default name for the downloaded image
+    link.click();
 }
 
 function show_encryption(){
