@@ -98,9 +98,11 @@ function decryptingMessage(message, key, password) {
         if (data.decrypted_message.startsWith('data:image/')) {
             // If the decrypted message is an image (Base64 string)
             showDecryptedImage(data.decrypted_message);
+            document.getElementById("download_decrypt").style.display = "None"
         } else {
             // If it's a text message
             $('#decrypted_message').text(data.decrypted_message);
+            document.getElementById("download_decrypt").style.display = "initial"
         }
     });
 }
