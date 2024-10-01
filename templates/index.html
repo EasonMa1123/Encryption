@@ -23,7 +23,7 @@
                 <label for="Text_switch" onclick="disable_Input('plain_text_message_file')">Text</label>
               
                 <input id="Message_switch" name="state-d" type="radio" />
-                <label for="Message_switch"  onclick="disable_Input('message')"">Message</label>
+                <label for="Message_switch"  onclick="disable_Input('message')">Message</label>
               
                 <input id="Image_switch" name="state-d" type="radio" />
                 <label for="Image_switch" onclick="disable_Input('image_file')">Image</label>
@@ -55,7 +55,7 @@
                 <button onclick="decryptMessage()">Decrypt</button>
             </div>
             <p>Decrypted Message: <span id="decrypted_message" class="message"></span></p>
-            <button onclick="Create_txt_file('decrypted_message')">Download decrypted Message/Data</button>
+            <button id="download_decrypt"onclick="Create_txt_file('decrypted_message')">Download decrypted Message/Data</button>
         </div>
         <div id="Option_button">
             <button type="button" id="Encryption_button" onclick="show_encryption()">Encryption</button>
