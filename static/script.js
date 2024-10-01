@@ -197,4 +197,10 @@ function ConvertImageToText(){
 }
 
 
+function reset_file(){
+    document.getElementById("image_file").value = ""
+    document.getElementById("plain_text_message_file").value = ""
+    document.getElementById("message").textContent = ""
+}
+
 

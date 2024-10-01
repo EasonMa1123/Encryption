@@ -19,10 +19,10 @@
             <h2>Encrypt</h2>
             <div id="input_switch" class="switch-toggle">
 
-                <input id="Text_switch" name="state-d" type="radio" checked="" />
+                <input id="Text_switch" name="state-d" type="radio" />
                 <label for="Text_switch" onclick="disable_Input('plain_text_message_file')">Text</label>
               
-                <input id="Message_switch" name="state-d" type="radio" checked="" />
+                <input id="Message_switch" name="state-d" type="radio" />
                 <label for="Message_switch"  onclick="disable_Input('message')"">Message</label>
               
                 <input id="Image_switch" name="state-d" type="radio" />
@@ -41,6 +41,8 @@
             <button onclick="Copy_text('encrypted_message')">Copy Message</button>
             <button onclick="Copy_text('key')">Copy Key</button>
             <button onclick="Create_txt_file('encrypted_message')">Download Encrypted Message/Data</button>
+            <button onclick="reset_file()">Reset Data</button>
+            
         </div>
 
         <div id="decryption" class="Processor">
