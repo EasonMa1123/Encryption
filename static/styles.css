@@ -27,6 +27,15 @@ input {
     flex-grow: 1;                
 }
 
+#input_switch{
+    display: block;
+    align-self: center;
+}
+
+#encryption{
+    align-items: center;
+}
+
 .Processor {
     width: 300px;
     padding: 20px;
@@ -34,6 +43,8 @@ input {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #f9f9f9;
+    margin: auto;
+    align-items: center;
 }
 
 #encryption:hover{
