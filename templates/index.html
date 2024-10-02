@@ -17,21 +17,25 @@
     <div id="content-wrapper">
         <div id="encryption" class="Processor">
             <h2>Encrypt</h2>
-            <div id="input_switch" class="switch-toggle">
-
-                <input id="Text_switch" name="state-d" type="radio" />
-                <label for="Text_switch" onclick="disable_Input('plain_text_message_file')">Text</label>
-              
-                <input id="Message_switch" name="state-d" type="radio" />
-                <label for="Message_switch"  onclick="disable_Input('message')">Message</label>
-              
-                <input id="Image_switch" name="state-d" type="radio" />
-                <label for="Image_switch" onclick="disable_Input('image_file')">Image</label>
-              
+            <div id="content_central">
+                <div id="input_switch" class="switch-toggle">
+                    <input id="Text_switch" name="state-d" onclick="disable_Input('plain_text_message_file')" type="radio" />
+                    <label for="Text_switch" >Text</label>
+                
+                    <input id="Message_switch" name="state-d" type="radio"  onclick="disable_Input('message')" />
+                    <label for="Message_switch" >Message</label>
+                
+                    <input id="Image_switch" name="state-d" type="radio" onclick="disable_Input('image_file')"/>
+                    <label for="Image_switch" >Image</label>
+                </div>
             </div>
             <div class="InOutPut">
-                <input type="file" id="plain_text_message_file" placeholder="Upload message" accept=".txt"></br>
-                <input type="file" id="image_file" placeholder="Upload image" accept="/image"></br>
+                <div class="file-input-group">
+                    <input type="file" id="plain_text_message_file" placeholder="Upload message" accept=".txt"><br>
+                </div>
+                <div class="file-input-group">
+                    <input type="file" id="image_file" placeholder="Upload image" accept="/image"><br>
+                </div>
                 <textarea id="message" placeholder="Enter your message"></textarea><br>
                 <input id="password_to_encrypte" placeholder="Enter the password"><br>
                 <button onclick="encryptMessage()">Encrypt</button>

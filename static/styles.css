@@ -10,30 +10,45 @@ body {
 }
 
 
-h1 {
+h1,h2 {
     margin-top: 20px;
+    align-self: center;
+    text-align: center;
 }
 
 
-input {
-    margin: 15px;
-}
 
 #content-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;     
     align-items: center;         
-    flex-grow: 1;                
+    flex-direction: column;              
 }
 
-#input_switch{
-    display: block;
+#content_central {
+    display: flex;
+    justify-content: center;  
+    align-items: center;      
+    margin: 15px;
+    border-radius: 10px;
+    text-align: center;
+    flex-direction: row;
+}
+
+.switch-toggle {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    border-radius: 15px;
     align-self: center;
+    margin: 0 auto;         
 }
 
 #encryption{
     align-items: center;
+    margin: auto;
+    
 }
 
 .Processor {
@@ -63,8 +78,25 @@ input {
 
 .InOutPut {
     text-align: center;
+    display: flex;
+    flex-direction: column;
 }
 
+.file-input-group {
+    display: flex;
+    justify-content: center;  /* Center the file input */
+    margin: 10px 0;
+}
+
+input[type="file"] {
+    text-align: center;
+}
+
+textarea, input[type="text"] {
+    width: 80%;              /* Adjust width to fit within the layout */
+    margin: 10px 0;
+    text-align: center;
+}
 
 button {
     padding: 10px 20px;
@@ -100,4 +132,5 @@ p span {
  }
  .switch-toggle input:checked + label {
    background: green;
+   border-radius: 8px;
  }
