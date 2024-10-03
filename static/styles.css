@@ -74,6 +74,11 @@ h1,h2 {
     margin-bottom: 20px;
 }
 
+.text_input{
+    text-align: center;
+    align-self:center ;
+}
+
 input[type="file"] {
     display: none;
 }
@@ -82,8 +87,6 @@ input[type="file"] {
     border: 10px black;
     background-color: #b7daf1;
     border-radius: 10px;
-    
-    
     margin:13px;
     display: block;
     cursor: pointer;
