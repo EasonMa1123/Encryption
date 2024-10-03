@@ -38,8 +38,8 @@
                     <label for="image_file" class="File_upload" id="image_file_label">Upload image file</label>
                     <input type="file" id="image_file" placeholder="Upload image" accept="/image"><br>
                 </div>
-                <textarea id="message" placeholder="Enter your message"></textarea><br>
-                <input id="password_to_encrypte" placeholder="Enter the password"><br>
+                <textarea class="text_input" id="message" placeholder="Enter your message"></textarea><br>
+                <input class="text_input" id="password_to_encrypte" placeholder="Enter the password"><br>
                 <button onclick="encryptMessage()">Encrypt</button>
             </div>
             <p>Encrypted Message: <span id="encrypted_message" class="message"></span></p>
@@ -54,10 +54,11 @@
         <div id="decryption" class="Processor">
             <div class="InOutPut">
                 <h2>Decrypt</h2>
+                <label for="decrypt_message_file" class="File_upload">Upload Encrypted File</label>
                 <input type="file" id="decrypt_message_file" placeholder="Upload encrypted message" accept=".txt"></br>
-                <textarea id="decrypt_message" placeholder="Enter encrypted message"></textarea><br>
-                <input id="decrypt_key" placeholder="Enter the key"><br>
-                <input id="password_to_decrypte" placeholder="Enter the password"><br>
+                <textarea class="text_input"id="decrypt_message" placeholder="Enter encrypted message"></textarea><br>
+                <input class="text_input" id="decrypt_key" placeholder="Enter the key"><br>
+                <input class="text_input" id="password_to_decrypte" placeholder="Enter the password"><br>
                 <button onclick="decryptMessage()">Decrypt</button>
             </div>
             <p>Decrypted Message: <span id="decrypted_message" class="message"></span></p>
