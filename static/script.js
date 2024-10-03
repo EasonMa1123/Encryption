@@ -39,25 +39,36 @@ function encryptMessage() {
 
 function disable_Input(IDToNotDisable){
     const x_name = "plain_text_message_file"
+    const x_label_name = "plain_text_message_file_label"
     const y_name = "image_file"
+    const y_labal_name = "image_file_label"
     const z_name = "message"
 
     var x = document.getElementById(x_name)
+    var x_label = document.getElementById(x_label_name)
     var y = document.getElementById(y_name)
+    var y_labal = document.getElementById(y_labal_name)
     var z = document.getElementById(z_name)
 
     if (x_name == IDToNotDisable){
-        y.style.display = "None";
+        
+        y_labal.style.display = "None";
         z.style.display = "None";
-        x.style.display = "initial";
+        
+        x_label.style.display = "initial";
     } else if (y_name == IDToNotDisable) {
-        x.style.display = "None";
+        
+        x_label.style.display = "None";
         z.style.display = "None";
-        y.style.display = "initial";
+        
+        
+        y_labal.style.display = "initial";
 
     } else if(z_name == IDToNotDisable){
-        y.style.display = "None";
-        x.style.display = "None";
+        
+        
+        y_labal.style.display = "None";
+        x_label.style.display = "None";
         z.style.display = "initial";
 
     }

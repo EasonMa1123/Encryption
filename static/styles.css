@@ -71,6 +71,20 @@ h1,h2 {
     margin-bottom: 20px;
 }
 
+input[type="file"] {
+    display: none;
+}
+
+.File_upload{
+    border: 10px black;
+    background-color: #b7daf1;
+    border-radius: 10px;
+    
+    
+    margin:13px;
+    display: block;
+    cursor: pointer;
+}
 
 #encryption, #decryption {
     display: none;
@@ -82,11 +96,6 @@ h1,h2 {
     flex-direction: column;
 }
 
-.file-input-group {
-    display: flex;
-    justify-content: center;  /* Center the file input */
-    margin: 10px 0;
-}
 
 input[type="file"] {
     text-align: center;
