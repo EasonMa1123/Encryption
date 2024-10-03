@@ -6,9 +6,12 @@ body {
     display: flex;
     flex-direction: column;      
     align-items: center;
-    height: 100vh;               
+    height: 100vh;   
+    background: #081f37;            
 }
-
+h1{
+    color: white;
+}
 
 h1,h2 {
     margin-top: 20px;
@@ -57,13 +60,13 @@ h1,h2 {
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
+    background-color:#5fc9f3;
     margin: auto;
     align-items: center;
 }
 
 #encryption:hover{
-    background-color: #a1a1a1ab;
+    background-color: #56b3d8;
 }
 
 #Option_button {
@@ -113,6 +116,7 @@ button {
     font-size: 16px;
     cursor: pointer;
     border-radius: 10px;
+    background-color: #2e79ba;
 }
 
 p span {
@@ -140,6 +144,6 @@ p span {
    cursor: pointer;
  }
  .switch-toggle input:checked + label {
-   background: green;
+   background: #1e549f;
    border-radius: 8px;
  }
