@@ -14,7 +14,17 @@
 </head>
 <body>
     <h1>Encrypt and Decrypt Messages</h1>
-    <div id="content-wrapper">
+    <div>
+        <button onclick="menu_open()" class="sidebar-item" id="open_menu_button" >☰</button>
+    </div>
+    <div id="sidebar" class="w3-sidebar">
+        <button onclick="menu_close()" class="sidebar-item">Close &times;</button>
+        <label for="Encryption_button" class="sidebar-item">Encryption</label>
+        <input type="radio" id="Encryption_button" onclick="show_encryption()" style="display: none;">
+        <label for="Decryption_button" class="sidebar-item">Decryption</label>
+        <input type="radio" id="Decryption_button" onclick="show_decryption()" style="display: none;">
+    </div>
+    <div id="content-wrapper" >
         <div id="encryption" class="Processor">
             <h2>Encrypt</h2>
             <div id="content_central">
@@ -65,8 +75,7 @@
             <button id="download_decrypt"onclick="Create_txt_file('decrypted_message')">Download decrypted Message/Data</button>
         </div>
         <div id="Option_button">
-            <button type="button" id="Encryption_button" onclick="show_encryption()">Encryption</button>
-            <button type="button" id="Decryption_button" onclick="show_decryption()">Decryption</button>
+            
         </div>
     </div>
     <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>

@@ -1,18 +1,26 @@
 
-var w = document.getElementById("Encryption_button");
-var x = document.getElementById("Decryption_button");
+
 var y = document.getElementById("encryption");
 var z = document.getElementById("decryption");
 var a = document.getElementById("plain_text_message_file_label");
 var b = document.getElementById("image_file_label");
 
 
-w.style.display = "None";
-x.style.display = "block";
+
 y.style.display = "block";
 z.style.display = "None";
 a.style.display = "None";
 b.style.display = "None";
+
+function menu_open() {
+    document.getElementById('sidebar').style.display = "block";
+    document.getElementById('open_menu_button').style.display = "None";
+}
+
+function menu_close() {
+    document.getElementById('sidebar').style.display = "None";
+    document.getElementById('open_menu_button').style.display = "block";
+}
 
 function encryptMessage() {
     var message_file = document.getElementById('plain_text_message_file').files[0];
@@ -153,24 +161,20 @@ function downloadImage(base64Image) {
 }
 
 function show_encryption(){
-    var w = document.getElementById("Encryption_button");
-    var x = document.getElementById("Decryption_button");
+    
     var y = document.getElementById("encryption");
     var z = document.getElementById("decryption");
     
-    w.style.display = "None";
-    x.style.display = "block";
+
     y.style.display = "block";
     z.style.display = "None";
 }
 function show_decryption(){
-    var w = document.getElementById("Encryption_button");
-    var x = document.getElementById("Decryption_button");
+    
     var y = document.getElementById("encryption");
     var z = document.getElementById("decryption");
     
-    w.style.display = "Block";
-    x.style.display = "None";
+
     y.style.display = "None";
     z.style.display = "Block";
 }
