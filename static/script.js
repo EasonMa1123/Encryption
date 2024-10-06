@@ -14,12 +14,12 @@ b.style.display = "None";
 
 function menu_open() {
     document.getElementById('sidebar').style.display = "block";
-    document.getElementById('open_menu_button').style.display = "None";
+
 }
 
 function menu_close() {
     document.getElementById('sidebar').style.display = "None";
-    document.getElementById('open_menu_button').style.display = "block";
+
 }
 
 function encryptMessage() {
