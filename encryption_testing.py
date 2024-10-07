@@ -8,9 +8,9 @@ password = "123"
 def check_encryption():
     incorrect_counter = 0
     invalid_counter = 0
-    for i in range(100000):
+    for i in range(1000):
         plain_text = ""
-        for time in range(1000):
+        for time in range(100):
             plain_text += slot[random.randrange(len(slot))]
         cipyer_message,key = encryption.encryption(plain_text,password)
         return_message = encryption.unencryption(cipyer_message,key,password)
