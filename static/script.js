@@ -36,14 +36,8 @@ function encryptMessage() {
         };
         reader.readAsDataURL(image_file); // Read the image file as Base64
        
-        var bar = document.getElementById("Message_progress_bar")
-        bar.style.display = "Block"
-        reader.onprogress = (pe) => {
-            if (pe.lengthComputable) {
-                bar.max = pe.total;
-                bar.value = pe.loaded;
-            }
-        }
+    
+
 
     } else if (message_file) {
         var reader = new FileReader();
