@@ -226,9 +226,21 @@ function ConvertImageToText(){
 
 
 function reset_file(){
-    document.getElementById("image_file").value = ""
-    document.getElementById("plain_text_message_file").value = ""
-    document.getElementById("message").textContent = ""
+    console.log("Here")
+    // Reset file inputs
+    document.getElementById("image_file").value = "";
+    document.getElementById("plain_text_message_file").value = "";
+
+    // Reset text content (for textarea and text inputs)
+    document.getElementById("message").value = ""; // Reset textarea for message input
+    document.getElementById("password_to_encrypte").value = ""; // Reset encryption password input
+    document.getElementById("decrypt_message").value = ""; // Reset decryption message textarea
+    document.getElementById("decrypt_key").value = ""; // Reset decryption key input
+    document.getElementById("password_to_decrypte").value = ""; // Reset decryption password input
+
+    // Clear any encrypted/decrypted message display
+    document.getElementById("encrypted_message").textContent = "";
+    document.getElementById("decrypted_message").textContent = "";
+    document.getElementById("key").textContent = "";
+
 }
-
-
