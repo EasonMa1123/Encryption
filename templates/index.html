@@ -54,6 +54,10 @@
                 <button onclick="encryptMessage()">Encrypt</button>
             </div>
             <p>Encrypted Message: <span id="encrypted_message" class="message"></span></p>
+            <div class="w3-light-grey" id="Message_progress_bar" style="display: none;">
+                <div id="myBar" class="w3-container w3-green" style="height:24px;width:0%">
+                </div>
+              </div>
             <p>Key: <span id="key"></span></p>
             <button onclick="Copy_text('encrypted_message')">Copy Message</button>
             <button onclick="Copy_text('key')">Copy Key</button>
