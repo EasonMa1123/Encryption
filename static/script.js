@@ -15,10 +15,12 @@ b.style.display = "None";
 function menu_open() {
     document.getElementById('sidebar').style.display = "block";
 
+
 }
 
 function menu_close() {
     document.getElementById('sidebar').style.display = "None";
+
 
 }
 
@@ -179,7 +181,10 @@ function show_encryption(){
     
     var y = document.getElementById("encryption");
     var z = document.getElementById("decryption");
-    
+    document.getElementById('Encryption_button_label').style.backgroundColor = "#13314c";
+    document.getElementById('Decryption_button_label').style.backgroundColor = "#ffffff";
+    document.getElementById('Encryption_button_label').style.color= "#ffffff";
+    document.getElementById('Decryption_button_label').style.color= "#000000";
 
     y.style.display = "block";
     z.style.display = "None";
@@ -188,6 +193,10 @@ function show_decryption(){
     
     var y = document.getElementById("encryption");
     var z = document.getElementById("decryption");
+    document.getElementById('Decryption_button_label').style.backgroundColor = "#13314c";
+    document.getElementById('Encryption_button_label').style.backgroundColor = "#ffffff";
+    document.getElementById('Decryption_button_label').style.color= "#ffffff";
+    document.getElementById('Encryption_button_label').style.color= "#000000";
     
 
     y.style.display = "None";
