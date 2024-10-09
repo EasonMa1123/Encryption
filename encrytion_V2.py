@@ -76,7 +76,10 @@ class Encrytion:
     def check_password(self,message,password):
         message_splited=message.split(self.split_key)
         #print(message_splited) 
-        real_password = message_splited[-2]
+        try:
+            real_password = message_splited[-2]
+        except:
+            return None
         
 
         if real_password == password:
@@ -102,7 +105,10 @@ class Encrytion:
         #message = self.split_letter(message)
         
         #print(split_message)
-        self.letter = self.slots[int(split_key[1])]
+        try:
+            self.letter = self.slots[int(split_key[1])]
+        except:
+            return None
         counter_location = split_key[0] 
         counter = int(counter_location)
         #print(message)
@@ -132,16 +138,21 @@ class Encrytion:
 
     def unencryption(self,message,key:str,password:str):
         single_edecrypted_message= self.decrypter(message,key)
+        if single_edecrypted_message == None:
+            return 405
         #print(single_edecrypted_message)
         Correct=self.check_password(single_edecrypted_message,password)
         
-        if Correct:
-            second_key = str(self.get_second_key(single_edecrypted_message))
-            single_edecrypted_message = str(self.remove_password(single_edecrypted_message))
-            
-            return self.decrypter(single_edecrypted_message,second_key)
+        if Correct != None:
+            if Correct:
+                second_key = str(self.get_second_key(single_edecrypted_message))
+                single_edecrypted_message = str(self.remove_password(single_edecrypted_message))
+                
+                return self.decrypter(single_edecrypted_message,second_key)
+            else:
+                return 405
         else:
-            return "Invalid Password,unable to decrypte"
+            return 405
     
 
     
