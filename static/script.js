@@ -28,7 +28,10 @@ function encryptMessage() {
     var message = document.getElementById('message').value;
     var password = document.getElementById('password_to_encrypte').value;
 
-    if (image_file) {
+    if(message.length ==1 ){
+        alert("Message too short!")
+
+    }else if (image_file) {
         var processing_text = document.getElementById("Processing_display")
         processing_text.style.display = "block"
         processing_text.value = "Loading..."
