@@ -8,7 +8,8 @@ password = "123"
 def check_encryption():
     incorrect_counter = 0
     invalid_counter = 0
-    for i in range(1000):
+    total_test_time = 10000
+    for i in range(total_test_time):
         plain_text = ""
         for time in range(100):
             plain_text += slot[random.randrange(len(slot))]
@@ -22,6 +23,6 @@ def check_encryption():
             invalid_counter +=1
         if i%100 == 0:
             print(f'testing number: {i}')
-    print(f'total Incorrect: {incorrect_counter},total invalid: {invalid_counter}')
+    print(f'total Incorrect: {incorrect_counter},total invalid: {invalid_counter}\n In% : Incorrect: {incorrect_counter/total_test_time}, invalid: {invalid_counter/total_test_time}')
 
 check_encryption()

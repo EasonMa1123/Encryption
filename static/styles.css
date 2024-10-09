@@ -156,12 +156,19 @@ textarea, input[type="text"] {
 
 button {
     padding: 10px 20px;
+    border: none;
     margin: 25px;
     font-size: 16px;
     cursor: pointer;
     border-radius: 10px;
     background-color: #2e79ba;
+    
 
+}
+
+button:hover{
+    background-color: #13314c;
+    color: white;
 }
 
 p span {
@@ -171,7 +178,7 @@ p span {
 }
 
 .message{
-    overflow: scroll;
+    overflow: auto;
 }
 
 .switch-toggle {

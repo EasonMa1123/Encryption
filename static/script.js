@@ -15,10 +15,12 @@ b.style.display = "None";
 function menu_open() {
     document.getElementById('sidebar').style.display = "block";
 
+
 }
 
 function menu_close() {
     document.getElementById('sidebar').style.display = "None";
+
 
 }
 
@@ -28,14 +30,20 @@ function encryptMessage() {
     var message = document.getElementById('message').value;
     var password = document.getElementById('password_to_encrypte').value;
 
-    if (image_file) {
+    if(message.length ==1 ){
+        alert("Message too short!")
+
+    }else if (image_file) {
+        var processing_text = document.getElementById("Processing_display")
+        processing_text.style.display = "block"
+        processing_text.value = "Loading..."
         var reader = new FileReader();
         reader.onload = function(event) {
             var imageContent = event.target.result; // Base64 string of the image
             encryptingMessage(imageContent, password); // Send the image string for encryption
         };
         reader.readAsDataURL(image_file); // Read the image file as Base64
-       
+       processing_text.style.display = "initial"
     
 
 
@@ -125,7 +133,10 @@ function decryptMessage() {
 
 function decryptingMessage(message, key, password) {
     $.post("/decrypt", { message: message, key: key, password: password }, function(data) {
-        if (data.decrypted_message.startsWith('data:image/')) {
+        if(Number.isInteger(data.decrypted_message)&& data.decrypted_message == 405){
+            alert("Invalid key/Password, unable to decrypte")
+
+        }else if (data.decrypted_message.startsWith('data:image/')) {
             // If the decrypted message is an image (Base64 string)
             showDecryptedImage(data.decrypted_message);
             document.getElementById("download_decrypt").style.display = "None"
@@ -170,7 +181,10 @@ function show_encryption(){
     
     var y = document.getElementById("encryption");
     var z = document.getElementById("decryption");
-    
+    document.getElementById('Encryption_button_label').style.backgroundColor = "#13314c";
+    document.getElementById('Decryption_button_label').style.backgroundColor = "#ffffff";
+    document.getElementById('Encryption_button_label').style.color= "#ffffff";
+    document.getElementById('Decryption_button_label').style.color= "#000000";
 
     y.style.display = "block";
     z.style.display = "None";
@@ -179,6 +193,10 @@ function show_decryption(){
     
     var y = document.getElementById("encryption");
     var z = document.getElementById("decryption");
+    document.getElementById('Decryption_button_label').style.backgroundColor = "#13314c";
+    document.getElementById('Encryption_button_label').style.backgroundColor = "#ffffff";
+    document.getElementById('Decryption_button_label').style.color= "#ffffff";
+    document.getElementById('Encryption_button_label').style.color= "#000000";
     
 
     y.style.display = "None";
@@ -202,7 +220,7 @@ function Create_txt_file (ID){
         const content = message;
         const file = new Blob([content], { type: 'text/plain' });
         link.href = URL.createObjectURL(file);
-        link.download = "sample.enc";
+        link.download = "CipherText.endec";
         link.click();
         URL.revokeObjectURL(link.href);
     } else {

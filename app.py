@@ -24,5 +24,10 @@ def decrypt_message():
     decrypted_message = decryption.unencryption(encrypted_message, key,password)
     return jsonify({'decrypted_message': decrypted_message})
 
+
+@app.route('/Base64image',methods = ['POST'])
+def image_to_base64():
+    pass
+
 if __name__ == '__main__':
     app.run(debug=True)
