@@ -31,7 +31,7 @@ class Encrytion:
         slot_num = random.randint(0,len(self.slots)-1)
         slot = self.slots[slot_num]
         #print(self.letter,len(self.message))
-        random_number = random.randint(1,len(message))
+        random_number = random.randint(2,len(message))
         #print(random_number)
         encryted_message = ""
         counter = random_number
