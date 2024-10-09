@@ -20,7 +20,7 @@
     </div>
     <div id="sidebar" class="w3-sidebar">
         <button onclick="menu_close()" class="sidebar-item">Close &times;</button>
-        <label id="Encryption_button_label" for="Encryption_button" class="sidebar-item">Encryption</label>
+        <label id="Encryption_button_label" for="Encryption_button" class="sidebar-item" style="background-color: #13314c;color: #ffffff;">Encryption</label>
         <input type="radio" id="Encryption_button" onclick="show_encryption()" style="display: none;">
         <label id="Decryption_button_label" for="Decryption_button" class="sidebar-item">Decryption</label>
         <input type="radio" id="Decryption_button" onclick="show_decryption()" style="display: none;">
@@ -33,7 +33,7 @@
                     <input id="Text_switch" name="state-d" onclick="disable_Input('plain_text_message_file')" type="radio" />
                     <label for="Text_switch" >Text</label>
                 
-                    <input id="Message_switch" name="state-d" type="radio"  onclick="disable_Input('message')" />
+                    <input id="Message_switch" name="state-d" type="radio"  onclick="disable_Input('message')" checked />
                     <label for="Message_switch" >Message</label>
                 
                     <input id="Image_switch" name="state-d" type="radio" onclick="disable_Input('image_file')"/>
