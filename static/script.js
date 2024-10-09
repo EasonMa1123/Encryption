@@ -208,7 +208,7 @@ function Create_txt_file (ID){
         const content = message;
         const file = new Blob([content], { type: 'text/plain' });
         link.href = URL.createObjectURL(file);
-        link.download = "sample.enc";
+        link.download = "CipherText.endec";
         link.click();
         URL.revokeObjectURL(link.href);
     } else {
