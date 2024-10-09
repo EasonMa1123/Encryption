@@ -178,7 +178,7 @@ p span {
 }
 
 .message{
-    overflow: scroll;
+    overflow: auto;
 }
 
 .switch-toggle {
