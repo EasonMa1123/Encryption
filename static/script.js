@@ -24,42 +24,145 @@ function menu_close() {
 
 }
 
-function encryptMessage() {
+// Function to read a file as Base64 using promises, with progress tracking
+function readFileAsBase64(file, progressCallback) {
+    return new Promise((resolve, reject) => {
+        var reader = new FileReader();
+        reader.onprogress = function(event) {
+            if (event.lengthComputable && progressCallback) {
+                var progress = Math.round((event.loaded / event.total) * 50); // File reading contributes 50%
+                progressCallback(progress); // Update progress bar (up to 50%)
+            }
+        };
+        reader.onload = function(event) {
+            resolve(event.target.result);
+        };
+        reader.onerror = function(error) {
+            reject(error);
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+// Function to read a text file with progress tracking
+function readFileAsText(file, progressCallback) {
+    return new Promise((resolve, reject) => {
+        var reader = new FileReader();
+        reader.onprogress = function(event) {
+            if (event.lengthComputable && progressCallback) {
+                var progress = Math.round((event.loaded / event.total) * 50); // File reading contributes 50%
+                progressCallback(progress); // Update progress bar (up to 50%)
+            }
+        };
+        reader.onload = function(event) {
+            resolve(event.target.result);
+        };
+        reader.onerror = function(error) {
+            reject(error);
+        };
+        reader.readAsText(file);
+    });
+}
+
+// Simulate encryption with progress updates (takes 50% of the progress bar)
+function encryptingMessageWithProgress(content, password, progressCallback) {
+    return new Promise((resolve) => {
+        let encryptionProgress = 0;
+        const encryptionInterval = setInterval(() => {
+            encryptionProgress += 10; // Simulate incremental encryption progress
+            progressCallback(50 + encryptionProgress); // Update progress bar from 50% to 100%
+            if (encryptionProgress >= 50) { // Once encryption completes, stop progress
+                clearInterval(encryptionInterval);
+                resolve(); // Resolve the promise once done
+            }
+        }, 2000); // Simulate encryption process taking some time (2 seconds total)
+    });
+}
+
+// Main encryptMessage function with async/await and progress bar
+async function encryptMessage() {
     var message_file = document.getElementById('plain_text_message_file').files[0];
     var image_file = document.getElementById('image_file').files[0];
     var message = document.getElementById('message').value;
     var password = document.getElementById('password_to_encrypte').value;
 
-    if(message.length ==1 ){
-        alert("Message too short!")
+    var progressBar = document.getElementById("progressBar");
+    var processing_text = document.getElementById("Processing_display");
 
-    }else if (image_file) {
-        var processing_text = document.getElementById("Processing_display")
-        processing_text.style.display = "block"
-        processing_text.value = "Loading..."
-        var reader = new FileReader();
-        reader.onload = function(event) {
-            var imageContent = event.target.result; // Base64 string of the image
-            encryptingMessage(imageContent, password); // Send the image string for encryption
-        };
-        reader.readAsDataURL(image_file); // Read the image file as Base64
-       processing_text.style.display = "initial"
-    
+    // Reset progress bar
+    progressBar.value = 0;
+    progressBar.style.display = "none";
+
+    if (message.length == 1) {
+        alert("Message too short!");
+        return;
+    }
+
+    try {
+        if (image_file) {
+            var imageFileSizeKB = image_file.size / 1024; // Convert to KB
+            if (imageFileSizeKB > 100) {
+                alert("Image file size exceeds the 200KB limit.");
+                return; // Reject and stop further processing
+            }
+            // Display loading text and show progress bar
+            processing_text.style.display = "block";
+            processing_text.textContent = "Loading...";
+            progressBar.style.display = "block";
+
+            // Convert image to Base64 and update progress bar
+            var imageContent = await readFileAsBase64(image_file, (progress) => {
+                progressBar.value = progress;
+            });
+            encryptingMessage(imageContent, password);
+            // Simulate encryption and update progress bar
+            await encryptingMessageWithProgress(imageContent, password, (progress) => {
+                progressBar.value = progress;
+            });
 
 
-    } else if (message_file) {
-        var reader = new FileReader();
-        reader.onload = function(event) {
-            var fileContent = event.target.result;
+        } else if (message_file) {
+            // Display loading text and show progress bar
+            processing_text.style.display = "block";
+            processing_text.textContent = "Loading...";
+            progressBar.style.display = "block";
+
+            // Read the text file and update progress bar
+            var fileContent = await readFileAsText(message_file, (progress) => {
+                progressBar.value = progress;
+            });
             encryptingMessage(fileContent, password);
-        };
-        reader.readAsText(message_file);
-    } else if (message !== "") {
-        encryptingMessage(message, password);
-    } else {
-        alert("Invalid Message or Image");
+            // Simulate encryption and update progress bar
+            await encryptingMessageWithProgress(fileContent, password, (progress) => {
+                progressBar.value = progress;
+
+
+            });
+            
+
+        } else if (message !== "") {
+            // No file selected, encrypt plain text message (simulate progress)
+            progressBar.style.display = "block";
+            await encryptingMessageWithProgress(message, password, (progress) => {
+                progressBar.value = progress;
+            });
+            encryptingMessage(message, password);
+
+        } else {
+            alert("Invalid Message or Image");
+        }
+    } catch (error) {
+        console.error("Error while reading file:", error);
+        alert("An error occurred during file processing");
+    } finally {
+        // Hide the progress bar and processing text after the operation
+        progressBar.style.display = "none";
+        processing_text.style.display = "initial";
+        processing_text.textContent = "Completed";
     }
 }
+
+
 
 function disable_Input(IDToNotDisable){
     const x_name = "plain_text_message_file"
