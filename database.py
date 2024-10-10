@@ -1,4 +1,3 @@
-import mysql.connector
 import sqlite3
 
 def create_check_database():
