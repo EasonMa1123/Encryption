@@ -1,5 +1,8 @@
 import random
 from database import  DataRecord
+import zlib
+import base64
+
 class Encrytion:
     
     def __init__(self):
@@ -26,7 +29,7 @@ class Encrytion:
         self.letter = ""
         self.split_key = "#~~123~~##~~qwer~"
 
-    def encrypter(self,message,password,key):
+    def encrypter(self,message,password,key,compressed):
         
 
         slot_num = random.randint(0,len(self.slots)-1)
@@ -37,11 +40,16 @@ class Encrytion:
         encryted_message = ""
         counter = random_number
 
+        if compressed ==  True:
+            message += self.split_key + "compressed"
+
         if password != None:
             message+= self.split_key + str(password)
 
         if key != None:
             message += self.split_key + str(key)
+        
+
             
 
         for word in message:
@@ -97,6 +105,30 @@ class Encrytion:
         return message.split(self.split_key)[0]
 
 
+    def check_compression(self,message):
+        try:
+            if "compressed" == message.split(self.split_key)[-3]:
+                return True
+        except:
+
+            return False
+        
+
+    def text_decompression(self,message):
+        compressed_data = base64.b64decode(message.encode('utf-8'))
+        decompressed_data = zlib.decompress(compressed_data)
+        decompressed_string = decompressed_data.decode('utf-8')
+        return decompressed_string
+
+    def text_compression(self,message):
+        encoded_message = message.encode('utf-8')
+        compressed_data = zlib.compress(encoded_message)
+        compressed_string = base64.b64encode(compressed_data).decode('utf-8')
+
+        return compressed_string
+        
+        
+        
     def decrypter(self,message,key):
 
         #print(message,key)
@@ -133,10 +165,16 @@ class Encrytion:
     
 
     def encryption(self,message,password):
+        if len(message) > 10:
+                message = self.text_compression(message)
+                compressed = True
+        else: 
+            compressed = False
+
         Data = DataRecord()
-        single_encrypted_message,key = self.encrypter(message,password=None,key=None)
+        single_encrypted_message,key = self.encrypter(message,password=None,key=None,compressed = None)
         while True:
-             double_encrypted_data,double_key = self.encrypter(single_encrypted_message,password,key)
+             double_encrypted_data,double_key = self.encrypter(single_encrypted_message,password,key,compressed)
              if not(Data.check_message(double_encrypted_data)):
                 Data.insert_data(double_encrypted_data,double_key)
                 return double_encrypted_data,double_key
@@ -145,18 +183,22 @@ class Encrytion:
 
 
     def unencryption(self,message,key:str,password:str):
-        single_edecrypted_message= self.decrypter(message,key)
-        if single_edecrypted_message == None:
+        single_decrypted_message= self.decrypter(message,key)
+        if single_decrypted_message == None:
             return 405
         #print(single_edecrypted_message)
-        Correct=self.check_password(single_edecrypted_message,password)
+        Correct=self.check_password(single_decrypted_message,password)
+        compression_message = single_decrypted_message
         
         if Correct != None:
             if Correct:
-                second_key = str(self.get_second_key(single_edecrypted_message))
-                single_edecrypted_message = str(self.remove_password(single_edecrypted_message))
+                second_key = str(self.get_second_key(single_decrypted_message))
+                single_decrypted_message = str(self.remove_password(single_decrypted_message))
                 
-                return self.decrypter(single_edecrypted_message,second_key)
+                if self.check_compression(compression_message):
+                    return self.text_decompression(self.decrypter(single_decrypted_message,second_key))
+                else:
+                    return self.decrypter(single_decrypted_message,second_key)
             else:
                 return 405
         else:

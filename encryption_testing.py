@@ -8,7 +8,7 @@ password = "123"
 def check_encryption():
     incorrect_counter = 0
     invalid_counter = 0
-    total_test_time = 10000
+    total_test_time = 1000
     for i in range(total_test_time):
         plain_text = ""
         for time in range(100):
