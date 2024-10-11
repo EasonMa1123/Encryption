@@ -116,13 +116,13 @@ class Encrytion:
 
     def text_decompression(self,message):
         compressed_data = base64.b64decode(message.encode('utf-8'))
-        decompressed_data = zlib.decompress(compressed_data)
+        decompressed_data = zlib.decompress(compressed_data,4)
         decompressed_string = decompressed_data.decode('utf-8')
         return decompressed_string
 
     def text_compression(self,message):
         encoded_message = message.encode('utf-8')
-        compressed_data = zlib.compress(encoded_message)
+        compressed_data = zlib.compress(encoded_message,4)
         compressed_string = base64.b64encode(compressed_data).decode('utf-8')
 
         return compressed_string
@@ -165,7 +165,7 @@ class Encrytion:
     
 
     def encryption(self,message,password):
-        if len(message) > 10:
+        if len(message) > 100000:
                 message = self.text_compression(message)
                 compressed = True
         else: 
