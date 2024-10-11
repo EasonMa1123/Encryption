@@ -27,7 +27,7 @@ class DataRecord:
         self.cc.execute('SELECT encrypted_message FROM message')
         message_in_db = [row[0] for row in self.cc.fetchall()]
 
-        print(message_in_db)
+
         for i in message_in_db:
             if message in message_in_db:
                 return True

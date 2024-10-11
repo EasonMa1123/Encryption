@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-from encrytion_V2 import Encrytion
+from encryption_V2 import Encrytion
 
 app = Flask(__name__)
 
