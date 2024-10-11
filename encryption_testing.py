@@ -1,4 +1,4 @@
-from encrytion_V2 import Encrytion
+from encryption_V2 import Encrytion
 import random
 
 encryption = Encrytion()
