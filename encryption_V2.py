@@ -69,7 +69,40 @@ class Encrytion:
         key = f'{random_number} {slot_num}'
         return return_value[::-1],key
 
+    def decrypter(self,message,key):
 
+        #print(message,key)
+        encryted_message = ""
+        message = message[::-1]
+        split_key = key.split(" ")
+        #message = self.split_letter(message)
+        
+        #print(split_message)
+        try:
+            self.letter = self.slots[int(split_key[1])]
+        except:
+            return None
+        counter_location = split_key[0] 
+        counter = int(counter_location)
+        #print(message)
+        
+        for word in message:
+            word_location = self.letter.find(word)
+            pre_encryted_location=word_location-(counter% len(self.letter))
+            encryted_location = pre_encryted_location 
+            #print(f'{word} {word_location} {pre_encryted_location} {encryted_location} {self.letter[encryted_location]} {self.letter}')
+            encryted_message+=self.letter[encryted_location]
+            counter*=int(counter_location)
+
+        
+            
+
+        return encryted_message
+
+
+    def encrytion_list_length(self):
+        return len(self.slots)
+    
 
     def split_letter(self,text):
         
@@ -116,53 +149,17 @@ class Encrytion:
 
     def text_decompression(self,message):
         compressed_data = base64.b64decode(message.encode('utf-8'))
-        decompressed_data = zlib.decompress(compressed_data,4)
+        decompressed_data = zlib.decompress(compressed_data)
         decompressed_string = decompressed_data.decode('utf-8')
         return decompressed_string
 
     def text_compression(self,message):
         encoded_message = message.encode('utf-8')
-        compressed_data = zlib.compress(encoded_message,4)
+        compressed_data = zlib.compress(encoded_message)
         compressed_string = base64.b64encode(compressed_data).decode('utf-8')
 
         return compressed_string
         
-        
-        
-    def decrypter(self,message,key):
-
-        #print(message,key)
-        encryted_message = ""
-        message = message[::-1]
-        split_key = key.split(" ")
-        #message = self.split_letter(message)
-        
-        #print(split_message)
-        try:
-            self.letter = self.slots[int(split_key[1])]
-        except:
-            return None
-        counter_location = split_key[0] 
-        counter = int(counter_location)
-        #print(message)
-        
-        for word in message:
-            word_location = self.letter.find(word)
-            pre_encryted_location=word_location-(counter% len(self.letter))
-            encryted_location = pre_encryted_location 
-            #print(f'{word} {word_location} {pre_encryted_location} {encryted_location} {self.letter[encryted_location]} {self.letter}')
-            encryted_message+=self.letter[encryted_location]
-            counter*=int(counter_location)
-
-        
-            
-
-        return encryted_message
-
-
-    def encrytion_list_length(self):
-        return len(self.slots)
-    
 
     def encryption(self,message,password):
         if len(message) > 100000:
