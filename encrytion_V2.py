@@ -1,4 +1,5 @@
 import random
+from database import  DataRecord
 class Encrytion:
     
     def __init__(self):
@@ -132,8 +133,15 @@ class Encrytion:
     
 
     def encryption(self,message,password):
+        Data = DataRecord()
         single_encrypted_message,key = self.encrypter(message,password=None,key=None)
-        return self.encrypter(single_encrypted_message,password,key)
+        while True:
+             double_encrypted_data,double_key = self.encrypter(single_encrypted_message,password,key)
+             if not(Data.check_message(double_encrypted_data)):
+                Data.insert_data(double_encrypted_data,double_key)
+                return double_encrypted_data,double_key
+                 
+
 
 
     def unencryption(self,message,key:str,password:str):
