@@ -3,13 +3,16 @@ from encryption_V2 import Encrytion
 
 app = Flask(__name__)
 
-@app.route('/')
-def index():
-    return render_template('index.html')
 
 @app.route('/')
 def home():
     return render_template('home.html')
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
 
 @app.route('/encrypt', methods=['POST'])
 def encrypt_message():
@@ -35,3 +38,4 @@ def image_to_base64():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
