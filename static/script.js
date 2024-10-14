@@ -1,4 +1,24 @@
+//home.html
+document.getElementById("signup-form").style.display = "None";
 
+
+
+
+function login_open(){
+    document.getElementById("signup-form").style.display = "None";
+    document.getElementById("login-form").style.display = "flex";
+
+}
+
+function signup_open(){
+    document.getElementById("signup-form").style.display = "flex";
+    document.getElementById("login-form").style.display = "None";
+
+}
+
+
+
+// index.html
 
 var y = document.getElementById("encryption");
 var z = document.getElementById("decryption");
