@@ -9,6 +9,38 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
+    
     
 </head>
+<body>
+    <div id="container">
+        <div class="signup-login-switch-toggle" id="login-signup-switch">
+            
+            <input id="login-button" name="state-d" type="radio" style="display: none;"/>
+            <label for="login-button">Login</label>
+            
+            <input id="signup-button" name="state-d" type="radio" style="display: none;"/>
+            <label for="signup-button">Signup</label>
+
+
+        </div>
+        <form id="login-form" class="processor">
+            <label>Login</label>
+            <input placeholder="Username">
+            <input placeholder="Password" type="password">
+            <input type="submit">
+
+        </form>
+        <form id="signup-form" class="processor">
+            <label> Signup</label>
+            <input placeholder="Username">
+            <input placeholder="Email">
+            <input placeholder="Password" type="password">
+            <input placeholder="Confirm Password" type="password">
+            <input type="submit">
+        </form>
+
+
+    </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
