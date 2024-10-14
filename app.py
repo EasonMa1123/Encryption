@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from encryption_V2 import Encrytion
+from User_database import DataRecord
+
 
 app = Flask(__name__)
 
@@ -30,6 +32,15 @@ def decrypt_message():
     password = request.form['password']
     decrypted_message = decryption.unencryption(encrypted_message, key,password)
     return jsonify({'decrypted_message': decrypted_message})
+
+
+@app.route('/checkUser',methods = ['POST'])
+def check_user():
+    user = request.form['userName']
+    if DataRecord().check_user(user):
+        return jsonify ({"Check":True})
+    else:
+        return jsonify ({"Check":False})
 
 
 @app.route('/Base64image',methods = ['POST'])
