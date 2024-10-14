@@ -7,6 +7,10 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/')
+def home():
+    return render_template('home.html')
+
 @app.route('/encrypt', methods=['POST'])
 def encrypt_message():
     encryption = Encrytion()
