@@ -55,6 +55,8 @@ function login(){
     $.post('/CheckUserPassword',{ userName:Username,Password:Password }, function(data){
         if (data.check == true){
             document.location.href = "/index";
+            Username = "";
+            Password = "";
             
         } else {
             alert("Incorrect Password/Username")
