@@ -1,1 +1,1 @@
-This is a project where allow user to encrypt and decrypt text,image
+This is a website allow user encrypte and decrypte Text and image,with the function of login or signup to ensure all user is authorised
