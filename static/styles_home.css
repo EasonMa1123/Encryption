@@ -30,6 +30,11 @@ input {
     
 }
 
+button{
+  margin: 17px;
+  font-family: 'Poppins', sans-serif;
+}
+
 #login-signup-switch {
     display: flex;
     justify-content: center; 
