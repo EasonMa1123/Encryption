@@ -16,7 +16,7 @@
     <div id="container">
         <div class="signup-login-switch-toggle" id="login-signup-switch">
             
-            <input id="login-button" name="state-d" type="radio" style="display: none;" onclick="login_open()"/>
+            <input id="login-button" name="state-d" type="radio" style="display: none;" onclick="login_open()" checked/>
             <label for="login-button">Login</label>
             
             <input id="signup-button" name="state-d" type="radio" style="display: none;" onclick="signup_open()"/>
@@ -28,7 +28,7 @@
             <label>Login</label>
             <input id="login-Username" placeholder="Username">
             <input id="login-Password" placeholder="Password" type="password">
-            <button onclick="login()">Submit</button>
+            <button onclick="login()">Login</button>
 
         </form>
         <form id="signup-form" class="processor" style="display: none;">
@@ -36,7 +36,7 @@
             <input id="signup-Username" placeholder="Username">
             <input id="signup-Password" placeholder="Password" type="password">
             <input id="ConfirmPassword" placeholder="Confirm Password" type="password">
-            <button onclick="submit_new_user_data()">Submit</button>
+            <button onclick="submit_new_user_data()">Login</button>
         </form>
 
 

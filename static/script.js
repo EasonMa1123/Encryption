@@ -33,9 +33,9 @@ function signup_open(){
 
 
 function submit_new_user_data(){
-    var Username = document.getElementById("signup-Username").value
-    var Password = document.getElementById("signup-Password").value
-    var Confirm_password = document.getElementById("ConfirmPassword").value
+    let Username = document.getElementById("signup-Username").value
+    let Password = document.getElementById("signup-Password").value
+    let Confirm_password = document.getElementById("ConfirmPassword").value
 
     if (Password != Confirm_password){
         alert("Invalid Password confirmation!")
@@ -49,13 +49,13 @@ function submit_new_user_data(){
 }
 
 function login(){
-    var Username = document.getElementById("login-Username").value
-    var Password = document.getElementById("login-Password").value
+    let Username = document.getElementById("login-Username").value
+    let Password = document.getElementById("login-Password").value
 
     $.post('/CheckUserPassword',{ userName:Username,Password:Password }, function(data){
         if (data.check == true){
             document.location.href = "/index";
-            reset_file();
+            
         } else {
             alert("Incorrect Password/Username")
         }
