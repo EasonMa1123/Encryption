@@ -24,18 +24,18 @@
 
 
         </div>
-        <form id="login-form" class="processor">
+        <form id="login-form" class="processor" autocomplete="off">
             <label>Login</label>
             <input id="login-Username" placeholder="Username" autocomplete="off">
-            <input id="login-Password" placeholder="Password" type="password" autocomplete="off">
+            <input id="login-Password" placeholder="Password" type="password" autocomplete="off" readonly onclick="this.removeAttribute('readonly');">
             <button onclick="login()">Login</button>
 
         </form>
-        <form id="signup-form" class="processor" style="display: none;">
+        <form id="signup-form" class="processor" style="display: none;" autocomplete="off">
             <label> Signup</label>
-            <input id="signup-Username" placeholder="Username" autocomplete="off">
-            <input id="signup-Password" placeholder="Password" type="password" autocomplete="off">
-            <input id="ConfirmPassword" placeholder="Confirm Password" type="password" autocomplete="off">
+            <input id="signup-Username" placeholder="Username" autocomplete="off" readonly onclick="this.removeAttribute('readonly');">
+            <input id="signup-Password" placeholder="Password" type="password" autocomplete="off" readonly onclick="this.removeAttribute('readonly');">
+            <input id="ConfirmPassword" placeholder="Confirm Password" type="password" autocomplete="off" readonly onclick="this.removeAttribute('readonly');">
             <button onclick="submit_new_user_data()">Login</button>
         </form>
 
