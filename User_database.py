@@ -24,14 +24,14 @@ class DataRecord:
             return False
 
 
-    def insert_new_user(self,user,password,email):
-        self.cc.execute('SELECT COUNT(id) FROM UserName')
+    def insert_new_user(self,user,password):
+        self.cc.execute('SELECT COUNT(id) FROM UserData')
         id = (self.cc.fetchall()[0][0])+1
-        self.cc.execute('INSERT INTO UserName (id, UserName ,Password ) VALUES (? , ?, ?,?);', (id,user, password))
+        self.cc.execute('INSERT INTO UserData (id, UserName ,Password ) VALUES (? , ?, ?);', (id,user, password))
         self.DataBase.commit()
     
     def check_password(self,user,password):
-        execute_text = f'SELECT Password FROM UserData WHERE UserName= {user}'
+        execute_text = f'SELECT Password FROM UserData WHERE UserName = "{user}";'
         self.cc.execute(execute_text)
         password_in_db = [row[0] for row in self.cc.fetchall()]
         if password in password_in_db:
