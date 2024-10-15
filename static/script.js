@@ -318,3 +318,7 @@ function reset_file(){
     document.getElementById("key").textContent = "";
 
 }
+
+function logout(){
+    document.location.href = "/";
+}
