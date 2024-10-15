@@ -1,5 +1,20 @@
+//setup
+
+var y = document.getElementById("encryption");
+var z = document.getElementById("decryption");
+var a = document.getElementById("plain_text_message_file_label");
+var b = document.getElementById("image_file_label");
+
+
+
+y.style.display = "block";
+z.style.display = "None";
+a.style.display = "None";
+b.style.display = "None";
+
+
 //home.html
-document.getElementById("signup-form").style.display = "None";
+
 
 
 
@@ -24,25 +39,34 @@ function submit_new_user_data(){
 
     if (Password != Confirm_password){
         alert("Invalid Password confirmation!")
-    }
+    } else{
+        $.post('/insertNewUser',{ userName: Username, Password:Password }, function(data) {
+            if (data.Feedback == "Invalid Username,This Username had been used "){
+                alert("Invalid Username,This Username had been used ")
+            }
+    });}
 
-    
 }
 
+function login(){
+    var Username = document.getElementById("login-Username").value
+    var Password = document.getElementById("login-Password").value
+
+    $.post('/CheckUserPassword',{ userName:Username,Password:Password }, function(data){
+        if (data.check == true){
+            document.location.href = "/index";
+            reset_file();
+        } else {
+            alert("Incorrect Password/Username")
+        }
+    })
+
+
+}
 
 // index.html
 
-var y = document.getElementById("encryption");
-var z = document.getElementById("decryption");
-var a = document.getElementById("plain_text_message_file_label");
-var b = document.getElementById("image_file_label");
 
-
-
-y.style.display = "block";
-z.style.display = "None";
-a.style.display = "None";
-b.style.display = "None";
 
 function menu_open() {
     document.getElementById('sidebar').style.display = "block";

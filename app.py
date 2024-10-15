@@ -10,7 +10,7 @@ app = Flask(__name__)
 def home():
     return render_template('home.html')
 
-@app.route('/')
+@app.route('/index')
 def index():
     return render_template('index.html')
 
@@ -34,18 +34,24 @@ def decrypt_message():
     return jsonify({'decrypted_message': decrypted_message})
 
 
-@app.route('/checkUser',methods = ['POST'])
-def check_user():
-    user = request.form['userName']
-    if DataRecord().check_user(user):
-        return jsonify ({"Check":True})
+@app.route('/CheckUserPassword',methods = ['POST'])
+def Check_user_password():
+    userName = request.form['userName']
+    password = request.form['Password']
+    if DataRecord().check_password(userName,password):
+        return jsonify({"check":True})
     else:
-        return jsonify ({"Check":False})
+        return jsonify({"check":False})
+    
+@app.route('/insertNewUser', methods = ['POST'])
+def insert_new_user():
+    userName = request.form['userName']
+    password = request.form['Password']
+    if DataRecord().check_user(userName):
+        return  jsonify({"Feedback":"Invalid Username,This Username had been used "}) 
+    else:
+        DataRecord().insert_new_user(userName,password)
 
-
-@app.route('/Base64image',methods = ['POST'])
-def image_to_base64():
-    pass
 
 if __name__ == '__main__':
     app.run(debug=True)
