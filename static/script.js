@@ -17,6 +17,18 @@ function signup_open(){
 }
 
 
+function submit_new_user_data(){
+    var Username = document.getElementById("signup-Username").value
+    var Password = document.getElementById("signup-Password").value
+    var Confirm_password = document.getElementById("ConfirmPassword").value
+
+    if (Password != Confirm_password){
+        alert("Invalid Password confirmation!")
+    }
+
+    
+}
+
 
 // index.html
 
