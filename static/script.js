@@ -37,7 +37,11 @@ function submit_new_user_data(){
     let Password = document.getElementById("signup-Password").value
     let Confirm_password = document.getElementById("ConfirmPassword").value
 
-    if (Password != Confirm_password){
+    if (Username == "") {
+        alert("please enter a username")
+    }else if(Password == ""){
+        alert("Please enter a password")
+    }else if (Password != Confirm_password){
         alert("Invalid Password confirmation!")
     } else{
         $.post('/insertNewUser',{ userName: Username, Password:Password }, function(data) {
