@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from encryption_V2 import Encrytion
 from User_database import DataRecord
+from password_strength import password_strength_checker
 
 
 app = Flask(__name__)
@@ -51,6 +52,12 @@ def insert_new_user():
         return  jsonify({"Feedback":"Invalid Username,This Username had been used "}) 
     else:
         DataRecord().insert_new_user(userName,password)
+
+@app.route('/password_strength', methods = ['POST'])
+def password_strength_check():
+    password = request.form['Password']
+    feedback = password_strength_checker().password_check(password)
+    return jsonify({"Feedback":feedback})
 
 
 if __name__ == '__main__':
