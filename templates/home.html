@@ -25,6 +25,7 @@
 
         </div>
         <form id="login-form" class="processor" autocomplete="off">
+
             <label>Login</label>
             <input id="login-Username" placeholder="Username" autocomplete="off">
             <input id="login-Password" placeholder="Password" type="password" autocomplete="off" readonly onclick="this.removeAttribute('readonly');">
@@ -33,13 +34,21 @@
         </form>
         <form id="signup-form" class="processor" style="display: none;" autocomplete="off">
             <label> Signup</label>
+
             <input id="signup-Username" placeholder="Username" autocomplete="off" readonly onclick="this.removeAttribute('readonly');">
-            <input id="signup-Password" placeholder="Password" type="password" autocomplete="off" readonly onclick="this.removeAttribute('readonly');">
+            <label id="Username-warning"></label>
+
+            <input id="signup-Password" placeholder="Password" type="password" autocomplete="off" readonly onclick="this.removeAttribute('readonly');" >
+            <label id="Password-warning"></label>
+
             <input id="ConfirmPassword" placeholder="Confirm Password" type="password" autocomplete="off" readonly onclick="this.removeAttribute('readonly');">
+            <label id="ConfirmPassword-warning"></label>
+
             <button onclick="submit_new_user_data()">Sign Up</button>
         </form>
 
 
     </div>
     <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='home_script.js') }}"></script>
 </body>
