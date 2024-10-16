@@ -38,8 +38,9 @@
             <input id="signup-Username" placeholder="Username" autocomplete="off" readonly onclick="this.removeAttribute('readonly');">
             <label id="Username-warning"></label>
 
-            <input id="signup-Password" placeholder="Password" type="password" autocomplete="off" readonly onclick="this.removeAttribute('readonly');" >
-            <label id="Password-warning"></label>
+            <input id="signup-Password" placeholder="Password" type="password" autocomplete="off"  >
+            <label id="Password-warning-1"></label>
+            <label id="Password-warning-2"></label>
 
             <input id="ConfirmPassword" placeholder="Confirm Password" type="password" autocomplete="off" readonly onclick="this.removeAttribute('readonly');">
             <label id="ConfirmPassword-warning"></label>
@@ -49,6 +50,7 @@
 
 
     </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='home_event_script.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='home_script.js') }}"></script>
+    
 </body>
