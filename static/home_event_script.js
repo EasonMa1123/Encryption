@@ -12,8 +12,8 @@ Password_input.onkeyup = function(){
         password_warning_1.innerHTML = "";
     }
     $.post('/password_strength',{Password:password},function(data){
-        if (data.feedback){
-            
+        if (data.score){
+
         }
     })
 }

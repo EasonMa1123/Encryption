@@ -56,8 +56,8 @@ def insert_new_user():
 @app.route('/password_strength', methods = ['POST'])
 def password_strength_check():
     password = request.form['Password']
-    feedback = password_strength_checker().password_check(password)
-    return jsonify({"Feedback":feedback})
+    score = password_strength_checker().password_check(password)
+    return jsonify({"score":score})
 
 
 if __name__ == '__main__':
