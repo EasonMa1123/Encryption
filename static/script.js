@@ -47,7 +47,10 @@ function submit_new_user_data(){
         $.post('/insertNewUser',{ userName: Username, Password:Password }, function(data) {
             if (data.Feedback == "Invalid Username,This Username had been used "){
                 alert("Invalid Username,This Username had been used ")
+            } else {
+                alert("Vaild SignUp,please login to enter!")
             }
+            
     });}
 
 }
