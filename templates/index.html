@@ -24,6 +24,8 @@
         <input type="radio" id="Encryption_button" onclick="show_encryption()" style="display: none;">
         <label id="Decryption_button_label" for="Decryption_button" class="sidebar-item">Decryption</label>
         <input type="radio" id="Decryption_button" onclick="show_decryption()" style="display: none;">
+        <label for="logout">Log out</label>
+        <input type="radio" id="logout" onclick="logout()" style="display: none;">
     </div>
     <div id="content-wrapper" >
         <div id="encryption" class="Processor">
@@ -50,7 +52,7 @@
                     <input type="file" id="image_file" placeholder="Upload image" accept="/image"><br>
                 </div>
                 <textarea class="text_input" id="message" placeholder="Enter your message"></textarea><br>
-                <input class="text_input" id="password_to_encrypte" placeholder="Enter the password"><br>
+                <input  type="password" class="text_input" id="password_to_encrypte" placeholder="Enter the password"><br>
                 <button onclick="encryptMessage()">Encrypt</button>
             </div>
             <p id="Processing_display" style="display: none;"></p>
@@ -82,6 +84,7 @@
         </div>
     </div>
     <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+        
 </body>
 
 </html>

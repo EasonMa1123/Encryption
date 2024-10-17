@@ -1,11 +1,21 @@
 from flask import Flask, render_template, request, jsonify
 from encryption_V2 import Encrytion
+from User_database import DataRecord
+from password_strength import password_strength_checker
+
 
 app = Flask(__name__)
 
+
 @app.route('/')
+def home():
+    return render_template('home.html')
+
+@app.route('/index')
 def index():
     return render_template('index.html')
+
+
 
 @app.route('/encrypt', methods=['POST'])
 def encrypt_message():
@@ -25,9 +35,34 @@ def decrypt_message():
     return jsonify({'decrypted_message': decrypted_message})
 
 
-@app.route('/Base64image',methods = ['POST'])
-def image_to_base64():
-    pass
+@app.route('/CheckUserPassword',methods = ['POST'])
+def Check_user_password():
+    userName = request.form['userName']
+    password = request.form['Password']
+    if DataRecord().check_password(userName,password):
+        return jsonify({"check":True})
+    else:
+        return jsonify({"check":False})
+    
+@app.route('/insertNewUser', methods = ['POST'])
+def insert_new_user():
+    userName = request.form['userName']
+    password = request.form['Password']
+    if DataRecord().check_user(userName):
+        return  jsonify({"Feedback":"Invalid Username,This Username had been used "}) 
+    else:
+        DataRecord().insert_new_user(userName,password)
+
+@app.route('/password_strength', methods = ['POST'])
+def password_strength_check():
+    password = request.form['Password']
+    score = password_strength_checker().password_check(password)
+    return jsonify({"score":score})
+
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    try:
+        app.run(debug=True)
+    except:
+        app.run(debug=True,port=5001)
+
