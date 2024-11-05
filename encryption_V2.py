@@ -1,7 +1,6 @@
 import random
 from Encryption_database import  DataRecord
-import zlib
-import base64
+
 
 class Encrytion:
     
@@ -29,15 +28,14 @@ class Encrytion:
         self.letter = ""
         self.split_key = "#~~123~~##~~qwer~"
 
-    def encrypter(self, message, password, key, compressed):
+    def encrypter(self, message, password, key):
         slot_num = random.randint(0, len(self.slots) - 1)
         slot = self.slots[slot_num]
         random_number = random.randint(2, len(message))
         encrypted_message = []
         counter = random_number
 
-        if compressed:
-            message += self.split_key + "compressed"
+        
         if password:
             message += self.split_key + str(password)
         if key:
@@ -69,23 +67,15 @@ class Encrytion:
 
         return ''.join(decrypted_message)
 
-    def text_compression(self, message):
-        return base64.b64encode(zlib.compress(message.encode('utf-8'))).decode('utf-8')
-
-    def text_decompression(self, message):
-        return zlib.decompress(base64.b64decode(message.encode('utf-8'))).decode('utf-8')
+    
 
     def encryption(self, message, password):
-        if len(message) > 100000:
-            message = self.text_compression(message)
-            compressed = True
-        else:
-            compressed = False
+
 
         data = DataRecord()
-        single_encrypted_message, key = self.encrypter(message, password=None, key=None, compressed=compressed)
+        single_encrypted_message, key = self.encrypter(message, password=None, key=None)
         while True:
-            double_encrypted_data, double_key = self.encrypter(single_encrypted_message, password, key, compressed)
+            double_encrypted_data, double_key = self.encrypter(single_encrypted_message, password, key,)
             if not data.check_message(double_encrypted_data):
                 data.insert_data(double_encrypted_data, double_key)
                 return double_encrypted_data, double_key
@@ -102,10 +92,7 @@ class Encrytion:
         second_key = self.get_second_key(single_decrypted_message)
         single_decrypted_message = self.remove_password(single_decrypted_message)
         
-        if self.check_compression(single_decrypted_message):
-            return self.text_decompression(self.decrypter(single_decrypted_message, second_key))
-        else:
-            return self.decrypter(single_decrypted_message, second_key)
+        return self.decrypter(single_decrypted_message, second_key)
 
     def check_password(self, message, password):
         parts = message.split(self.split_key)
@@ -120,8 +107,4 @@ class Encrytion:
     def remove_password(self, message):
         return message.split(self.split_key)[0]
 
-    def check_compression(self, message):
-        try:
-            return message.split(self.split_key)[-3] == "compressed"
-        except IndexError:
-            return False
+    
