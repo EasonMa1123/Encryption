@@ -181,6 +181,7 @@ async function encryptMessage() {
             });
             encryptingMessage(imageContent, password);
             // Simulate encryption and update progress bar
+
             await encryptingMessageWithProgress(imageContent, password, (progress) => {
                 progressBar.value = progress;
             });
@@ -208,9 +209,10 @@ async function encryptMessage() {
         } else if (message !== "") {
             // No file selected, encrypt plain text message (simulate progress)
             progressBar.style.display = "block";
-            await encryptingMessageWithProgress(message, password, (progress) => {
+            if (message.length > 10000)
+                await encryptingMessageWithProgress(message, password, (progress) => {
                 progressBar.value = progress;
-            });
+                });
             encryptingMessage(message, password);
 
         } else {
@@ -423,11 +425,13 @@ function reset_file(){
     document.getElementById("decrypt_message").value = ""; // Reset decryption message textarea
     document.getElementById("decrypt_key").value = ""; // Reset decryption key input
     document.getElementById("password_to_decrypte").value = ""; // Reset decryption password input
+    
 
     // Clear any encrypted/decrypted message display
     document.getElementById("encrypted_message").textContent = "";
     document.getElementById("decrypted_message").textContent = "";
     document.getElementById("key").textContent = "";
+    document.getElementById("Processing_display").style.display = "None";
 
 }
 
