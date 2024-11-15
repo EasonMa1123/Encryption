@@ -76,6 +76,14 @@ function login(){
 // index.html
 
 
+function setting_on() {
+    document.getElementById("overlay-setting").style.display = "block";
+}
+  
+function setting_off() {
+    document.getElementById("overlay-setting").style.display = "none";
+}
+
 
 function menu_open() {
     document.getElementById('sidebar').style.display = "block";
