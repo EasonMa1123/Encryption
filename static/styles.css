@@ -26,6 +26,16 @@
     cursor: pointer; /* Add a pointer on hover */
   }
 
+#setting-layer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;     
+    align-items: center;         
+    flex-direction: column;
+    border: black;
+    background-color: white;
+}
+
 /* Button inside the sidebar */
 #sidebar button {
     padding: 10px;

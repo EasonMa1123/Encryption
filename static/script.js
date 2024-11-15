@@ -78,11 +78,13 @@ function login(){
 
 function setting_on() {
     document.getElementById("overlay-setting").style.display = "block";
+    menu_close();
+
 }
   
 function setting_off() {
     document.getElementById("overlay-setting").style.display = "none";
-}
+} 
 
 
 function menu_open() {
