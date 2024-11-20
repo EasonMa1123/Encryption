@@ -27,13 +27,32 @@
   }
 
 #setting-layer{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;     
-    align-items: center;         
-    flex-direction: column;
+    vertical-align: middle;
+    width: 300px;
+    margin: auto;
     border: black;
-    background-color: white;
+
+}
+
+#setting-layout{
+    display: flex;
+    justify-content: center;  
+    align-items: center;      
+    margin: 15px;
+    text-align: center;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color:#5fc9f3
+}
+
+.setting-section{
+    display: flex;
+    justify-content: center;  
+    align-items: center;      
+    margin: 15px;
+    text-align: center;
+    flex-direction: column;
+    border-radius: 10px;
 }
 
 /* Button inside the sidebar */

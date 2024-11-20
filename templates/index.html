@@ -20,23 +20,44 @@
     </div>
     <div id="overlay-setting">
         <div id="setting-layer">
-            <div id="theme-setting">
-                <label for="dark-theme">dark</label>
-                <input id="dark-theme" type="radio">
-                <label for="bright-theme">bright</label>
-                <input id="bright-theme" type="radio">
-            </div>
-            <div id="font-size-setting">
+            <div id="setting-layout">
+                <div id="theme-setting" class="setting-section" >
+                    <a>Theme setting</a>
+                    <div class="switch-toggle">
+                        <input id="dark-theme" name="theme-setting-button" class="setting-button" type="radio" style="display: none;" onclick="">
+                        <label for="dark-theme" class="setting-button">dark</label>
+                        
+                        <input id="bright-theme" name="theme-setting-button"  class="setting-button" type="radio" style="display: none;" onclick="">
+                        <label for="bright-theme"class="setting-button">bright</label>
+                    </div>
+                </div>
+                <div id="font-size-setting" class="setting-section">
+                    <a>Font size setting</a>
+                    <div class="switch-toggle">
+                        
+                        <input id="big-font" name="font-setting-button" type="radio" style="display: none;">
+                        <label for="big-font">big</label>
+                        
+                        <input id="small-font" name="font-setting-button" type="radio" style="display: none;">
+                        <label for="small-font">small</label>
+                
+                    </div>
+                </div>
+                <div id="change-username" class="setting-section" autocomplete="off">
+                    <a>Change Username</a>
+                    <input type="text"  id="Current-username" placeholder="Current Username" autocomplete="off" readonly onclick="this.removeAttribute('readonly');">
+                    <input type="text" id="New-username" placeholder="New Username" autocomplete="off" readonly onclick="this.removeAttribute('readonly');">
 
-            </div>
-            <div id="change-username">
+                </div>
+                <div id="change-password" class="setting-section">
+                    <a>Change Password</a>
+                    <input type="text"  id="Current-password" placeholder="Current Password" autocomplete="off" readonly onclick="this.removeAttribute('readonly');">
+                    <input type="text" id="New-password" placeholder="New Password" autocomplete="off" readonly onclick="this.removeAttribute('readonly');">
 
+                </div>
+                <button>save change</button>
+                <button onclick="setting_off() ">cancel change </button>
             </div>
-            <div id="change-password">
-
-            </div>
-            <button>save chnage</button>
-            <button onclick="setting_off() ">cancel change </button>
         </div>
     </div>
     <div id="sidebar" class="w3-sidebar">
