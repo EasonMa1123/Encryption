@@ -24,6 +24,7 @@
     background-color: rgba(0,0,0,0.5); /* Black background with opacity */
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
     cursor: pointer; /* Add a pointer on hover */
+    overflow: scroll;
   }
 
 #setting-layer{
@@ -42,7 +43,8 @@
     text-align: center;
     flex-direction: column;
     border-radius: 10px;
-    background-color:#5fc9f3
+    background-color:#5fc9f3;
+    overflow-y: scroll;
 }
 
 .setting-section{
@@ -53,6 +55,8 @@
     text-align: center;
     flex-direction: column;
     border-radius: 10px;
+    background-color: #4fa6c8;
+    padding: 10px;
 }
 
 /* Button inside the sidebar */
@@ -88,7 +92,8 @@ body {
           
     
     height: 100vh;   
-    background-image:linear-gradient(#081f37,#0d2f53,#081f37) ;            
+    background-image:linear-gradient(#081f37,#0d2f53,#081f37) ;  
+             
 }
 h1{
     color: white;
