@@ -100,12 +100,12 @@ function menu_close() {
 }
 
 function set_dark_theme(){
-    document.body.style.backgroundImage = "linear-gradient(#081f37,#0d2f53,#081f37);"
-    alert("g")
+    document.body.style.backgroundImage = "linear-gradient(#081f37,#0d2f53,#081f37)";
+
 }
 
 function set_bright_theme(){
-    document.body.style.backgroundImage = "linear-gradient(#16497e,#164d87,#113f70);"
+    document.body.style.backgroundImage = "linear-gradient(#113f70,#ffffff,#113f70)";
 }
 
 // Function to read a file as Base64 using promises, with progress tracking
@@ -453,6 +453,9 @@ function reset_file(){
     document.getElementById("Processing_display").style.display = "None";
 
 }
+
+
+
 
 function logout(){
     document.location.href = "/";
