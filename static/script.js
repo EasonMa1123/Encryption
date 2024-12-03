@@ -99,6 +99,15 @@ function menu_close() {
 
 }
 
+function set_dark_theme(){
+    document.body.style.backgroundImage = "linear-gradient(#081f37,#0d2f53,#081f37);"
+    alert("g")
+}
+
+function set_bright_theme(){
+    document.body.style.backgroundImage = "linear-gradient(#16497e,#164d87,#113f70);"
+}
+
 // Function to read a file as Base64 using promises, with progress tracking
 function readFileAsBase64(file, progressCallback) {
     return new Promise((resolve, reject) => {
