@@ -438,3 +438,12 @@ function reset_file(){
 function logout(){
     document.location.href = "/";
 }
+
+
+function disable_file_input(){
+    document.getElementById().style.display = "None"
+}
+
+function enable_file_input(){
+    document.getElementById().style.display = "initial"
+}
