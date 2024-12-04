@@ -151,6 +151,15 @@ function ChangePassword(){
     }
 }
 
+
+
+function check_invalid_enter(){
+    if(sessionStorage.getItem("Username") == null){
+        alert("get out")
+        logout()
+    }
+}
+
 // Function to read a file as Base64 using promises, with progress tracking
 function readFileAsBase64(file, progressCallback) {
     return new Promise((resolve, reject) => {
@@ -497,9 +506,7 @@ function reset_file(){
 
 }
 
-function access_account_detail(){
 
-}
 
 
 function logout(){
