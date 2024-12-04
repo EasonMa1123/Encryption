@@ -59,6 +59,11 @@ def password_strength_check():
     score = password_strength_checker().password_check(password)
     return jsonify({"score":score})
 
+@app.route('/access_account_detail', methods = ['POST'])
+def access_account_detail():
+    Username = request.form['Username']
+    return jsonify({"Username":DataRecord().access_account(Username)[0],"Password":DataRecord().access_account(Username)[1]})
+
 
 if __name__ == '__main__':
     try:
