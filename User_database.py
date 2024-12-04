@@ -38,3 +38,11 @@ class DataRecord:
             return True
         else:
             return False
+        
+    def access_account(self,user):
+        execute_text = f'SELECT * FROM UserData WHERE UserName = "{user}"'
+        self.cc.execute(execute_text)
+        data = [row for row in self.cc.fetchall()]
+        return [data[0][1],data[0][2]]
+    
+
