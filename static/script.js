@@ -62,6 +62,7 @@ function login(){
     $.post('/CheckUserPassword',{ userName:Username,Password:Password }, function(data){
         if (data.check == true){
             sessionStorage.setItem("Username",Username)
+            sessionStorage.setItem("Password",Password)
             document.location.href = "/index";
             Username = "";
             Password = "";
@@ -97,6 +98,7 @@ function menu_open() {
 
 function menu_close() {
     document.getElementById('sidebar').style.display = "None";
+    document.getElementById('Username-display').innerHTML = ""
 
 
 }
@@ -108,6 +110,45 @@ function set_dark_theme(){
 
 function set_bright_theme(){
     document.body.style.backgroundImage = "linear-gradient(#113f70,#ffffff,#113f70)";
+}
+
+
+
+function ChangeUserName(){
+    const old_username = document.getElementById("Current-username").value;
+    const new_username = document.getElementById("New-username").value;
+
+    if (old_username == "" || new_username == ""|| old_username == " " || new_username == " "  ){
+        alert("Invalid Username ")
+    }
+    else if (old_username == new_username){
+        alert("Same Username!")
+    } else if(old_username == sessionStorage.getItem("Username")){
+        $.post("/access_account_detail",{Username:old_username},function(data){
+            const id = data.ID
+            $.post("/update_account_username",{id:id,New_username:new_username})
+            sessionStorage.setItem("Username",new_username)
+            alert("UserName Changed")
+        })
+    }
+}
+
+
+function ChangePassword(){
+    const old_Password = document.getElementById("Current-password").value;
+    const new_Password = document.getElementById("New-password").value;
+
+    if (old_Password == new_Password){
+        alert("Same Password!")
+    } else if(old_Password == sessionStorage.getItem("Password")){
+        $.post("/access_account_detail",{Username:sessionStorage.getItem("Username")},function(data){
+            $.post("/password_Update",{id:data.ID,New_password:new_Password})
+            sessionStorage.setItem("Password",new_Password)
+            alert("Password Changed")
+        })
+    } else{
+        alert("Invalid Password change")
+    }
 }
 
 // Function to read a file as Base64 using promises, with progress tracking

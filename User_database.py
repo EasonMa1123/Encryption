@@ -50,4 +50,10 @@ class DataRecord:
         self.cc.execute(execute_text)
         self.DataBase.commit()
 
+    def update_account_Password(self,new_Password,UserID):
+        execute_text = f'UPDATE UserData SET Password="{new_Password}" WHERE id = "{UserID}"'
+        self.cc.execute(execute_text)
+        self.DataBase.commit()
+
+
 
