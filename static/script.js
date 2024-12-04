@@ -61,6 +61,7 @@ function login(){
 
     $.post('/CheckUserPassword',{ userName:Username,Password:Password }, function(data){
         if (data.check == true){
+            sessionStorage.setItem("Username",Username)
             document.location.href = "/index";
             Username = "";
             Password = "";
@@ -89,6 +90,7 @@ function setting_off() {
 
 function menu_open() {
     document.getElementById('sidebar').style.display = "block";
+    document.getElementById('Username-display').innerHTML = sessionStorage.getItem("Username")
 
 
 }
@@ -433,7 +435,7 @@ function ConvertImageToText(){
 
 
 function reset_file(){
-    console.log("Here")
+
     // Reset file inputs
     document.getElementById("image_file").value = "";
     document.getElementById("plain_text_message_file").value = "";
@@ -454,7 +456,9 @@ function reset_file(){
 
 }
 
+function access_account_detail(){
 
+}
 
 
 function logout(){
