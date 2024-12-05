@@ -59,6 +59,13 @@
     padding: 10px;
 }
 
+#personal-setting{
+    background-color: #257291;
+    border-radius: 10px;
+    margin: 6px;
+    padding: 3px;
+}
+
 /* Button inside the sidebar */
 #sidebar button {
     padding: 10px;
