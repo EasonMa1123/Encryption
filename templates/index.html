@@ -12,7 +12,7 @@
 
     
 </head>
-<body onload="check_invalid_enter()">
+<body onload="access_setting()">
     <h1>Encrypt and Decrypt Messages</h1>
     <div>
         <label for="open_menu_button" style="font-size: 50px;color: aliceblue; margin-left: 10px;">☰</label>
@@ -25,7 +25,7 @@
                     <div id="theme-setting" class="setting-section" >
                         <a>Theme setting</a>
                         <div class="switch-toggle">
-                            <input id="dark-theme" name="theme-setting-button" class="setting-button" type="radio" style="display: none;" checked onclick="set_dark_theme()">
+                            <input id="dark-theme" name="theme-setting-button" class="setting-button" type="radio" style="display: none;" onclick="set_dark_theme()">
                             <label for="dark-theme" class="setting-button">dark</label>
                             
                             <input id="bright-theme" name="theme-setting-button"  class="setting-button" type="radio" style="display: none;" onclick="set_bright_theme()">
@@ -39,7 +39,7 @@
                             <input id="big-font" name="font-setting-button" type="radio" style="display: none;" onclick="set_big_font()">
                             <label for="big-font">big</label>
 
-                            <input id="medium-font" name="font-setting-button" type="radio" style="display: none;" onclick="set_medium_font()" checked>
+                            <input id="medium-font" name="font-setting-button" type="radio" style="display: none;" onclick="set_medium_font()" >
                             <label for="medium-font">medium</label>
                             
                             <input id="small-font" name="font-setting-button" type="radio" style="display: none;" onclick="set_small_font()">
@@ -47,7 +47,7 @@
                     
                         </div>
                     </div>
-                    <button>Save Change</button>
+                    <button onclick="save_setting()">Save Change</button>
                 </div>
                 <div id="change-username" class="setting-section" autocomplete="off">
                     <a>Change Username</a>
@@ -88,7 +88,8 @@
     <div id="content-wrapper" >
         <div id="encryption" class="Processor">
             <h2>Encrypt</h2>
-            <div id="content_central">
+            
+            <div id="content_central" >
                 
                 <div id="input_switch" class="switch-toggle">
                     <input id="Text_switch" name="state-d" onclick="disable_Input('plain_text_message_file')" type="radio" />

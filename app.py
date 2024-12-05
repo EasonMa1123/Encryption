@@ -80,7 +80,22 @@ def update_account_password():
     return jsonify({"Feedback":True})
     
 
+@app.route('/update_user_setting',methods = ['POST'])
+def update_user_setting():
+    id = request.form['id']
+    theme = request.form['theme']
+    fontsize = request.form['fontSize']
+    DataRecord().update_account_setting(id,theme,fontsize)
+    return jsonify({"Feedback":True})
 
+@app.route('/access_user_setting',methods = ['POST'])
+def access_user_setting():
+    id = request.form['id']
+    data = DataRecord().access_account_setting(id,False)
+    if data ==  None:
+        return jsonify({"Theme":None,"Fontsize":None})
+    else:
+        return jsonify({"Theme":data[1],"Fontsize":data[2]})
 
 if __name__ == '__main__':
     try:

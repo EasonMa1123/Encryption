@@ -65,9 +65,7 @@ class DataRecord:
 
 
     def update_account_setting(self,userID,theme,fontSize):
-        execute_text = f'SELECT * FROM UserSettingData WHERE id = "{userID}"'
-        self.cc.execute(execute_text)
-        data = [row for row in self.cc.fetchall()]
+        data = self.access_account_setting(userID,True)
         if data == []:
             execute_text = f'INSERT INTO UserSettingData (id,Theme,Fontsize) VALUES({userID},"{theme}","{fontSize}")'
             
@@ -76,6 +74,22 @@ class DataRecord:
 
         self.cc.execute(execute_text)
         self.DataBase.commit()
+
+
+    def access_account_setting(self,UserID,check):
+        execute_text = f'SELECT * FROM UserSettingData WHERE id = "{UserID}"'
+        self.cc.execute(execute_text)
+        data = [row for row in self.cc.fetchall()]
+        if check:
+            return data
+        else:
+            try:
+                return [i for i in data[0]]
+            except:
+                return None
+    
+
+
 
     
 

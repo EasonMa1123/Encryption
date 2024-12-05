@@ -164,6 +164,49 @@ function ChangePassword(){
 }
 
 
+function save_setting(){
+    $.post('/access_account_detail',{Username:sessionStorage.getItem("Username")},function(data){
+        const ID = data.ID
+
+    
+        if (document.body.style.backgroundImage == "linear-gradient(rgb(17, 63, 112), rgb(255, 255, 255), rgb(17, 63, 112))"){
+            var Theme = "bright"
+        }else if(document.body.style.backgroundImage == "linear-gradient(rgb(8, 31, 55), rgb(13, 47, 83), rgb(8, 31, 55))"){
+            var Theme = "dark"
+        } 
+
+        const FontSize = document.body.style.fontSize;
+        $.post('/update_user_setting',{id:ID,theme:Theme,fontSize:FontSize});
+    })
+}
+
+
+function access_setting(){
+    check_invalid_enter()
+    $.post('/access_account_detail',{Username:sessionStorage.getItem("Username")},function(data){
+        const ID = data.ID
+        $.post('/access_user_setting',{id:ID},function(data){
+            if(data.Theme != null){
+                const Theme = data.Theme
+                const FontSize = data.Fontsize
+                if (Theme == "bright"){
+                    set_bright_theme()
+                    document.getElementById('bright-theme').checked = true;
+                } else{
+                    document.getElementById('dark-theme').checked = true;
+                }
+                document.body.style.fontSize = FontSize
+                if (data.Fontsize == "large"){
+                    document.getElementById('big-font').checked = true;
+                } else if (data.Fontsize == "medium"){
+                    document.getElementById('medium-font').checked = true;
+                } else if (data.Fontsize == "small"){
+                    document.getElementById('small-font').checked = true;
+                }
+            }
+        })
+    })
+}
 
 function check_invalid_enter(){
     if(sessionStorage.getItem("Username") == null){
