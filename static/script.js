@@ -1,212 +1,8 @@
-//setup
-
-var y = document.getElementById("encryption");
-var z = document.getElementById("decryption");
-var a = document.getElementById("plain_text_message_file_label");
-var b = document.getElementById("image_file_label");
 
 
 
-y.style.display = "block";
-z.style.display = "None";
-a.style.display = "None";
-b.style.display = "None";
-
-
-//home.html
-
-
-
-
-
-function login_open(){
-    document.getElementById("signup-form").style.display = "None";
-    document.getElementById("login-form").style.display = "flex";
-
-}
-
-function signup_open(){
-    document.getElementById("signup-form").style.display = "flex";
-    document.getElementById("login-form").style.display = "None";
-
-}
-
-
-function submit_new_user_data(){
-    let Username = document.getElementById("signup-Username").value
-    let Password = document.getElementById("signup-Password").value
-    let Confirm_password = document.getElementById("ConfirmPassword").value
-
-    if (Username == "") {
-        alert("please enter a username")
-    }else if(Password == ""){
-        alert("Please enter a password")
-    }else if (Password != Confirm_password){
-        alert("Invalid Password confirmation!")
-    } else{
-        $.post('/insertNewUser',{ userName: Username, Password:Password }, function(data) {
-            if (data.Feedback == "Invalid Username,This Username had been used "){
-                alert("Invalid Username,This Username had been used ")
-            } else {
-                alert("Vaild SignUp,please login to enter!")
-            }
-            
-    });}
-
-}
-
-function login(){
-    let Username = document.getElementById("login-Username").value
-    let Password = document.getElementById("login-Password").value
-
-    $.post('/CheckUserPassword',{ userName:Username,Password:Password }, function(data){
-        if (data.check == true){
-            sessionStorage.setItem("Username",Username)
-            sessionStorage.setItem("Password",Password)
-            document.location.href = "/index";
-            Username = "";
-            Password = "";
-            
-        } else {
-            alert("Incorrect Password/Username")
-        }
-    })
-
-
-}
 
 // index.html
-
-
-function setting_on() {
-    document.getElementById("overlay-setting").style.display = "block";
-    menu_close();
-
-}
-  
-function setting_off() {
-    document.getElementById("overlay-setting").style.display = "none";
-} 
-
-
-function menu_open() {
-    document.getElementById('sidebar').style.display = "block";
-    document.getElementById('Username-display').innerHTML = sessionStorage.getItem("Username")
-
-
-}
-
-function menu_close() {
-    document.getElementById('sidebar').style.display = "None";
-    document.getElementById('Username-display').innerHTML = ""
-
-
-}
-
-function set_dark_theme(){
-    document.body.style.backgroundImage = "linear-gradient(#081f37,#0d2f53,#081f37)";
-
-}
-
-function set_bright_theme(){
-    document.body.style.backgroundImage = "linear-gradient(#113f70,#ffffff,#113f70)";
-}
-
-function set_big_font(){
-    document.body.style.fontSize = "large"
-}
-
-function set_medium_font(){
-    document.body.style.fontSize = "medium"
-}
-
-
-function set_small_font(){
-    document.body.style.fontSize = "small"
-}
-
-
-function ChangeUserName(){
-    const old_username = document.getElementById("Current-username").value;
-    const new_username = document.getElementById("New-username").value;
-
-    if (old_username == "" || new_username == ""|| old_username == " " || new_username == " "  ){
-        alert("Invalid Username ")
-    }
-    else if (old_username == new_username){
-        alert("Same Username!")
-    } else if(old_username == sessionStorage.getItem("Username")){
-        $.post("/access_account_detail",{Username:old_username},function(data){
-            const id = data.ID
-            $.post("/update_account_username",{id:id,New_username:new_username})
-            sessionStorage.setItem("Username",new_username)
-            alert("UserName Changed")
-        })
-    }
-}
-
-
-function ChangePassword(){
-    const old_Password = document.getElementById("Current-password").value;
-    const new_Password = document.getElementById("New-password").value;
-
-    if (old_Password == new_Password){
-        alert("Same Password!")
-    } else if(old_Password == sessionStorage.getItem("Password")){
-        $.post("/access_account_detail",{Username:sessionStorage.getItem("Username")},function(data){
-            $.post("/password_Update",{id:data.ID,New_password:new_Password})
-            sessionStorage.setItem("Password",new_Password)
-            alert("Password Changed")
-        })
-    } else{
-        alert("Invalid Password change")
-    }
-}
-
-
-function save_setting(){
-    $.post('/access_account_detail',{Username:sessionStorage.getItem("Username")},function(data){
-        const ID = data.ID
-
-    
-        if (document.body.style.backgroundImage == "linear-gradient(rgb(17, 63, 112), rgb(255, 255, 255), rgb(17, 63, 112))"){
-            var Theme = "bright"
-        }else if(document.body.style.backgroundImage == "linear-gradient(rgb(8, 31, 55), rgb(13, 47, 83), rgb(8, 31, 55))"){
-            var Theme = "dark"
-        } 
-
-        const FontSize = document.body.style.fontSize;
-        $.post('/update_user_setting',{id:ID,theme:Theme,fontSize:FontSize});
-    })
-}
-
-
-function access_setting(){
-    check_invalid_enter()
-    $.post('/access_account_detail',{Username:sessionStorage.getItem("Username")},function(data){
-        const ID = data.ID
-        $.post('/access_user_setting',{id:ID},function(data){
-            if(data.Theme != null){
-                const Theme = data.Theme
-                const FontSize = data.Fontsize
-                if (Theme == "bright"){
-                    set_bright_theme()
-                    document.getElementById('bright-theme').checked = true;
-                } else{
-                    document.getElementById('dark-theme').checked = true;
-                }
-                document.body.style.fontSize = FontSize
-                if (data.Fontsize == "large"){
-                    document.getElementById('big-font').checked = true;
-                } else if (data.Fontsize == "medium"){
-                    document.getElementById('medium-font').checked = true;
-                } else if (data.Fontsize == "small"){
-                    document.getElementById('small-font').checked = true;
-                }
-            }
-        })
-    })
-}
 
 function check_invalid_enter(){
     if(sessionStorage.getItem("Username") == null){
@@ -357,43 +153,6 @@ async function encryptMessage() {
 
 
 
-function disable_Input(IDToNotDisable){
-    const x_name = "plain_text_message_file"
-    const x_label_name = "plain_text_message_file_label"
-    const y_name = "image_file"
-    const y_labal_name = "image_file_label"
-    const z_name = "message"
-
-    var x = document.getElementById(x_name)
-    var x_label = document.getElementById(x_label_name)
-    var y = document.getElementById(y_name)
-    var y_labal = document.getElementById(y_labal_name)
-    var z = document.getElementById(z_name)
-
-    if (x_name == IDToNotDisable){
-        
-        y_labal.style.display = "None";
-        z.style.display = "None";
-        
-        x_label.style.display = "initial";
-    } else if (y_name == IDToNotDisable) {
-        
-        x_label.style.display = "None";
-        z.style.display = "None";
-        
-        
-        y_labal.style.display = "initial";
-
-    } else if(z_name == IDToNotDisable){
-        
-        
-        y_labal.style.display = "None";
-        x_label.style.display = "None";
-        z.style.display = "initial";
-
-    }
-}
-
 
 
 
@@ -473,31 +232,7 @@ function downloadImage(base64Image) {
     link.click();
 }
 
-function show_encryption(){
-    
-    var y = document.getElementById("encryption");
-    var z = document.getElementById("decryption");
-    document.getElementById('Encryption_button_label').style.backgroundColor = "#13314c";
-    document.getElementById('Decryption_button_label').style.backgroundColor = "#ffffff";
-    document.getElementById('Encryption_button_label').style.color= "#ffffff";
-    document.getElementById('Decryption_button_label').style.color= "#000000";
 
-    y.style.display = "block";
-    z.style.display = "None";
-}
-function show_decryption(){
-    
-    var y = document.getElementById("encryption");
-    var z = document.getElementById("decryption");
-    document.getElementById('Decryption_button_label').style.backgroundColor = "#13314c";
-    document.getElementById('Encryption_button_label').style.backgroundColor = "#ffffff";
-    document.getElementById('Decryption_button_label').style.color= "#ffffff";
-    document.getElementById('Encryption_button_label').style.color= "#000000";
-    
-
-    y.style.display = "None";
-    z.style.display = "Block";
-}
 function Copy_text(ID){
     var copyText = document.getElementById(ID).textContent;    
     navigator.clipboard.writeText(copyText);
@@ -539,40 +274,9 @@ function ConvertImageToText(){
 }
 
 
-function reset_file(){
-
-    // Reset file inputs
-    document.getElementById("image_file").value = "";
-    document.getElementById("plain_text_message_file").value = "";
-
-    // Reset text content (for textarea and text inputs)
-    document.getElementById("message").value = ""; // Reset textarea for message input
-    document.getElementById("password_to_encrypte").value = ""; // Reset encryption password input
-    document.getElementById("decrypt_message").value = ""; // Reset decryption message textarea
-    document.getElementById("decrypt_key").value = ""; // Reset decryption key input
-    document.getElementById("password_to_decrypte").value = ""; // Reset decryption password input
-    
-
-    // Clear any encrypted/decrypted message display
-    document.getElementById("encrypted_message").textContent = "";
-    document.getElementById("decrypted_message").textContent = "";
-    document.getElementById("key").textContent = "";
-    document.getElementById("Processing_display").style.display = "None";
-
-}
-
 
 
 
 function logout(){
     document.location.href = "/login";
-}
-
-
-function disable_file_input(){
-    document.getElementById().style.display = "None"
-}
-
-function enable_file_input(){
-    document.getElementById().style.display = "initial"
 }
