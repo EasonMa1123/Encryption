@@ -21,27 +21,33 @@
     <div id="overlay-setting">
         <div id="setting-layer">
             <div id="setting-layout">
-                <div id="theme-setting" class="setting-section" >
-                    <a>Theme setting</a>
-                    <div class="switch-toggle">
-                        <input id="dark-theme" name="theme-setting-button" class="setting-button" type="radio" style="display: none;" checked onclick="set_dark_theme()">
-                        <label for="dark-theme" class="setting-button">dark</label>
-                        
-                        <input id="bright-theme" name="theme-setting-button"  class="setting-button" type="radio" style="display: none;" onclick="set_bright_theme()">
-                        <label for="bright-theme"class="setting-button">bright</label>
+                <div id="personal-setting">
+                    <div id="theme-setting" class="setting-section" >
+                        <a>Theme setting</a>
+                        <div class="switch-toggle">
+                            <input id="dark-theme" name="theme-setting-button" class="setting-button" type="radio" style="display: none;" checked onclick="set_dark_theme()">
+                            <label for="dark-theme" class="setting-button">dark</label>
+                            
+                            <input id="bright-theme" name="theme-setting-button"  class="setting-button" type="radio" style="display: none;" onclick="set_bright_theme()">
+                            <label for="bright-theme"class="setting-button">bright</label>
+                        </div>
                     </div>
-                </div>
-                <div id="font-size-setting" class="setting-section">
-                    <a>Font size setting</a>
-                    <div class="switch-toggle">
-                        
-                        <input id="big-font" name="font-setting-button" type="radio" style="display: none;">
-                        <label for="big-font">big</label>
-                        
-                        <input id="small-font" name="font-setting-button" type="radio" style="display: none;">
-                        <label for="small-font">small</label>
-                
+                    <div id="font-size-setting" class="setting-section">
+                        <a>Font size setting</a>
+                        <div class="switch-toggle">
+                            
+                            <input id="big-font" name="font-setting-button" type="radio" style="display: none;" onclick="set_big_font()">
+                            <label for="big-font">big</label>
+
+                            <input id="medium-font" name="font-setting-button" type="radio" style="display: none;" onclick="set_medium_font()" checked>
+                            <label for="medium-font">medium</label>
+                            
+                            <input id="small-font" name="font-setting-button" type="radio" style="display: none;" onclick="set_small_font()">
+                            <label for="small-font">small</label>
+                    
+                        </div>
                     </div>
+                    <button>Save Change</button>
                 </div>
                 <div id="change-username" class="setting-section" autocomplete="off">
                     <a>Change Username</a>
@@ -52,8 +58,8 @@
                 </div>
                 <div id="change-password" class="setting-section">
                     <a>Change Password</a>
-                    <input type="text"  id="Current-password" placeholder="Current Password" autocomplete="off" readonly onclick="this.removeAttribute('readonly');">
-                    <input type="text" id="New-password" placeholder="New Password" autocomplete="off" readonly onclick="this.removeAttribute('readonly');">
+                    <input type="password"  id="Current-password" placeholder="Current Password" autocomplete="off" readonly onclick="this.removeAttribute('readonly');">
+                    <input type="password" id="New-password" placeholder="New Password" autocomplete="off" readonly onclick="this.removeAttribute('readonly');">
                     <button id="Password-change-button" onclick="ChangePassword()">Save change</button>
 
                 </div>
@@ -83,6 +89,7 @@
         <div id="encryption" class="Processor">
             <h2>Encrypt</h2>
             <div id="content_central">
+                
                 <div id="input_switch" class="switch-toggle">
                     <input id="Text_switch" name="state-d" onclick="disable_Input('plain_text_message_file')" type="radio" />
                     <label for="Text_switch" >Text</label>

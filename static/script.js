@@ -112,6 +112,18 @@ function set_bright_theme(){
     document.body.style.backgroundImage = "linear-gradient(#113f70,#ffffff,#113f70)";
 }
 
+function set_big_font(){
+    document.body.style.fontSize = "large"
+}
+
+function set_medium_font(){
+    document.body.style.fontSize = "medium"
+}
+
+
+function set_small_font(){
+    document.body.style.fontSize = "small"
+}
 
 
 function ChangeUserName(){
