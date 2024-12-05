@@ -12,13 +12,65 @@
 
     
 </head>
-<body>
+<body onload="access_setting()">
     <h1>Encrypt and Decrypt Messages</h1>
     <div>
         <label for="open_menu_button" style="font-size: 50px;color: aliceblue; margin-left: 10px;">☰</label>
         <input type="button" onclick="menu_open()" class="sidebar-item" id="open_menu_button" style="display: none;"></button>
     </div>
+    <div id="overlay-setting">
+        <div id="setting-layer">
+            <div id="setting-layout">
+                <div id="personal-setting">
+                    <div id="theme-setting" class="setting-section" >
+                        <a>Theme setting</a>
+                        <div class="switch-toggle">
+                            <input id="dark-theme" name="theme-setting-button" class="setting-button" type="radio" style="display: none;" onclick="set_dark_theme()">
+                            <label for="dark-theme" class="setting-button">dark</label>
+                            
+                            <input id="bright-theme" name="theme-setting-button"  class="setting-button" type="radio" style="display: none;" onclick="set_bright_theme()">
+                            <label for="bright-theme"class="setting-button">bright</label>
+                        </div>
+                    </div>
+                    <div id="font-size-setting" class="setting-section">
+                        <a>Font size setting</a>
+                        <div class="switch-toggle">
+                            
+                            <input id="big-font" name="font-setting-button" type="radio" style="display: none;" onclick="set_big_font()">
+                            <label for="big-font">big</label>
+
+                            <input id="medium-font" name="font-setting-button" type="radio" style="display: none;" onclick="set_medium_font()" >
+                            <label for="medium-font">medium</label>
+                            
+                            <input id="small-font" name="font-setting-button" type="radio" style="display: none;" onclick="set_small_font()">
+                            <label for="small-font">small</label>
+                    
+                        </div>
+                    </div>
+                    <button onclick="save_setting()">Save Change</button>
+                </div>
+                <div id="change-username" class="setting-section" autocomplete="off">
+                    <a>Change Username</a>
+                    <input type="text"  id="Current-username" placeholder="Current Username" autocomplete="off" readonly onclick="this.removeAttribute('readonly');">
+                    <input type="text" id="New-username" placeholder="New Username" autocomplete="off" readonly onclick="this.removeAttribute('readonly');">
+                    <button id="Username-change-button" onclick="ChangeUserName()">Save change</button>
+
+                </div>
+                <div id="change-password" class="setting-section">
+                    <a>Change Password</a>
+                    <input type="password"  id="Current-password" placeholder="Current Password" autocomplete="off" readonly onclick="this.removeAttribute('readonly');">
+                    <input type="password" id="New-password" placeholder="New Password" autocomplete="off" readonly onclick="this.removeAttribute('readonly');">
+                    <button id="Password-change-button" onclick="ChangePassword()">Save change</button>
+
+                </div>
+                
+                <button onclick="setting_off() ">Exit</button>
+            </div>
+        </div>
+    </div>
     <div id="sidebar" class="w3-sidebar">
+        <label>User:</label>
+        <label id="Username-display">Username</label>
         <button onclick="menu_close()" class="sidebar-item">Close &times;</button>
         <label id="Encryption_button_label" for="Encryption_button" class="sidebar-item" style="background-color: #13314c;color: #ffffff;">Encryption</label>
         <input type="radio" id="Encryption_button" onclick="show_encryption()" style="display: none;">
@@ -26,7 +78,9 @@
         <input type="radio" id="Decryption_button" onclick="show_decryption()" style="display: none;">
         <div style="margin: 30px;"></div>
         <label for="setting">Setting </label>
-        <input type="radio" id="setting" onclick="" style="display: none;">
+        <input type="radio" id="setting" onclick="setting_on()" style="display: none;">
+        <div style="margin: 30px;"></div>
+        
         <div style="margin: 30px;"></div>
         <label for="logout">Log out</label>
         <input type="radio" id="logout" onclick="logout()" style="display: none;">
@@ -34,7 +88,9 @@
     <div id="content-wrapper" >
         <div id="encryption" class="Processor">
             <h2>Encrypt</h2>
-            <div id="content_central">
+            
+            <div id="content_central" >
+                
                 <div id="input_switch" class="switch-toggle">
                     <input id="Text_switch" name="state-d" onclick="disable_Input('plain_text_message_file')" type="radio" />
                     <label for="Text_switch" >Text</label>

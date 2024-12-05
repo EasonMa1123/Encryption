@@ -12,6 +12,60 @@
     box-shadow: 2px 0 5px rgba(0,0,0,0.2);
 }
 
+#overlay-setting {
+    position: fixed; /* Sit on top of the page content */
+    display: none; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+    overflow: scroll;
+  }
+
+#setting-layer{
+    vertical-align: middle;
+    width: 300px;
+    margin: auto;
+    border: black;
+
+}
+
+#setting-layout{
+    display: flex;
+    justify-content: center;  
+    align-items: center;      
+    margin: 15px;
+    text-align: center;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color:#5fc9f3;
+    overflow-y: scroll;
+}
+
+.setting-section{
+    display: flex;
+    justify-content: center;  
+    align-items: center;      
+    margin: 15px;
+    text-align: center;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: #4fa6c8;
+    padding: 10px;
+}
+
+#personal-setting{
+    background-color: #257291;
+    border-radius: 10px;
+    margin: 6px;
+    padding: 3px;
+}
+
 /* Button inside the sidebar */
 #sidebar button {
     padding: 10px;
@@ -45,7 +99,8 @@ body {
           
     
     height: 100vh;   
-    background-image:linear-gradient(#081f37,#0d2f53,#081f37) ;            
+    background-image:linear-gradient(#081f37,#0d2f53,#081f37) ;  
+             
 }
 h1{
     color: white;
