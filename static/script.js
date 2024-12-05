@@ -436,7 +436,7 @@ function reset_file(){
 }
 
 function logout(){
-    document.location.href = "/";
+    document.location.href = "/login";
 }
 
 
