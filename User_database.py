@@ -14,6 +14,14 @@ class DataRecord:
             )
         """)
         self.DataBase.commit()
+        self.cc.execute("""
+            CREATE TABLE IF NOT EXISTS UserSettingData ( 
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                Theme TEXT,
+                FontSize TEXT
+            )
+        """)
+        self.DataBase.commit()
 
     def check_user(self,user):
         self.cc.execute('''SELECT UserName FROM UserData ''')
@@ -56,4 +64,20 @@ class DataRecord:
         self.DataBase.commit()
 
 
+    def update_account_setting(self,userID,theme,fontSize):
+        execute_text = f'SELECT * FROM UserSettingData WHERE id = "{userID}"'
+        self.cc.execute(execute_text)
+        data = [row for row in self.cc.fetchall()]
+        if data == []:
+            execute_text = f'INSERT INTO UserSettingData (id,Theme,Fontsize) VALUES({userID},"{theme}","{fontSize}")'
+            
+        else:
+            execute_text = f'UPDATE UserSettingData SET Theme = "{theme}",Fontsize = "{fontSize}" WHERE id = "{userID}" '
+
+        self.cc.execute(execute_text)
+        self.DataBase.commit()
+
+    
+
+        
 
