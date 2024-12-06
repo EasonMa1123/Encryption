@@ -1,4 +1,5 @@
 import random
+import concurrent.futures
 from Encryption_database import  DataRecord
 
 
@@ -27,11 +28,19 @@ class Encrytion:
 
         self.letter = ""
         self.split_key = "#~~123~~##~~qwer~"
+        self.split_amount = 4
+        self.init_key = 3
 
-    def encrypter(self, message, password, key):
-        slot_num = random.randint(0, len(self.slots) - 1)
+    def encrypter(self, message, password, key,init_key):
+        if init_key:
+            slot_num = init_key
+            random_number = init_key
+        else:
+            slot_num = random.randint(0, len(self.slots) - 1)
+            random_number = random.randint(2, len(message))
+
         slot = self.slots[slot_num]
-        random_number = random.randint(2, len(message))
+        
         encrypted_message = []
         counter = random_number
 
@@ -69,18 +78,19 @@ class Encrytion:
 
     
 
-    def encryption(self, message, password):
+    def single_encryption(self, message, password):
 
 
         data = DataRecord()
-        single_encrypted_message, key = self.encrypter(message, password=None, key=None)
+        single_encrypted_message, key = self.encrypter(message, password=None, key=None,init_key=None)
         while True:
-            double_encrypted_data, double_key = self.encrypter(single_encrypted_message, password, key,)
+            double_encrypted_data, double_key = self.encrypter(single_encrypted_message, password, key,init_key=None)
             if not data.check_message(double_encrypted_data):
+                
                 data.insert_data(double_encrypted_data, double_key)
                 return double_encrypted_data, double_key
 
-    def unencryption(self, message, key, password):
+    def single_unencryption(self, message, key, password):
         single_decrypted_message = self.decrypter(message, key)
         if not single_decrypted_message:
             return 405
@@ -107,4 +117,47 @@ class Encrytion:
     def remove_password(self, message):
         return message.split(self.split_key)[0]
 
+    def split_plain_text(self,message):
+        new_message = []
+        if len(message)%self.split_amount <2:
+            message += "   "
+
+        for i in range((len(message)//self.split_amount)+1):
+            new_message.append(message[self.split_amount*i:(self.split_amount*(i+1))])
+        
+        return new_message
+
+    def merge_cipher(self,message):
+        cipher_text = ""
+        for i in message:
+            cipher_text += i[0]
+        return cipher_text
+
+    def encrypt_key(self,message):
+        key = ""
+
+        for i in message:
+            key += i[1]
+        
+        return self.encrypter(key,False,False,self.init_key)
+
+
+    def encryption(self,message, password):
+        if len(message)<self.split_amount:
+            return self.single_encryption(message,password)
+        else:
+            message_list = self.split_plain_text(message)
+            password_list = [password for i in range((len(message)//self.split_amount)+1)]
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                Encrypted_list=list(executor.map(self.single_encryption, message_list,password_list))
+                print(Encrypted_list)
+                for i in range(len(Encrypted_list)):
+                    print(len(Encrypted_list[i][0]))
+                
+            return self.merge_cipher(Encrypted_list),self.encrypt_key(Encrypted_list)[0]
     
+    def unencryption(self,message, key, password):
+        return self.single_unencryption(message, key, password)
+    
+
+print(Encrytion().encryption("123456789101112131411","12"))
