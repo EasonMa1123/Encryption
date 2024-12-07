@@ -11,7 +11,7 @@ def check_encryption(text_length):
     
     incorrect_counter = 0
     invalid_counter = 0
-    total_test_time = 1
+    total_test_time = 3
     
     en_run_times = []
     de_run_times = []

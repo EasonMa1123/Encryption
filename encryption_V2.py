@@ -27,7 +27,7 @@ class Encrytion:
 
 
         self.letter = ""
-        self.split_key = "#~~123~~##~~qwer~block"
+        self.split_key = "#~~123~~##~~qwer~"
         self.split_amount = 1000
         self.init_key = 2
         self.space = "   "
@@ -126,7 +126,7 @@ class Encrytion:
 
     def split_plain_text(self,message):
         new_message = []
-        if len(message)%self.split_amount <2:
+        if len(message)%self.split_amount <= 2:
             message += self.space
 
         for i in range((len(message)//self.split_amount)+1):
@@ -193,9 +193,11 @@ class Encrytion:
             try:
                plain_text = "".join(plain_text_list)
                plain_text = plain_text[:-(len(self.space))]
+               print(len(cipher_text_list),len(key_list))
                return plain_text
             except:
                 print(key_list)
+                print((cipher_text_list))
                 print(len(cipher_text_list),len(key_list))
                 return "Invalid Password,unable to decrypte"
 
