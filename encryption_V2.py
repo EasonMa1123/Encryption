@@ -28,7 +28,7 @@ class Encrytion:
 
         self.letter = ""
         self.split_key = "#~~123~~##~~qwer~block"
-        self.split_amount = 100
+        self.split_amount = 1000
         self.init_key = 2
         self.space = "   "
 
