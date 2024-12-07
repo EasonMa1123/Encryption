@@ -27,9 +27,9 @@ class Encrytion:
 
 
         self.letter = ""
-        self.split_key = "#~~123~~##~~qwer~"
-        self.split_amount = 500
-        self.init_key = 4
+        self.split_key = "#~~123~~##~~qwer~block"
+        self.split_amount = 100
+        self.init_key = 2
         self.space = "   "
 
     def encrypter(self, message, password, key,init_key):
@@ -98,10 +98,12 @@ class Encrytion:
     def single_decryption(self, message, key, password):
         single_decrypted_message = self.decrypter(message, key,False)
         if not single_decrypted_message:
+            
             return 405
         
         correct = self.check_password(single_decrypted_message, password)
         if not correct:
+            
             return 405
         
         second_key = self.get_second_key(single_decrypted_message)
@@ -147,12 +149,18 @@ class Encrytion:
 
     def encrypt_key(self,message):
         key = ""
+        counter = 0
+        message_length = 0
+        for i in message:
+            message_length +=1
+
 
         for i in message:
-            if i[1] != message[len(message)-1][1]:
+            if counter < message_length-1:
                 key += i[1]+self.split_key
             else:
                 key+=i[1]
+            counter += 1
         
         return self.encrypter(key,False,False,self.init_key)
 
@@ -182,11 +190,13 @@ class Encrytion:
             password_list = [password for i in range((len(message)//self.split_amount)+1)]
             with concurrent.futures.ThreadPoolExecutor() as executor:
                plain_text_list=list(executor.map(self.single_decryption, cipher_text_list,key_list,password_list))
+            try:
                plain_text = "".join(plain_text_list)
                plain_text = plain_text[:-(len(self.space))]
-            try:
-                return plain_text
+               return plain_text
             except:
+                print(key_list)
+                print(len(cipher_text_list),len(key_list))
                 return "Invalid Password,unable to decrypte"
 
 '''
