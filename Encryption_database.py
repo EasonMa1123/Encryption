@@ -18,9 +18,13 @@ class DataRecord:
         self.DataBase.commit()
 
     def insert_data(self, message, key):
-        self.setup()
-        self.cc.execute('INSERT INTO message ( encrypted_message, key) VALUES (?, ?);', (message, key))
-        self.DataBase.commit()
+       
+        try:
+            self.setup()
+            self.cc.execute('INSERT INTO message ( encrypted_message, key) VALUES (?, ?);', (message, key))
+            self.DataBase.commit()
+        except:
+            pass
         self.DataBase.close()
 
 
