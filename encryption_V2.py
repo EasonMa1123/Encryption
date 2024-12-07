@@ -1,7 +1,7 @@
 import random
+import concurrent.futures
 from Encryption_database import  DataRecord
-import zlib
-import base64
+
 
 class Encrytion:
     
@@ -28,16 +28,24 @@ class Encrytion:
 
         self.letter = ""
         self.split_key = "#~~123~~##~~qwer~"
+        self.split_amount = 1000
+        self.init_key = 2
+        self.space = "   "
 
-    def encrypter(self, message, password, key, compressed):
-        slot_num = random.randint(0, len(self.slots) - 1)
+    def encrypter(self, message, password, key,init_key):
+        if init_key:
+            slot_num = init_key
+            random_number = init_key
+        else:
+            slot_num = random.randint(0, len(self.slots) - 1)
+            random_number = random.randint(2, len(message))
+
         slot = self.slots[slot_num]
-        random_number = random.randint(2, len(message))
+        
         encrypted_message = []
         counter = random_number
 
-        if compressed:
-            message += self.split_key + "compressed"
+        
         if password:
             message += self.split_key + str(password)
         if key:
@@ -51,61 +59,57 @@ class Encrytion:
 
         return ''.join(encrypted_message[::-1]), f'{random_number} {slot_num}'
 
-    def decrypter(self, message, key):
+    def decrypter(self, message, key ,init_key):
         decrypted_message = []
         message = message[::-1]
-        split_key = key.split(" ")
-        try:
-            slot = self.slots[int(split_key[1])]
-        except:
-            return None
+        if init_key  == False:
+            split_key = key.split(" ")
+            try:
+                slot = self.slots[int(split_key[1])]
+            except:
+                return None
         
-        counter = int(split_key[0])
+            counter = int(split_key[0])
+            RANDOM_NUMBER = int(split_key[0])
+        else:
+            slot = self.slots[init_key]
+            counter = init_key
+            RANDOM_NUMBER = init_key
+
         for word in message:
             word_location = slot.find(word)
             decrypted_location = (word_location - (counter % len(slot))) % len(slot)
             decrypted_message.append(slot[decrypted_location])
-            counter *= int(split_key[0])
+            counter *= RANDOM_NUMBER
 
         return ''.join(decrypted_message)
 
-    def text_compression(self, message):
-        return base64.b64encode(zlib.compress(message.encode('utf-8'))).decode('utf-8')
+    
 
-    def text_decompression(self, message):
-        return zlib.decompress(base64.b64decode(message.encode('utf-8'))).decode('utf-8')
+    def single_encryption(self, message, password):
 
-    def encryption(self, message, password):
-        if len(message) > 100000:
-            message = self.text_compression(message)
-            compressed = True
-        else:
-            compressed = False
 
-        data = DataRecord()
-        single_encrypted_message, key = self.encrypter(message, password=None, key=None, compressed=compressed)
-        while True:
-            double_encrypted_data, double_key = self.encrypter(single_encrypted_message, password, key, compressed)
-            if not data.check_message(double_encrypted_data):
-                data.insert_data(double_encrypted_data, double_key)
-                return double_encrypted_data, double_key
+        
+        single_encrypted_message, key = self.encrypter(message, password=None, key=None,init_key=None)
 
-    def unencryption(self, message, key, password):
-        single_decrypted_message = self.decrypter(message, key)
+        double_encrypted_data, double_key = self.encrypter(single_encrypted_message, password, key,init_key=None)
+        return double_encrypted_data, double_key
+
+    def single_decryption(self, message, key, password):
+        single_decrypted_message = self.decrypter(message, key,False)
         if not single_decrypted_message:
+            
             return 405
         
         correct = self.check_password(single_decrypted_message, password)
         if not correct:
+            
             return 405
         
         second_key = self.get_second_key(single_decrypted_message)
         single_decrypted_message = self.remove_password(single_decrypted_message)
         
-        if self.check_compression(single_decrypted_message):
-            return self.text_decompression(self.decrypter(single_decrypted_message, second_key))
-        else:
-            return self.decrypter(single_decrypted_message, second_key)
+        return self.decrypter(single_decrypted_message, second_key,False)
 
     def check_password(self, message, password):
         parts = message.split(self.split_key)
@@ -120,8 +124,89 @@ class Encrytion:
     def remove_password(self, message):
         return message.split(self.split_key)[0]
 
-    def check_compression(self, message):
-        try:
-            return message.split(self.split_key)[-3] == "compressed"
-        except IndexError:
+    def split_plain_text(self,message):
+        new_message = []
+        if len(message)%self.split_amount <= 2:
+            message += self.space
+
+        for i in range((len(message)//self.split_amount)+1):
+            new_message.append(message[self.split_amount*i:(self.split_amount*(i+1))])
+        
+        return new_message
+
+    def merge_cipher(self,message):
+        cipher_text = ""
+        for i in message:
+            cipher_text += i[0]+self.split_key
+        return cipher_text
+
+    def split_cipher_text(self,text):
+        if self.split_key in text:
+            return text.split(self.split_key)
+        else:
             return False
+    
+
+    def encrypt_key(self,message):
+        key = ""
+        counter = 0
+        message_length = 0
+        for i in message:
+            message_length +=1
+
+
+        for i in message:
+            if counter < message_length-1:
+                key += i[1]+self.split_key
+            else:
+                key+=i[1]
+            counter += 1
+        
+        return self.encrypter(key,False,False,self.init_key)
+
+
+    def decrypt_key(self,cipher_key):
+        
+        return (self.decrypter(cipher_key,False,self.init_key)).split(self.split_key)
+
+    def encryption(self,message, password):
+        if len(message)<self.split_amount:
+            return self.single_encryption(message,password)
+        else:
+            message_list = self.split_plain_text(message)
+            password_list = [password for i in range((len(message)//self.split_amount)+1)]
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                Encrypted_list=list(executor.map(self.single_encryption, message_list,password_list))
+
+                
+            return self.merge_cipher(Encrypted_list),self.encrypt_key(Encrypted_list)[0]
+    
+    def unencryption(self,message, key, password):
+        if self.split_cipher_text(message) == False:
+            return self.single_decryption(message, key, password)
+        else:
+            cipher_text_list = self.split_cipher_text(message)
+            key_list = self.decrypt_key(key)
+            password_list = [password for i in range((len(message)//self.split_amount)+1)]
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+               plain_text_list=list(executor.map(self.single_decryption, cipher_text_list,key_list,password_list))
+            try:
+               plain_text = "".join(plain_text_list)
+               plain_text = plain_text[:-(len(self.space))]
+               print(len(cipher_text_list),len(key_list))
+               return plain_text
+            except:
+                print(key_list)
+                print((cipher_text_list))
+                print(len(cipher_text_list),len(key_list))
+                return "Invalid Password,unable to decrypte"
+
+'''
+plain_text = "11223344556677889900"
+print(len(plain_text))
+text,key = Encrytion().encryption(plain_text,"12")
+print(text,key)
+PT = Encrytion().unencryption(text,key,"12")
+print(PT)
+print(len(PT))
+'''
