@@ -27,7 +27,7 @@ class Encrytion:
 
 
         self.letter = ""
-        self.split_key = "#~~123~~##~~qwer~"
+        self.split_key = "~~123%67"
         self.split_amount = 1000
         self.init_key = 2
         self.space = "   "
@@ -126,7 +126,7 @@ class Encrytion:
 
     def split_plain_text(self,message):
         new_message = []
-        if len(message)%self.split_amount <= 2:
+        if len(message)%self.split_amount <= 3:
             message += self.space
 
         for i in range((len(message)//self.split_amount)+1):
@@ -162,7 +162,7 @@ class Encrytion:
                 key+=i[1]
             counter += 1
         
-        return self.encrypter(key,False,False,self.init_key)
+        return self.encrypter(key,False,False,self.init_key)[0]
 
 
     def decrypt_key(self,cipher_key):
@@ -179,7 +179,7 @@ class Encrytion:
                 Encrypted_list=list(executor.map(self.single_encryption, message_list,password_list))
 
                 
-            return self.merge_cipher(Encrypted_list),self.encrypt_key(Encrypted_list)[0]
+            return self.merge_cipher(Encrypted_list),self.encrypt_key(Encrypted_list)
     
     def unencryption(self,message, key, password):
         if self.split_cipher_text(message) == False:
@@ -192,8 +192,8 @@ class Encrytion:
                plain_text_list=list(executor.map(self.single_decryption, cipher_text_list,key_list,password_list))
             try:
                plain_text = "".join(plain_text_list)
-               plain_text = plain_text[:-(len(self.space))]
-               print(len(cipher_text_list),len(key_list))
+               #plain_text = plain_text[:-(len(self.space))]
+               #print(len(cipher_text_list),len(key_list))
                return plain_text
             except:
                 print(key_list)
