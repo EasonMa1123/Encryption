@@ -5,7 +5,7 @@ import concurrent.futures
 
 class Encrytion:
     
-    def __init__(self):
+    def __init__(self,split_amount = 1000):
         
         self.slots = ["abcdefghijklmnMNOPQRSTUVWXYZopqrstuvwxyzABCDEFGHIJKL!@#$%^&*()_+-=[]{|\;}:',./<>?`~1234567890 ",
                       "ABCDEFGHI@#$%^&*()_+-=[]{|\;}:',./<>?`~JKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!1234567890 ",
@@ -28,7 +28,7 @@ class Encrytion:
 
         self.letter = ""
         self.split_key = "~~123%67"
-        self.split_amount = 1000
+        self.split_amount = split_amount
         self.init_key = 2
         self.space = "   "
 
@@ -192,9 +192,9 @@ class Encrytion:
                plain_text_list=list(executor.map(self.single_decryption, cipher_text_list,key_list,password_list))
             try:
                plain_text = "".join(plain_text_list)
-               #plain_text = plain_text[:-(len(self.space))]
+               plain_text = list(plain_text)[:-(len(self.space)-1)]
                #print(len(cipher_text_list),len(key_list))
-               return plain_text
+               return "".join(plain_text)
             except:
                 print(key_list)
                 print((cipher_text_list))
