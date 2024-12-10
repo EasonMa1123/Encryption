@@ -1,6 +1,6 @@
 import random
 import concurrent.futures
-from Encryption_database import  DataRecord
+
 
 
 class Encrytion:
