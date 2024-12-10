@@ -12,7 +12,7 @@ def check_encryption(text_length,split_amount):
     encryption = Encrytion(split_amount)
     incorrect_counter = 0
     invalid_counter = 0
-    total_test_time = 1
+    total_test_time = 1000
     
     en_run_times = []
     de_run_times = []
