@@ -118,7 +118,7 @@
             <p id="Processing_display" style="display: none;"></p>
             <progress id="progressBar" value="0" max="100" style="display:none;"></progress>
             <p>Encrypted Message: <span id="encrypted_message" class="message"></span></p>
-            <p>Key: <span id="key"></span></p>
+            <p>Key: <span id="key" class="message"></span></p>
             <button onclick="Copy_text('encrypted_message')">Copy Message</button>
             <button onclick="Copy_text('key')">Copy Key</button>
             <button onclick="Create_txt_file('encrypted_message')">Download Encrypted Message/Data</button>
@@ -130,7 +130,7 @@
             <div class="InOutPut">
                 <h2>Decrypt</h2>
                 <label for="decrypt_message_file" class="File_upload">Upload Encrypted File</label>
-                <input type="file" id="decrypt_message_file" placeholder="Upload encrypted message" accept=".endec"></br>
+                <input type="file" id="decrypt_message_file" placeholder="Upload encrypted message" accept=".endec" onsubmit="disable_file_input()"></br>
                 <textarea class="text_input"id="decrypt_message" placeholder="Enter encrypted message"></textarea><br>
                 <input class="text_input" id="decrypt_key" placeholder="Enter the key"><br>
                 <input type="password" class="text_input" id="password_to_decrypte" placeholder="Enter the password"><br>
@@ -144,6 +144,12 @@
         </div>
     </div>
     <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='index_event.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='setting.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='setting.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='setup.js') }}"></script>
+    
+
         
 </body>
 

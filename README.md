@@ -1,1 +1,11 @@
-This is a website allow user encrypte and decrypte Text and image,with the function of login or signup to ensure all user is authorised
+To Fully use the Project,please install the following Lilbary:
+1) Flask
+2) zlib
+
+Step to use encryption:
+1) login in/sign up(if first time)
+2) enter message to encrypt
+3) Enter a password that only you and reciever know
+4) Click button "Encrytpe" to encrypt data
+5) recommand: download the cypher text,if  not copy the text
+6) copy the key

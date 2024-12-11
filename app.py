@@ -7,7 +7,12 @@ from password_strength import password_strength_checker
 app = Flask(__name__)
 
 
+
 @app.route('/')
+def redirect():
+    return render_template('redirect.html')
+
+@app.route('/login')
 def home():
     return render_template('home.html')
 
