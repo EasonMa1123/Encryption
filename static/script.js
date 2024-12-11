@@ -279,4 +279,6 @@ function ConvertImageToText(){
 
 function logout(){
     document.location.href = "/login";
+    sessionStorage.setItem("",Username)
+    sessionStorage.setItem("",Password)
 }
