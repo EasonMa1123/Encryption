@@ -34,18 +34,8 @@
                     </div>
                     <div id="font-size-setting" class="setting-section">
                         <a>Font size setting</a>
-                        <div class="switch-toggle">
-                            
-                            <input id="big-font" name="font-setting-button" type="radio" style="display: none;" onclick="set_big_font()">
-                            <label for="big-font">big</label>
-
-                            <input id="medium-font" name="font-setting-button" type="radio" style="display: none;" onclick="set_medium_font()" >
-                            <label for="medium-font">medium</label>
-                            
-                            <input id="small-font" name="font-setting-button" type="radio" style="display: none;" onclick="set_small_font()">
-                            <label for="small-font">small</label>
-                    
-                        </div>
+                        <label></label>
+                        <input id="font-size" type="number" max="30" min="13" onchange="set_font_size(document.getElementById('font-size').value)">
                     </div>
                     <button onclick="save_setting()">Save Change</button>
                 </div>
