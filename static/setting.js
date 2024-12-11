@@ -49,12 +49,19 @@ function ChangePassword(){
     if (old_Password == new_Password){
         alert("Same Password!")
     } else if(old_Password == sessionStorage.getItem("Password")){
-        $.post("/access_account_detail",{Username:sessionStorage.getItem("Username")},function(data){
-            $.post("/password_Update",{id:data.ID,New_password:new_Password})
-            sessionStorage.setItem("Password",new_Password)
-            alert("Password Changed")
+        $.post('/password_strength',{Password:new_Password},function(data){
+            if (data.score < 20){
+                alert("Password is not Strong enough")
+            }else {
+                $.post("/access_account_detail",{Username:sessionStorage.getItem("Username")},function(data){
+                    $.post("/password_Update",{id:data.ID,New_password:new_Password})
+                    sessionStorage.setItem("Password",new_Password)
+                    alert("Password Changed")
+                })
+        
+            }
         })
-    } else{
+            } else{
         alert("Invalid Password change")
     }
 }
