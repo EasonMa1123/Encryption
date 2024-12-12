@@ -69,7 +69,7 @@ function save_setting(){
             const Theme = "bright"
             const FontSize = document.body.style.fontSize;
             $.post('/update_user_setting',{id:ID,theme:Theme,fontSize:FontSize});
-        }else if(document.body.style.backgroundImage == "linear-gradient(rgb(8, 31, 55), rgb(13, 47, 83), rgb(8, 31, 55))"){
+        }else {            
             const Theme = "dark"
             const FontSize = document.body.style.fontSize;
             $.post('/update_user_setting',{id:ID,theme:Theme,fontSize:FontSize});
@@ -95,6 +95,8 @@ function access_setting(){
                     document.getElementById('dark-theme').checked = true;
                 }
                 document.body.style.fontSize = FontSize
+                
+                document.getElementById("font-size").value = Number(FontSize.substring(2,-2))
                 
                 
             }
