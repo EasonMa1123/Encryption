@@ -203,7 +203,7 @@ input[type="file"] {
     text-align: center;
 }
 
-textarea, input[type="text"] {
+textarea, input[type="text"],input[type="password"] {
     width: 80%;              /* Adjust width to fit within the layout */
     margin: 10px 0;
     text-align: center;
