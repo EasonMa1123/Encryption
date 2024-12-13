@@ -88,8 +88,8 @@ async function encryptMessage() {
     try {
         if (image_file) {
             var imageFileSizeKB = image_file.size / 1024; // Convert to KB
-            if (imageFileSizeKB > 1000) {
-                alert("Image file size exceeds the 1MB limit.");
+            if (imageFileSizeKB > 250) {
+                alert("Image file size exceeds the 250KB limit.");
                 return; // Reject and stop further processing
             }
             // Display loading text and show progress bar

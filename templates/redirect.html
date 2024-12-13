@@ -14,7 +14,8 @@
     
 </head>
 
-<body onload="logout()"></body>
 
+<body onload="logout()"></body>
 <div class="loader"></div>
+<body onload="setTimeout(logout(),10)"></body>
 <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
