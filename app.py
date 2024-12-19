@@ -20,6 +20,10 @@ def home():
 def index():
     return render_template('index.html')
 
+@app.route('/testing')
+def testing():
+    return render_template('testing.html')
+
 
 
 @app.route('/encrypt', methods=['POST'])
