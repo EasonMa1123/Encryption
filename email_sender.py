@@ -7,7 +7,7 @@ class email_send:
         self.password = "kpfo ebfp cmqv lfem"
 
 
-    def send_email(self,subject,message,recipient):
+    def send_email(self,subject:str,message:str,recipient:str):
         msg = MIMEText(message)
         msg['Subject'] = subject
         msg['From'] = self.sender
