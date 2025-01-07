@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 from encryption_V2 import Encrytion
 from User_database import DataRecord
 from password_strength import password_strength_checker
+from encryption_testing import encryption_test
 
 
 app = Flask(__name__)
@@ -105,6 +106,11 @@ def access_user_setting():
         return jsonify({"Theme":None,"Fontsize":None})
     else:
         return jsonify({"Theme":data[1],"Fontsize":data[2]})
+
+@app.route('/encryption_testing',methods = ['POST'])
+def encryption_testing():
+    result = encryption_test().test()
+    return jsonify({"graphData":result})
 
 if __name__ == '__main__':
     try:
