@@ -64,18 +64,13 @@ class encryption_test:
         return sum(en_run_times)/len(en_run_times),sum(de_run_times)/len(de_run_times)
 
 
-    def test(self):
+    def test(self,power):
         max_tiral_num = 6
-        for j in range(1,max_tiral_num):
-            Enc_times = []
-            dec_times = [['time','length']]
-            for i in range(1,max_tiral_num):
-                print(f'10 to the power {i} for string, 10 to the power of {j} for split amount')
-                Enc_time,dec_time = self.check_encryption(10**i,10**j)
-                Enc_label = f'split amount: 10^{j} ENC'
-                DEC_label = f'split amount: 10^{j} DEC'
-                Enc_times.append(Enc_time)
-                dec_times.append([dec_time,i])
+        Enc_times = []
+        for i in range(1,max_tiral_num):
+            Enc_time,dec_time = self.check_encryption(10**i,10**power)
+            Enc_times.append(Enc_time)
+
 
         return Enc_times
             

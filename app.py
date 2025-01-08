@@ -109,7 +109,8 @@ def access_user_setting():
 
 @app.route('/encryption_testing',methods = ['POST'])
 def encryption_testing():
-    result = encryption_test().test()
+    power = request.form['Power']
+    result = encryption_test().test(int(power))
     return jsonify({"graphData":result})
 
 if __name__ == '__main__':
