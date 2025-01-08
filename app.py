@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 from encryption_V2 import Encrytion
 from User_database import DataRecord
 from password_strength import password_strength_checker
+from email_sender import email_send
 
 
 app = Flask(__name__)
@@ -101,6 +102,16 @@ def access_user_setting():
         return jsonify({"Theme":None,"Fontsize":None})
     else:
         return jsonify({"Theme":data[1],"Fontsize":data[2]})
+
+@app.route('/email_verification',methods = ['POST'])
+def email_verification():
+    import random
+    email = request.form['Email']
+    code = random.randint(10000,99999)
+    Title = "email Verification"
+    Body = f'Your code is {code}'
+    email_send().send_email(Title,Body,email)
+    return jsonify({"Code":code})
 
 if __name__ == '__main__':
     try:
