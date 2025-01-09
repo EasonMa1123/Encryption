@@ -95,3 +95,4 @@ class DataRecord:
 
         
 
+print(DataRecord().check_user("eason"))

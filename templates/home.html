@@ -32,7 +32,7 @@
             <button onclick="login()">Login</button>
 
         </form>
-        <form id="signup-form" class="processor" style="display: none;" autocomplete="off">
+        <div id="signup-form" class="processor" style="display: none;" autocomplete="off">
             <label> Signup</label>
 
             <input id="signup-Username" placeholder="Username" autocomplete="off" readonly onclick="this.removeAttribute('readonly');">
@@ -40,7 +40,7 @@
 
             <input id="signup-Password" placeholder="Password" type="password" autocomplete="off">
 
-            <input id="signup-email" placeholder="Email" autocomplete="off">
+            
 
             <label id="Password-warning-1"></label>
             <label id="Password-warning-2"></label>
@@ -48,13 +48,16 @@
             <input id="ConfirmPassword" placeholder="Confirm Password" type="password" autocomplete="off" readonly onclick="this.removeAttribute('readonly');">
             <label id="ConfirmPassword-warning"></label>
 
-            <button onclick="submit_new_user_data()">Sign Up</button>
-        </form>
+            <input id="signup-email" placeholder="Email" autocomplete="off">
+            <button id="Confirm-email-button" onclick="confirm_new_user_data()">Confirm Information</button>
+            <input id="code-input" type="text" style="display: none;">
+
+            <button id="Submit-button" onclick="submit_new_user_data()" style="display: none;">Sign Up</button>
+        </div>
 
 
     </div>
     <script type="text/javascript" src="{{ url_for('static', filename='home_event_script.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='home.js') }}"></script>
 
 
