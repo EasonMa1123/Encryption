@@ -55,4 +55,3 @@ class email_send:
             smtp_server.sendmail(self.sender, recipient, msg.as_string())
             print("Message sent!")
 
-email_send().send_email("hi","hihi","19EMa@haz5d.com")
