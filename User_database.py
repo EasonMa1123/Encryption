@@ -10,7 +10,8 @@ class DataRecord:
             CREATE TABLE IF NOT EXISTS UserData ( 
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 UserName TEXT,
-                Password TEXT
+                Password TEXT,
+                Email TEXT
             )
         """)
         self.DataBase.commit()
@@ -32,10 +33,10 @@ class DataRecord:
             return False
 
 
-    def insert_new_user(self,user,password):
+    def insert_new_user(self,user,password,Email):
         self.cc.execute('SELECT COUNT(id) FROM UserData')
         id = (self.cc.fetchall()[0][0])+1
-        self.cc.execute('INSERT INTO UserData (id, UserName ,Password ) VALUES (? , ?, ?);', (id,user, password))
+        self.cc.execute('INSERT INTO UserData (id, UserName ,Password,Email ) VALUES (? , ?, ?,?);', (id,user, password,Email))
         self.DataBase.commit()
     
     def check_password(self,user,password):

@@ -53,12 +53,12 @@ def Check_user_password():
 @app.route('/insertNewUser', methods = ['POST'])
 def insert_new_user():
     userName = request.form['userName']
-    print(userName)
     password = request.form['Password']
+    Email = request.form['Email']
     if DataRecord().check_user(userName):
         return jsonify({"Feedback":"Invalid Username,This Username had been used "}) 
     else:
-        DataRecord().insert_new_user(userName,password)
+        DataRecord().insert_new_user(userName,password,Email)
         return jsonify({"Feedback":"Success"})
 
 @app.route('/password_strength', methods = ['POST'])

@@ -47,10 +47,10 @@ function submit_new_user_data(){
     let DataCode = sessionStorage.getItem("code")
     let Username = document.getElementById("signup-Username").value
     let Password = document.getElementById("signup-Password").value
-    alert(user_code)
-    alert(DataCode)
+    const Confirm_email = document.getElementById("signup-email").value
+
     if (Number(user_code) == Number(DataCode)){
-        $.post('/insertNewUser',{ userName: Username, Password:Password }, function(data) {
+        $.post('/insertNewUser',{ userName: Username, Password:Password,Email:Confirm_email }, function(data) {
             if (data.Feedback == "Invalid Username,This Username had been used "){
                 alert("Invalid Username,This Username had been used ")
             } else {
