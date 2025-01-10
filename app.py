@@ -111,7 +111,7 @@ def email_verification():
     email = request.form['Email']
     code = random.randint(10000,99999)
     Title = "email Verification"
-    Body = f'Your code is {code}'
+    Body = f'{code}'
     email_send().send_email(Title,Body,email)
     return jsonify({"Code":code})
 
