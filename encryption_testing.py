@@ -66,13 +66,21 @@ class encryption_test:
 
     def test(self,power):
         max_tiral_num = 6
-        Enc_times = []
-        for i in range(1,max_tiral_num):
-            Enc_time,dec_time = self.check_encryption(10**i,10**power)
-            Enc_times.append(Enc_time)
+        Enc_times = ""
+        for j in range(1,power):
+            for i in range(1,max_tiral_num):
+                Enc_time,dec_time = self.check_encryption(10**i,10**j)
+                if i<max_tiral_num-1:
+                    Enc_times+=f'{str(Enc_time)}:'
+                else:
+                    Enc_times+=f'{str(Enc_time)}'
+            if j<power-1:
+                Enc_times+=","
 
 
         return Enc_times
+    
+    
             
         
 
