@@ -1,6 +1,10 @@
 from encryption_V2 import Encrytion
 import random
 import time as Time
+import secrets
+import string
+
+
 
 class encryption_test:
     def __init__(self):
@@ -8,6 +12,11 @@ class encryption_test:
 
         self.slot = "ABCDEFGHI@#$%^&*()_+-=[]{|\;}:',./<>?`~JKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!1234567890 "
         self.password = "123"
+    
+    def generate_random_string(self,length):
+        
+        alphabet = string.ascii_letters + string.digits  # Uppercase, lowercase, and digits
+        return ''.join(secrets.choice(alphabet) for _ in range(length))
 
     def check_encryption(self,text_length,split_amount,debug):
         slot = self.slot
@@ -21,11 +30,9 @@ class encryption_test:
         de_run_times = []
         
         for i in range(total_test_time):
+            plain_text = self.generate_random_string(text_length)
 
-            plain_text = ""
-            for time in range(text_length):
-                plain_text += str(slot[random.randrange(len(slot))])
-
+            
             encryption_start_time = Time.time()
             cipyer_message,key = encryption.encryption(plain_text,password)
             encryption_end_time = Time.time()
@@ -79,9 +86,3 @@ class encryption_test:
 
 
         return Enc_times
-    
-    
-            
-        
-
-

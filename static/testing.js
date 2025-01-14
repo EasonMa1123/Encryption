@@ -18,7 +18,7 @@ function drawChart() {
 
       // Add a column for each line in the graph
       for (var i = 0; i < numLines; i++) {
-          Graph_data.addColumn('number', `Line ${i + 1}`);
+          Graph_data.addColumn('number', `Text split per power of ${i+1}`);
       }
 
       // Parse the data and prepare rows
@@ -37,7 +37,7 @@ function drawChart() {
 
       // Set chart options
       var options = {
-          title: 'Line Chart Example',
+          title: 'Time complexity of Different Text Split',
           legend: { position: 'bottom' },
       };
 
