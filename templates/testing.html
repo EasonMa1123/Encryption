@@ -17,8 +17,9 @@
 <body>
     <div id="container">
         <div id="myChart" style="width:100%; max-width:600px; height:500px;"></div>
-        <input id="Number" type="number">
-        <button onclick="CreateChart()"></button>
+        <input id="Number" type="number" placeholder="Maximum Power to split">
+        <button onclick="CreateChart()">Start Generate Chart</button>
     </div>
+    <button onclick="return_home()">Back Home</button>
 </body>
 <script type="text/javascript" src="{{ url_for('static', filename='testing.js') }}"></script>

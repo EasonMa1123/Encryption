@@ -46,3 +46,8 @@ function drawChart() {
       chart.draw(Graph_data, options);
   });
 }
+
+
+function return_home(){
+    document.location.href = "/index";
+}
