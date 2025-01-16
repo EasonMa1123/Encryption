@@ -1,3 +1,7 @@
+#graph-container{
+    background-color: #0d3545;
+    border: #242729;
+}
 #sidebar {
     width: 250px;
     position: fixed;

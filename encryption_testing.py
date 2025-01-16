@@ -30,7 +30,10 @@ class encryption_test:
         de_run_times = []
         
         for i in range(total_test_time):
-            plain_text = self.generate_random_string(text_length)
+            if text_length < 10:
+                plain_text = self.generate_random_string(5)
+            else:
+                plain_text = self.generate_random_string(text_length)
 
             
             encryption_start_time = Time.time()
@@ -71,13 +74,12 @@ class encryption_test:
         return sum(en_run_times)/len(en_run_times),sum(de_run_times)/len(de_run_times)
 
 
-    def test(self,power:int,debug:bool):
-        max_tiral_num = 6
+    def test(self,power:int,min_power:int,maximum_text_length:int,debug:bool):
         Enc_times = ""
-        for j in range(1,power):
-            for i in range(1,max_tiral_num):
+        for j in range(min_power,power):
+            for i in range(maximum_text_length):
                 Enc_time,dec_time = self.check_encryption(10**i,10**j,debug)
-                if i<max_tiral_num-1:
+                if i<maximum_text_length-1:
                     Enc_times+=f'{str(Enc_time)}:'
                 else:
                     Enc_times+=f'{str(Enc_time)}'
