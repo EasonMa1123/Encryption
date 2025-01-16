@@ -25,7 +25,7 @@
                     <div id="theme-setting" class="setting-section" >
                         <a>Theme setting</a>
                         <div class="switch-toggle">
-                            <input id="dark-theme" name="theme-setting-button" class="setting-button" type="radio" style="display: none;" onclick="set_dark_theme()">
+                            <input id="dark-theme" name="theme-setting-button" class="setting-button" type="radio" style="display: none;" onclick="set_dark_theme()" checked>
                             <label for="dark-theme" class="setting-button">dark</label>
                             
                             <input id="bright-theme" name="theme-setting-button"  class="setting-button" type="radio" style="display: none;" onclick="set_bright_theme()">
@@ -35,7 +35,7 @@
                     <div id="font-size-setting" class="setting-section">
                         <a>Font size setting</a>
                         <label></label>
-                        <input id="font-size" type="number" max="30" min="13" onchange="set_font_size(document.getElementById('font-size').value)">
+                        <input id="font-size" type="number" max="30" min="13" onchange="set_font_size(document.getElementById('font-size').value)" value="18">
                     </div>
                     <button onclick="save_setting()">Save Change</button>
                 </div>
@@ -122,7 +122,7 @@
                 <label for="decrypt_message_file" class="File_upload">Upload Encrypted File</label>
                 <input type="file" id="decrypt_message_file" placeholder="Upload encrypted message" accept=".endec" onsubmit="disable_file_input()"></br>
                 <textarea class="text_input"id="decrypt_message" placeholder="Enter encrypted message"></textarea><br>
-                <input class="text_input" id="decrypt_key" placeholder="Enter the key"><br>
+                <textarea class="text_input" id="decrypt_key" placeholder="Enter the key"></textarea><br>
                 <input type="password" class="text_input" id="password_to_decrypte" placeholder="Enter the password"><br>
                 <button onclick="decryptMessage()">Decrypt</button>
             </div>

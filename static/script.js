@@ -6,7 +6,7 @@
 
 function check_invalid_enter(){
     if(sessionStorage.getItem("Username") == null){
-        alert("get out")
+        alert("What are you doing in here,this is not your place,leave! Thank You :)")
         logout()
     }
 }

@@ -1,6 +1,6 @@
 To Fully use the Project,please install the following Lilbary:
 1) Flask
-2) zlib
+
 
 Step to use encryption:
 1) login in/sign up(if first time)

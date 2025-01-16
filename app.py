@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 from encryption_V2 import Encrytion
 from User_database import DataRecord
 from password_strength import password_strength_checker
+from email_sender import email_send
 
 
 app = Flask(__name__)
@@ -53,10 +54,12 @@ def Check_user_password():
 def insert_new_user():
     userName = request.form['userName']
     password = request.form['Password']
+    Email = request.form['Email']
     if DataRecord().check_user(userName):
-        return  jsonify({"Feedback":"Invalid Username,This Username had been used "}) 
+        return jsonify({"Feedback":"Invalid Username,This Username had been used "}) 
     else:
-        DataRecord().insert_new_user(userName,password)
+        DataRecord().insert_new_user(userName,password,Email)
+        return jsonify({"Feedback":"Success"})
 
 @app.route('/password_strength', methods = ['POST'])
 def password_strength_check():
@@ -101,6 +104,16 @@ def access_user_setting():
         return jsonify({"Theme":None,"Fontsize":None})
     else:
         return jsonify({"Theme":data[1],"Fontsize":data[2]})
+
+@app.route('/email_verification',methods = ['POST'])
+def email_verification():
+    import random
+    email = request.form['Email']
+    code = random.randint(10000,99999)
+    Title = "email Verification"
+    Body = f'{code}'
+    email_send().send_email(Title,Body,email)
+    return jsonify({"Code":code})
 
 if __name__ == '__main__':
     try:
