@@ -50,7 +50,7 @@ function submit_new_user_data(){
     const Confirm_email = document.getElementById("signup-email").value
 
     if (Number(user_code) == Number(DataCode)){
-        $.post('/insertNewUser',{ userName: Username, Password:Password,Email:Confirm_email }, function(data) {
+        $.post('/insertNewUser',{ userName: Username, Password:Password,Email:Confirm_emailtoLowerCase() }, function(data) {
             if (data.Feedback == "Invalid Username,This Username had been used "){
                 alert("Invalid Username,This Username had been used ")
             } else {

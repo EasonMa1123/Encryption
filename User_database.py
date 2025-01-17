@@ -52,7 +52,7 @@ class DataRecord:
         execute_text = f'SELECT * FROM UserData WHERE UserName = "{user}"'
         self.cc.execute(execute_text)
         data = [row for row in self.cc.fetchall()]
-        return[data[0][0],data[0][1],data[0][2]]
+        return[data[0][0],data[0][1],data[0][2],data[0][3]]
     
     def update_account_Username(self,new_username,UserID):
         execute_text = f'UPDATE UserData SET UserName="{new_username}" WHERE id = "{UserID}"'
@@ -63,6 +63,15 @@ class DataRecord:
         execute_text = f'UPDATE UserData SET Password="{new_Password}" WHERE id = "{UserID}"'
         self.cc.execute(execute_text)
         self.DataBase.commit()
+
+    def update_account_Email(self,new_email,UserID):
+        try:
+            execute_text = f'UPDATE UserData SET Email="{new_email}" WHERE id = "{UserID}"'
+            self.cc.execute(execute_text)
+            self.DataBase.commit()
+            return True
+        except:
+            return False
 
 
     def update_account_setting(self,userID,theme,fontSize):

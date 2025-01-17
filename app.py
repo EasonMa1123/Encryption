@@ -70,7 +70,10 @@ def password_strength_check():
 @app.route('/access_account_detail', methods = ['POST'])
 def access_account_detail():
     Username = request.form['Username']
-    return jsonify({"ID":DataRecord().access_account(Username)[0],"Username":DataRecord().access_account(Username)[1],"Password":DataRecord().access_account(Username)[2]})
+    return jsonify({"ID":DataRecord().access_account(Username)[0],
+                    "Username":DataRecord().access_account(Username)[1],
+                    "Password":DataRecord().access_account(Username)[2],
+                    "email":DataRecord().access_account(Username)[3]})
 
 @app.route('/update_account_username',methods = ['POST'])
 def update_account_username():
@@ -95,6 +98,12 @@ def update_user_setting():
     fontsize = request.form['fontSize']
     DataRecord().update_account_setting(id,theme,fontsize)
     return jsonify({"Feedback":True})
+
+@app.route('/update_user_email',methods=['POST'])
+def update_user_email():
+    id = request.form["id"]
+    email = request.form["email"]
+    return jsonify({"Feedback":DataRecord().update_account_Email(email,id)})
 
 @app.route('/access_user_setting',methods = ['POST'])
 def access_user_setting():
