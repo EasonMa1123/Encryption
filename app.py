@@ -96,6 +96,12 @@ def update_user_setting():
     DataRecord().update_account_setting(id,theme,fontsize)
     return jsonify({"Feedback":True})
 
+@app.route('/update_user_email',methods=['POST'])
+def update_user_email():
+    id = request.form["id"]
+    email = request.form["email"]
+    return jsonify({"Feedback":DataRecord().update_account_Email(email,id)})
+
 @app.route('/access_user_setting',methods = ['POST'])
 def access_user_setting():
     id = request.form['id']

@@ -53,7 +53,13 @@
                     <button id="Password-change-button" onclick="ChangePassword()">Save change</button>
 
                 </div>
-                
+                <div id="change-email" class="setting-section">
+                    <a>Change Email</a>
+                    <input type="email" id="New-email" placeholder="New Email" autocomplete="off" readonly onclick="this.removeAttribute('readonly');">
+                    <button id="Email-change-button" onclick="send_ver_email()">Send Verification Code</button>
+                    <input id="Verification-code" placeholder="Enter the code" style="display: none;">
+                    <button id="email-confirmation-button"onclick="check_ver_code()" style="display: none;">Save Change</button>
+                </div>
                 <button onclick="setting_off() ">Exit</button>
             </div>
         </div>
