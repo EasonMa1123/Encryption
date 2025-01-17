@@ -18,13 +18,13 @@ class encryption_test:
         alphabet = string.ascii_letters + string.digits  # Uppercase, lowercase, and digits
         return ''.join(secrets.choice(alphabet) for _ in range(length))
 
-    def check_encryption(self,text_length,split_amount,debug):
+    def check_encryption(self,text_length,split_amount,trial_num=10,debug=False):
         slot = self.slot
         password = self.password
         encryption = Encrytion(split_amount)
         incorrect_counter = 0
         invalid_counter = 0
-        total_test_time = 10
+        total_test_time = trial_num
         
         en_run_times = []
         de_run_times = []
@@ -74,11 +74,11 @@ class encryption_test:
         return sum(en_run_times)/len(en_run_times),sum(de_run_times)/len(de_run_times)
 
 
-    def test(self,power:int,min_power:int,maximum_text_length:int,debug:bool):
+    def test(self,power:int,min_power:int,maximum_text_length:int,trial_num:int,debug:bool):
         Enc_times = ""
         for j in range(min_power,power+1):
             for i in range(maximum_text_length+1):
-                Enc_time,dec_time = self.check_encryption(10**i,10**j,debug)
+                Enc_time,dec_time = self.check_encryption(10**i,10**j,trial_num,debug)
                 if i<=maximum_text_length-1:
                     Enc_times+=f'{str(Enc_time)}:'
                 else:

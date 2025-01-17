@@ -112,7 +112,8 @@ def encryption_testing():
     power = request.form['Power']
     max_text_length = request.form['max_text_length']
     min_power = request.form['min_power']
-    result = encryption_test().test(int(power),int(min_power),int(max_text_length),False)
+    trial_num = request.form['trial_num']
+    result = encryption_test().test(int(power),int(min_power),int(max_text_length),int(trial_num),False)
     return jsonify({"graphData":result})
 
 if __name__ == '__main__':
