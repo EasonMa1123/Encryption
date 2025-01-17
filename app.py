@@ -70,7 +70,10 @@ def password_strength_check():
 @app.route('/access_account_detail', methods = ['POST'])
 def access_account_detail():
     Username = request.form['Username']
-    return jsonify({"ID":DataRecord().access_account(Username)[0],"Username":DataRecord().access_account(Username)[1],"Password":DataRecord().access_account(Username)[2]})
+    return jsonify({"ID":DataRecord().access_account(Username)[0],
+                    "Username":DataRecord().access_account(Username)[1],
+                    "Password":DataRecord().access_account(Username)[2],
+                    "email":DataRecord().access_account(Username)[3]})
 
 @app.route('/update_account_username',methods = ['POST'])
 def update_account_username():

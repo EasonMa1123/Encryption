@@ -106,14 +106,19 @@ function access_setting(){
 
 
 function send_ver_email(){
-    var new_email=document.getElementById("New-email").value
-    $.post('/email_verification',{Email:new_email},function(data){
-        const code = data.Code
-        document.getElementById("Verification-code").style.display = "flex";
-        document.getElementById("email-confirmation-button").style.display = "flex";
-        alert("Code sent!\nPlease Check email! ")
-        sessionStorage.setItem("ver_code",code)
-    })
+    var new_email=document.getElementById("New-email").value.toLowerCase()
+    $.post('/access_account_detail',{Username:sessionStorage.getItem("Username")},function(data){
+        if (data.email.toLowerCase() == new_email.toLowerCase()){
+            alert("Same Email,Invalid Request!")
+
+        }else{ 
+            $.post('/email_verification',{Email:new_email},function(data){
+                const code = data.Code
+                document.getElementById("Verification-code").style.display = "flex";
+                document.getElementById("email-confirmation-button").style.display = "flex";
+                alert("Code sent!\nPlease Check email! ")
+                sessionStorage.setItem("ver_code",code)
+            })}})
 }
 
 function check_ver_code(){
