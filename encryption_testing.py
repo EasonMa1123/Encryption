@@ -76,14 +76,14 @@ class encryption_test:
 
     def test(self,power:int,min_power:int,maximum_text_length:int,debug:bool):
         Enc_times = ""
-        for j in range(min_power,power):
-            for i in range(maximum_text_length):
+        for j in range(min_power,power+1):
+            for i in range(maximum_text_length+1):
                 Enc_time,dec_time = self.check_encryption(10**i,10**j,debug)
-                if i<maximum_text_length-1:
+                if i<=maximum_text_length-1:
                     Enc_times+=f'{str(Enc_time)}:'
                 else:
                     Enc_times+=f'{str(Enc_time)}'
-            if j<power-1:
+            if j<=power-1:
                 Enc_times+=","
 
 
