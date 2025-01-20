@@ -282,3 +282,12 @@ function logout(){
     sessionStorage.setItem("",Username)
     sessionStorage.setItem("",Password)
 }
+
+
+function about_page(){
+    document.location.href = "/about";
+}
+
+function quit_about_page(){
+    document.location.href = "/index";
+}
