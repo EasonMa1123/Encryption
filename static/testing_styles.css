@@ -1,0 +1,9 @@
+#option-container {
+    display: flex;
+    justify-content: center;  
+    align-items: center;      
+    margin: 15px;
+    border-radius: 10px;
+    text-align: center;
+    flex-direction: row;
+}
