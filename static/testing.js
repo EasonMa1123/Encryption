@@ -45,7 +45,7 @@ function drawChart() {
             title:"Time(s)"
           },
           hAxis:{
-            title:"Split Location",
+            title:"String Length",
             
           }
       };
