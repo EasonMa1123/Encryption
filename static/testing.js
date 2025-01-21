@@ -30,7 +30,7 @@ function drawChart() {
 
       // Create rows with X values and line values
       for (var x = 0; x < maxPoints; x++) {
-          let row = [x]; // First column is X
+          let row = [10**x]; // First column is X
           for (var i = 0; i < numLines; i++) {
               row.push(parsedData[i][x] || null); // Add Y values or null for missing points
           }
@@ -41,6 +41,13 @@ function drawChart() {
       var options = {
           title: 'Time complexity of Different Text Split',
           legend: { position: 'bottom' },
+          vAxis:{
+            title:"Time(s)"
+          },
+          hAxis:{
+            title:"Split Location",
+            
+          }
       };
 
       // Create and draw the chart
