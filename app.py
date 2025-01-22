@@ -111,9 +111,28 @@ def email_verification():
     email = request.form['Email']
     code = random.randint(10000,99999)
     Title = "email Verification"
+    head = "Your verification Code:"
     Body = f'{code}'
-    email_send().send_email(Title,Body,email)
+    email_send().send_email(Title,head,Body,email)
     return jsonify({"Code":code})
+
+@app.route('/message_email',methods = ['POST'])
+def message_email():
+    email = request.form['Email']
+    
+    message = request.form['Message']
+    key = request.form['Key']
+    for i in range(2):
+        Title = f"Message Part{i+1}"
+        if i==0:
+            Body = message
+        else:
+            Body = key
+        result = email_send().send_email(Title,"Confidential Message",Body,email)
+    if result:
+        return jsonify({"Feedback":True})
+    else:
+        return jsonify({"Feedback":False})
 
 if __name__ == '__main__':
     try:

@@ -282,3 +282,14 @@ function logout(){
     sessionStorage.setItem("",Username)
     sessionStorage.setItem("",Password)
 }
+
+
+function send_message_email(){
+    var email = document.getElementById("Receiver_email").value
+    const message = document.getElementById("encrypted_message").innerText
+    const key = document.getElementById("key").innerText
+    $.post('/message_email',{Email:email,Message:message,Key:key},function(data){
+        if(data.Feedback == true){alert("message sent!")}else{alert("There is an error,Try it again!")}
+        
+    })
+}
