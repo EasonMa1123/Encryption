@@ -196,9 +196,9 @@ class Encrytion:
                #print(len(cipher_text_list),len(key_list))
                return "".join(plain_text)
             except:
-                print(key_list)
-                print((cipher_text_list))
-                print(len(cipher_text_list),len(key_list))
+                #print(key_list)
+                #print((cipher_text_list))
+                #print(len(cipher_text_list),len(key_list))
                 return "Invalid Password,unable to decrypte"
 
 '''
