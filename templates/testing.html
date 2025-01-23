@@ -24,6 +24,13 @@
         <input id="Number" type="number" placeholder="Maximum Power to split">
         <input id="max-text-length" type="number" placeholder="Maximum Text Length">
         <input type="number" id="trial_num" placeholder="Trial Time">
+        <div class="switch-toggle">
+            <input id="normal-scale" name="testing-setting-button" class="setting-button" type="radio" style="display: none;"  checked>
+            <label for="normal-scale" class="setting-button">Normal Scale</label>
+            
+            <input id="log-scale" name="testing-setting-button"  class="setting-button" type="radio" style="display: none;" >
+            <label for="log-scale"class="setting-button">Log10 Scale</label>
+        </div>
         <button onclick="CreateChart()">Start Generate Chart</button>
     </div>
     <button onclick="return_home()">Back Home</button>

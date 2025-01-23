@@ -36,6 +36,12 @@ function drawChart() {
           }
           Graph_data.addRow(row);
       }
+      if(document.getElementById("normal-scale").checked){
+        var scale_type = ''
+      }else{
+        var scale_type = 'log'
+      }
+      
 
       // Set chart options
       var options = {
@@ -46,6 +52,7 @@ function drawChart() {
           },
           hAxis:{
             title:"String Length",
+            scaleType: scale_type
             
           }
       };
