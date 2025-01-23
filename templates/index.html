@@ -109,11 +109,12 @@
             <progress id="progressBar" value="0" max="100" style="display:none;"></progress>
             <p>Encrypted Message: <span id="encrypted_message" class="message"></span></p>
             <p>Key: <span id="key" class="message"></span></p>
-            <div>
-                <input type="email" id="Receiver_email">
-                <button onclick="send_message_email()">Send Message</button>
+            <div class="tooltip">
+                <input type="email" class="tooltip" id="Receiver_email"><span class="tooltiptext">Please do not send a large message!</span>
+                
             
             </div>
+            <button onclick="send_message_email()">Send Message</button>
             <button onclick="Copy_text('encrypted_message')">Copy Message</button>
             <button onclick="Copy_text('key')">Copy Key</button>
             <button onclick="Create_txt_file('encrypted_message')">Download Encrypted Message/Data</button>
