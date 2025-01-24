@@ -74,14 +74,14 @@ class encryption_test:
         return sum(en_run_times)/len(en_run_times),sum(de_run_times)/len(de_run_times)
 
 
-    def test(self,power:int,min_power:int,maximum_text_length:int,trial_num:int,str_grow:str,debug:bool):
+    def test(self,power:int,min_power:int,maximum_text_length:int,trial_num:int,str_grow:str,str_index:int,debug:bool):
         Enc_times = ""
         for j in range(min_power,power+1):
             for i in range(maximum_text_length+1):
                 if str_grow == "exp":
-                    Enc_time,dec_time = self.check_encryption(10**i,10**j,trial_num,debug)
+                    Enc_time,dec_time = self.check_encryption(str_index**i,10**j,trial_num,debug)
                 elif str_grow == "mul":
-                    Enc_time,dec_time = self.check_encryption(10*i,10**j,trial_num,debug)
+                    Enc_time,dec_time = self.check_encryption(str_index*i,10**j,trial_num,debug)
                 if i<=maximum_text_length-1:
                     Enc_times+=f'{str(Enc_time)}:'
                 else:

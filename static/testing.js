@@ -13,13 +13,15 @@ function drawChart() {
     var str_length_grow = "exp"
   } else{
     var str_length_grow = "mul"
-  }
+  };
+  var str_length_index = document.getElementById('str-length-index').value;
   // Make a POST request to fetch the data
   $.post('/encryption_testing', { Power: Power_input,
     max_text_length:max_text_length_input,
     min_power:min_Power_input,
     trial_num:trial_num,
-    Str_grow:str_length_grow}, function (data) {
+    Str_grow:str_length_grow,
+    str_index:str_length_index}, function (data) {
       var Graph_data = new google.visualization.DataTable();
 
       // Define columns
@@ -40,9 +42,9 @@ function drawChart() {
       // Create rows with X values and line values
       for (var x = 0; x < maxPoints; x++) {
         if (str_length_grow == "exp"){
-          var row = [10**x]; // First column is X
+          var row = [str_length_index**x]; // First column is X
         }else {
-          var row = [10*x];
+          var row = [str_length_index*x];
         }
           
           for (var i = 0; i < numLines; i++) {
