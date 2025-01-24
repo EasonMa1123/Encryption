@@ -18,12 +18,15 @@
 <body>
     <div id="container">
         <div id="myChart" style="width:100%; max-width:600px; height:500px;"></div>
+        <div id="result-div">
+            <a id="result-display"></a>
+        </div>
     </div>
     <div id="option-container">
-        <input id="min-power" type="number" placeholder="Minimum Power to split">
-        <input id="Number" type="number" placeholder="Maximum Power to split">
-        <input id="max-text-length" type="number" placeholder="Maximum Text Length">
-        <input type="number" id="trial_num" placeholder="Trial Time">
+        <input id="min-power" type="number" placeholder="Minimum 10^x to split">
+        <input id="Number" type="number" placeholder="Maximum 10^x to split">
+        <input id="max-text-length" type="number" placeholder="Maximum Text Length(10*x)">
+        <input type="number" id="trial_num" placeholder="Trial Time per each test point">
         <div class="switch-toggle">
             <input id="normal-scale" name="testing-setting-button" class="setting-button" type="radio" style="display: none;"  checked>
             <label for="normal-scale" class="setting-button">Normal Scale</label>

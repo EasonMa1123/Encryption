@@ -41,3 +41,8 @@ body {
     
     align-items: center;
 }
+#result-div{
+    background-color: #0d2f53;
+    color: white;
+    border-radius: 10px;
+}

@@ -44,7 +44,7 @@ function drawChart() {
 
       var trendlines = {};
       for (var i = 0; i < numLines; i++) {
-          trendlines[i] = {type: 'linear', visibleInLegend: true}; // You can customize the trendline type (linear, exponential, etc.)
+          trendlines[i] = {showR2: true, visibleInLegend: true}; // You can customize the trendline type (linear, exponential, etc.)
       }
       
 
@@ -66,7 +66,10 @@ function drawChart() {
       // Create and draw the chart
       var chart = new google.visualization.ScatterChart(document.getElementById('myChart'));
       chart.draw(Graph_data, options);
+      document.getElementById("result-display").innerHTML = `Min split ${min_Power_input} ,Max split ${Power_input} , Max String Length ${max_text_length_input} , Trial Time ${trial_num}`;
+      alert("Done!")
   });
+  
 }
 
 
