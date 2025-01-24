@@ -6,7 +6,7 @@
 
 function check_invalid_enter(){
     if(sessionStorage.getItem("Username") == null){
-        alert("get out")
+        alert("What are you doing in here,this is not your place,leave! Thank You :)")
         logout()
     }
 }
@@ -88,8 +88,8 @@ async function encryptMessage() {
     try {
         if (image_file) {
             var imageFileSizeKB = image_file.size / 1024; // Convert to KB
-            if (imageFileSizeKB > 1000) {
-                alert("Image file size exceeds the 1MB limit.");
+            if (imageFileSizeKB > 250) {
+                alert("Image file size exceeds the 250KB limit.");
                 return; // Reject and stop further processing
             }
             // Display loading text and show progress bar
@@ -281,4 +281,18 @@ function logout(){
     document.location.href = "/login";
     sessionStorage.setItem("",Username)
     sessionStorage.setItem("",Password)
+}
+
+
+function send_message_email(){
+    var email = document.getElementById("Receiver_email").value
+    const message = document.getElementById("encrypted_message").innerText
+    const key = document.getElementById("key").innerText
+    if (message == ""){
+        alert("No message to send!")
+    }else{
+        $.post('/message_email',{Email:email,Message:message,Key:key},function(data){
+            if(data.Feedback == true){alert("message sent!")}else{alert("There is an error,Try it again!")}
+            
+        })}
 }

@@ -8,7 +8,7 @@ class email_send:
         self.password = "kpfo ebfp cmqv lfem"
 
 
-    def send_email(self,subject:str,message:str,recipient:str):
+    def send_email(self,subject:str,head:str,message:str,recipient:str):
 
         email_message = '''
 	<!DOCTYPE html>
@@ -30,7 +30,7 @@ class email_send:
 		<table role="presentation" width="100%">
 			<tr>
 				<td bgcolor="#051014" align="center" style="color: white;">
-					<h1> Your verification Code:</h1>
+					<h1> '''+head+'''</h1>
 				</td>
 		</table>
 		<table role="presentation" border="0" cellpadding="0" cellspacing="10px" style="padding: 30px 30px 30px 60px;"></table>
@@ -52,6 +52,9 @@ class email_send:
         msg.set_content(email_message, subtype='html')
         with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp_server:
             smtp_server.login(self.sender, self.password)
-            smtp_server.sendmail(self.sender, recipient, msg.as_string())
-            print("Message sent!")
+            try:
+                   smtp_server.sendmail(self.sender, recipient, msg.as_string())
+                   return True
+            except:
+                   return False
 

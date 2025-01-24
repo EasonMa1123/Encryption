@@ -8,18 +8,11 @@ function set_bright_theme(){
     document.body.style.backgroundImage = "linear-gradient(#113f70,#ffffff,#113f70)";
 }
 
-function set_big_font(){
-    document.body.style.fontSize = "large"
-}
-
-function set_medium_font(){
-    document.body.style.fontSize = "medium"
+function set_font_size(size){
+    document.body.style.fontSize = `${size}px`
 }
 
 
-function set_small_font(){
-    document.body.style.fontSize = "small"
-}
 
 
 function ChangeUserName(){
@@ -73,13 +66,16 @@ function save_setting(){
 
     
         if (document.body.style.backgroundImage == "linear-gradient(rgb(17, 63, 112), rgb(255, 255, 255), rgb(17, 63, 112))"){
-            var Theme = "bright"
-        }else if(document.body.style.backgroundImage == "linear-gradient(rgb(8, 31, 55), rgb(13, 47, 83), rgb(8, 31, 55))"){
-            var Theme = "dark"
+            const Theme = "bright"
+            const FontSize = document.body.style.fontSize;
+            $.post('/update_user_setting',{id:ID,theme:Theme,fontSize:FontSize});
+        }else {            
+            const Theme = "dark"
+            const FontSize = document.body.style.fontSize;
+            $.post('/update_user_setting',{id:ID,theme:Theme,fontSize:FontSize});
         } 
-
-        const FontSize = document.body.style.fontSize;
-        $.post('/update_user_setting',{id:ID,theme:Theme,fontSize:FontSize});
+        
+        
     })
 }
 
@@ -99,13 +95,10 @@ function access_setting(){
                     document.getElementById('dark-theme').checked = true;
                 }
                 document.body.style.fontSize = FontSize
-                if (data.Fontsize == "large"){
-                    document.getElementById('big-font').checked = true;
-                } else if (data.Fontsize == "medium"){
-                    document.getElementById('medium-font').checked = true;
-                } else if (data.Fontsize == "small"){
-                    document.getElementById('small-font').checked = true;
-                }
+                
+                document.getElementById("font-size").value = Number(FontSize.substring(2,-2))
+                
+                
             }
         })
     })
