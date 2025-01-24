@@ -78,7 +78,7 @@ class encryption_test:
         Enc_times = ""
         for j in range(min_power,power+1):
             for i in range(maximum_text_length+1):
-                Enc_time,dec_time = self.check_encryption(10**i,10**j,trial_num,debug)
+                Enc_time,dec_time = self.check_encryption(10*i,10**j,trial_num,debug)
                 if i<=maximum_text_length-1:
                     Enc_times+=f'{str(Enc_time)}:'
                 else:
