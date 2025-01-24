@@ -30,7 +30,7 @@ function drawChart() {
 
       // Create rows with X values and line values
       for (var x = 0; x < maxPoints; x++) {
-          let row = [10**x]; // First column is X
+          let row = [10*x]; // First column is X
           for (var i = 0; i < numLines; i++) {
               row.push(parsedData[i][x] || null); // Add Y values or null for missing points
           }
@@ -40,6 +40,11 @@ function drawChart() {
         var scale_type = ''
       }else{
         var scale_type = 'log'
+      }
+
+      var trendlines = {};
+      for (var i = 0; i < numLines; i++) {
+          trendlines[i] = {type: 'linear', visibleInLegend: true}; // You can customize the trendline type (linear, exponential, etc.)
       }
       
 
@@ -54,11 +59,12 @@ function drawChart() {
             title:"String Length",
             scaleType: scale_type
             
-          }
+          },
+          trendlines: trendlines
       };
 
       // Create and draw the chart
-      var chart = new google.visualization.LineChart(document.getElementById('myChart'));
+      var chart = new google.visualization.ScatterChart(document.getElementById('myChart'));
       chart.draw(Graph_data, options);
   });
 }
