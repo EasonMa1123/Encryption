@@ -5,6 +5,7 @@ from password_strength import password_strength_checker
 from email_sender import email_send
 
 
+
 app = Flask(__name__)
 
 
@@ -125,8 +126,5 @@ def email_verification():
     return jsonify({"Code":code})
 
 if __name__ == '__main__':
-    try:
-        app.run(debug=False)
-    except:
-        app.run(debug=False,port=5001)
+    app.run(host="0.0.0.0",port=8080)
 
