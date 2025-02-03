@@ -126,7 +126,7 @@ def email_verification():
 
 if __name__ == '__main__':
     try:
-        app.run(debug=True)
+        app.run(debug=False)
     except:
-        app.run(debug=True,port=5001)
+        app.run(debug=False,port=5001)
 
