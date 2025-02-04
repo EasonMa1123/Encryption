@@ -43,14 +43,17 @@ function confirm_new_user_data(){
 
 
 function submit_new_user_data(){
+    alert("hi")
     let user_code = document.getElementById("code-input").value
     let DataCode = sessionStorage.getItem("code")
     let Username = document.getElementById("signup-Username").value
     let Password = document.getElementById("signup-Password").value
     const Confirm_email = document.getElementById("signup-email").value
-
+    alert("hi2")
     if (Number(user_code) == Number(DataCode)){
-        $.post('/insertNewUser',{ userName: Username, Password:Password,Email:Confirm_emailtoLowerCase() }, function(data) {
+        alert("hi3")
+        $.post('/insertNewUser',{ userName: Username, Password:Password,Email:Confirm_email.toLowerCase() }, function(data) {
+            alert("hi4")
             if (data.Feedback == "Invalid Username,This Username had been used "){
                 alert("Invalid Username,This Username had been used ")
             } else {
