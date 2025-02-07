@@ -1,4 +1,5 @@
 import sqlite3
+from encryption_V2 import Encrytion as ENC
 
 class DataRecord:
     def __init__(self):
@@ -27,7 +28,7 @@ class DataRecord:
     def check_user(self,user):
         self.cc.execute('''SELECT UserName FROM UserData ''')
         user_in_DataBase = [row[0] for row in self.cc.fetchall()]
-        if user in user_in_DataBase:
+        if self.encrypting_data(user) in user_in_DataBase:
             return True
         else:
             return False
@@ -36,37 +37,37 @@ class DataRecord:
     def insert_new_user(self,user,password,Email):
         self.cc.execute('SELECT COUNT(id) FROM UserData')
         id = (self.cc.fetchall()[0][0])+1
-        self.cc.execute('INSERT INTO UserData (id, UserName ,Password,Email ) VALUES (? , ?, ?,?);', (id,user, password,Email))
+        self.cc.execute('INSERT INTO UserData (id, UserName ,Password,Email ) VALUES (? , ?, ?,?);', (id,self.encrypting_data(user), self.encrypting_data(password),self.encrypting_data(Email)))
         self.DataBase.commit()
     
     def check_password(self,user,password):
-        execute_text = f'SELECT Password FROM UserData WHERE UserName = "{user}";'
+        execute_text = f'SELECT Password FROM UserData WHERE UserName = "{self.encrypting_data(user)}";'
         self.cc.execute(execute_text)
         password_in_db = [row[0] for row in self.cc.fetchall()]
-        if password in password_in_db:
+        if self.encrypting_data(password) in password_in_db:
             return True
         else:
             return False
         
     def access_account(self,user):
-        execute_text = f'SELECT * FROM UserData WHERE UserName = "{user}"'
+        execute_text = f'SELECT * FROM UserData WHERE UserName = "{self.encrypting_data(user)}"'
         self.cc.execute(execute_text)
         data = [row for row in self.cc.fetchall()]
         return[data[0][0],data[0][1],data[0][2],data[0][3]]
     
     def update_account_Username(self,new_username,UserID):
-        execute_text = f'UPDATE UserData SET UserName="{new_username}" WHERE id = "{UserID}"'
+        execute_text = f'UPDATE UserData SET UserName="{self.encrypting_data(new_username)}" WHERE id = "{UserID}"'
         self.cc.execute(execute_text)
         self.DataBase.commit()
 
     def update_account_Password(self,new_Password,UserID):
-        execute_text = f'UPDATE UserData SET Password="{new_Password}" WHERE id = "{UserID}"'
+        execute_text = f'UPDATE UserData SET Password="{self.encrypting_data(new_Password)}" WHERE id = "{UserID}"'
         self.cc.execute(execute_text)
         self.DataBase.commit()
 
     def update_account_Email(self,new_email,UserID):
         try:
-            execute_text = f'UPDATE UserData SET Email="{new_email}" WHERE id = "{UserID}"'
+            execute_text = f'UPDATE UserData SET Email="{self.encrypting_data(new_email)}" WHERE id = "{UserID}"'
             self.cc.execute(execute_text)
             self.DataBase.commit()
             return True
@@ -97,11 +98,13 @@ class DataRecord:
                 return [i for i in data[0]]
             except:
                 return None
-    
 
+    def encrypting_data(self,data):
+        return ENC().hashing(data)
+        
+    def unencrypting_data(self,data):
+        return ENC().unhashing(data)
 
-
-    
 
         
 
