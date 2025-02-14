@@ -53,7 +53,13 @@
                     <button id="Password-change-button" onclick="ChangePassword()">Save change</button>
 
                 </div>
-                
+                <div id="change-email" class="setting-section">
+                    <a>Change Email</a>
+                    <input type="email" id="New-email" placeholder="New Email" autocomplete="off" readonly onclick="this.removeAttribute('readonly');">
+                    <button id="Email-change-button" onclick="send_ver_email()">Send Verification Code</button>
+                    <input id="Verification-code" placeholder="Enter the code" style="display: none;">
+                    <button id="email-confirmation-button"onclick="check_ver_code()" style="display: none;">Save Change</button>
+                </div>
                 <button onclick="setting_off() ">Exit</button>
             </div>
         </div>
@@ -130,6 +136,7 @@
             </div>
             <p>Decrypted Message: <span id="decrypted_message" class="message"></span></p>
             <button id="download_decrypt"onclick="Create_txt_file('decrypted_message')">Download decrypted Message/Data</button>
+            <button onclick="reset_file()">Reset Data</button>
         </div>
         <div id="Option_button">
             

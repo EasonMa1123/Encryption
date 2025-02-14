@@ -1,8 +1,12 @@
 from encryption_V2 import Encrytion
 import random
 import time as Time
+
 import secrets
 import string
+
+
+
 
 
 
@@ -33,6 +37,7 @@ class encryption_test:
             if text_length < 10:
                 plain_text = self.generate_random_string(5)
             else:
+
                 plain_text = self.generate_random_string(text_length)
 
             
@@ -91,3 +96,4 @@ class encryption_test:
 
 
         return Enc_times
+

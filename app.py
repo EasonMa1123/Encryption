@@ -2,7 +2,12 @@ from flask import Flask, render_template, request, jsonify
 from encryption_V2 import Encrytion
 from User_database import DataRecord
 from password_strength import password_strength_checker
+
 from encryption_testing import encryption_test
+
+from email_sender import email_send
+
+
 
 
 app = Flask(__name__)
@@ -58,10 +63,12 @@ def Check_user_password():
 def insert_new_user():
     userName = request.form['userName']
     password = request.form['Password']
+    Email = request.form['Email']
     if DataRecord().check_user(userName):
-        return  jsonify({"Feedback":"Invalid Username,This Username had been used "}) 
+        return jsonify({"Feedback":"Invalid Username,This Username had been used "}) 
     else:
-        DataRecord().insert_new_user(userName,password)
+        DataRecord().insert_new_user(userName,password,Email)
+        return jsonify({"Feedback":"Success"})
 
 @app.route('/password_strength', methods = ['POST'])
 def password_strength_check():
@@ -72,7 +79,10 @@ def password_strength_check():
 @app.route('/access_account_detail', methods = ['POST'])
 def access_account_detail():
     Username = request.form['Username']
-    return jsonify({"ID":DataRecord().access_account(Username)[0],"Username":DataRecord().access_account(Username)[1],"Password":DataRecord().access_account(Username)[2]})
+    return jsonify({"ID":DataRecord().access_account(Username)[0],
+                    "Username":DataRecord().access_account(Username)[1],
+                    "Password":DataRecord().access_account(Username)[2],
+                    "email":DataRecord().access_account(Username)[3]})
 
 @app.route('/update_account_username',methods = ['POST'])
 def update_account_username():
@@ -98,6 +108,12 @@ def update_user_setting():
     DataRecord().update_account_setting(id,theme,fontsize)
     return jsonify({"Feedback":True})
 
+@app.route('/update_user_email',methods=['POST'])
+def update_user_email():
+    id = request.form["id"]
+    email = request.form["email"]
+    return jsonify({"Feedback":DataRecord().update_account_Email(email,id)})
+
 @app.route('/access_user_setting',methods = ['POST'])
 def access_user_setting():
     id = request.form['id']
@@ -106,6 +122,7 @@ def access_user_setting():
         return jsonify({"Theme":None,"Fontsize":None})
     else:
         return jsonify({"Theme":data[1],"Fontsize":data[2]})
+
 
 @app.route('/encryption_testing',methods = ['POST'])
 def encryption_testing():
@@ -118,8 +135,18 @@ def encryption_testing():
     result = encryption_test().test(int(power),int(min_power),int(max_text_length),int(trial_num),str_grow,int(str_length_index),False)
     return jsonify({"graphData":result})
 
+
+@app.route('/email_verification',methods = ['POST'])
+def email_verification():
+    import random
+    email = request.form['Email']
+    code = random.randint(10000,99999)
+    Title = "email Verification"
+    Body = f'{code}'
+    email_send().send_email(Title,Body,email)
+    return jsonify({"Code":code})
+
 if __name__ == '__main__':
-    try:
-        app.run(debug=True)
-    except:
-        app.run(debug=True,port=5001)
+    app.run(host="0.0.0.0",port=8080)
+
+

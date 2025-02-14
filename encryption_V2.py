@@ -168,6 +168,12 @@ class Encrytion:
     def decrypt_key(self,cipher_key):
         
         return (self.decrypter(cipher_key,False,self.init_key)).split(self.split_key)
+    
+    def hashing(self,data):
+        return self.encrypter(data,False,False,self.init_key)[0]
+    
+    def unhashing(self,data):
+        return self.decrypter(data,False,self.init_key)
 
     def encryption(self,message, password):
         if len(message)<self.split_amount:

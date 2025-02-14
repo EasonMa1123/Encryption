@@ -1,6 +1,6 @@
 To Fully use the Project,please install the following Lilbary:
 1) Flask
-2) zlib
+
 
 Step to use encryption:
 1) login in/sign up(if first time)
@@ -9,3 +9,4 @@ Step to use encryption:
 4) Click button "Encrytpe" to encrypt data
 5) recommand: download the cypher text,if  not copy the text
 6) copy the key
+
