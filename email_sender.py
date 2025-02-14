@@ -25,7 +25,7 @@ class email_send:
 		#email{margin:auto;width:600px;background-color:#fff}
 		</style>
 	</head>
-	<body bgcolor="#F5F8FA" style="width: 100%; font-family:Lato, sans-serif; font-size:18px;">
+	<body bgcolor="#F5F8FA" style="width: 100%; font-family:Lato, sans-serif; font-size:18px;margin: auto;">
 	<div id="email">
 		<table role="presentation" width="100%">
 			<tr>
