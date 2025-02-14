@@ -2,7 +2,11 @@ from flask import Flask, render_template, request, jsonify
 from encryption_V2 import Encrytion
 from User_database import DataRecord
 from password_strength import password_strength_checker
+
+from encryption_testing import encryption_test
+
 from email_sender import email_send
+
 
 
 
@@ -21,6 +25,10 @@ def home():
 @app.route('/index')
 def index():
     return render_template('index.html')
+
+@app.route('/testing')
+def testing():
+    return render_template('testing.html')
 
 
 
@@ -115,6 +123,19 @@ def access_user_setting():
     else:
         return jsonify({"Theme":data[1],"Fontsize":data[2]})
 
+
+@app.route('/encryption_testing',methods = ['POST'])
+def encryption_testing():
+    power = request.form['Power']
+    max_text_length = request.form['max_text_length']
+    min_power = request.form['min_power']
+    trial_num = request.form['trial_num']
+    str_grow = request.form['Str_grow']
+    str_length_index = request.form['str_index']
+    result = encryption_test().test(int(power),int(min_power),int(max_text_length),int(trial_num),str_grow,int(str_length_index),False)
+    return jsonify({"graphData":result})
+
+
 @app.route('/email_verification',methods = ['POST'])
 def email_verification():
     import random
@@ -127,4 +148,5 @@ def email_verification():
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0",port=8080)
+
 

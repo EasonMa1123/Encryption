@@ -1,3 +1,6 @@
+function direct_to_testing(){
+    document.location.href = "/testing";
+}
 
 
 
