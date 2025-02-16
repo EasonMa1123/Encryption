@@ -5,7 +5,7 @@ import concurrent.futures
 
 class Encrytion:
     
-    def __init__(self,split_amount = 100):
+    def __init__(self,split_amount = 6):
         
         self.slots = ["abcdefghijklmnMNOPQRSTUVWXYZopqrstuvwxyzABCDEFGHIJKL!@#$%^&*()_+-=[]{|\;}:',./<>?`~1234567890 ",
                       "ABCDEFGHI@#$%^&*()_+-=[]{|\;}:',./<>?`~JKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!1234567890 ",
@@ -124,15 +124,18 @@ class Encrytion:
     def remove_password(self, message):
         return message.split(self.split_key)[0]
 
-    def split_plain_text(self,message):
+    def split_plain_text(self, message):
         new_message = []
-        if len(message)%self.split_amount <= 3:
-            message += self.space
-
-        for i in range((len(message)//self.split_amount)+1):
-            new_message.append(message[self.split_amount*i:(self.split_amount*(i+1))])
         
+        if len(message) % self.split_amount != 0:  # Only pad if necessary
+            padding_needed = self.split_amount - (len(message) % self.split_amount)
+            message += " " * padding_needed  # Add the correct number of spaces
+
+        for i in range((len(message) // self.split_amount)):
+            new_message.append(message[self.split_amount * i:(self.split_amount * (i + 1))])
+
         return new_message
+
 
     def merge_cipher(self,message):
         cipher_text = ""
@@ -154,20 +157,29 @@ class Encrytion:
         for i in message:
             message_length +=1
 
-
+ 
         for i in message:
             if counter < message_length-1:
                 key += i[1]+self.split_key
             else:
                 key+=i[1]
             counter += 1
-        
-        return self.encrypter(key,False,False,self.init_key)[0]
+        key_list = self.split_plain_text(key)
+        init_key_list = [self.init_key for i in range((len(key)//self.split_amount)+1)]
+        default_key_list = [False for i in range((len(key)//self.split_amount)+1)]
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            Encrypted_list=list(executor.map(self.encrypter,key_list,default_key_list,default_key_list,init_key_list))
+        return self.merge_cipher(Encrypted_list)
 
 
     def decrypt_key(self,cipher_key):
-        
-        return (self.decrypter(cipher_key,False,self.init_key)).split(self.split_key)
+        cipher_key_list = self.split_cipher_text(cipher_key)
+        init_key_list = [self.init_key for i in range((len(cipher_key)//self.split_amount)+1)]
+        default_key_list = [False for i in range((len(cipher_key)//self.split_amount)+1)]
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            Encrypted_list=list(executor.map(self.decrypter,cipher_key_list,default_key_list,init_key_list))
+        #print(Encrypted_list)
+        return (("".join(Encrypted_list)).split(self.split_key))
     
     def hashing(self,data):
         return self.encrypter(data,False,False,self.init_key)[0]
@@ -208,11 +220,13 @@ class Encrytion:
                 return "Invalid Password,unable to decrypte"
 
 '''
-plain_text = "11223344556677889900"
+plain_text = "1122334455667788990qwe00qwe"
 print(len(plain_text))
 text,key = Encrytion().encryption(plain_text,"12")
-print(text,key)
+print(f'text: {text},\nkey: {key}')
+
 PT = Encrytion().unencryption(text,key,"12")
 print(PT)
+print(plain_text)
 print(len(PT))
 '''
