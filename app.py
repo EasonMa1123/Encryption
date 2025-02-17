@@ -147,6 +147,6 @@ def email_verification():
     return jsonify({"Code":code})
 
 if __name__ == '__main__':
-    app.run(port=8080,allow_unsafe_werkzeug=True)
+    app.run(debug=False,port=8080,host="0.0.0.0")
 
 
