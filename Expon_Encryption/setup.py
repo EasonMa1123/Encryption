@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name='ExponEncryption',
-    version='0.5.0',
+    version='0.6.0',
     author='Eason Ma',
     author_email='2easonma@gmail.com',  # Replace with your email
     description='A secure Python library for string encryption using exponential encryption algorithm',

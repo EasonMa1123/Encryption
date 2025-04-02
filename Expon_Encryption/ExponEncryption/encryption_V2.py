@@ -5,7 +5,7 @@ import concurrent.futures
 
 class Encrytion:
     
-    def __init__(self,split_amount = 6):
+    def __init__(self,split_amount = 100):
         
         self.slots = ["abcdefghijklmnMNOPQRSTUVWXYZopqrstuvwxyzABCDEFGHIJKL!@#$%^&*()_+-=[]{|\;}:',./<>?`~1234567890 ",
                       "ABCDEFGHI@#$%^&*()_+-=[]{|\;}:',./<>?`~JKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!1234567890 ",
@@ -218,15 +218,3 @@ class Encrytion:
                 print((cipher_text_list))
                 print(len(cipher_text_list),len(key_list))
                 return "Invalid Password,unable to decrypte"
-
-'''
-plain_text = "1122334455667788990qwe00qwe"
-print(len(plain_text))
-text,key = Encrytion().encryption(plain_text,"12")
-print(f'text: {text},\nkey: {key}')
-
-PT = Encrytion().unencryption(text,key,"12")
-print(PT)
-print(plain_text)
-print(len(PT))
-'''
