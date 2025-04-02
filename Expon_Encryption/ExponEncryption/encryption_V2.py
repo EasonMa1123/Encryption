@@ -199,7 +199,7 @@ class Encrytion:
                 
             return self.merge_cipher(Encrypted_list),self.encrypt_key(Encrypted_list)
     
-    def unencryption(self,message, key, password):
+    def decryption(self,message, key, password):
         if self.split_cipher_text(message) == False:
             return self.single_decryption(message, key, password)
         else:
