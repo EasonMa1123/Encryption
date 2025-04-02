@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling >= 1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "Expon_Encryption_EasonMa"
+version = "0.0.1"
+authors = [
+  { name="EasonMa, email="easonma2311@gmail.com" },
+]
+description = "An Encryption "
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+Homepage = "https://github.com/EasonMa1123/Encryption"
+Issues = "https://github.com/EasonMa1123/Encryption/issues"

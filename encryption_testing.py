@@ -1,4 +1,4 @@
-from encryption_V2 import Encrytion
+from mypythonlib.encryption_V2 import Encrytion
 import random
 import time as Time
 
