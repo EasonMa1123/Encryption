@@ -1,0 +1,12 @@
+Metadata-Version: 2.1
+Name: ExponEncryption
+Version: 0.0.1
+Summary: ExponEncryption is a powerful yet lightweight Python library designed for secure and efficient data encryption using exponential cryptographic techniques.
+Home-page: https://github.com/EasonMa1123/Encryption
+Author: Eason Ma
+License: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+License-File: LICENSE.md
