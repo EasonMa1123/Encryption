@@ -5,7 +5,7 @@ import concurrent.futures
 
 class Encrytion:
     
-    def __init__(self,split_amount = 100):
+    def __init__(self,split_amount = 100,request_key=None):
         
         self.slots = ["abcdefghijklmnMNOPQRSTUVWXYZopqrstuvwxyzABCDEFGHIJKL!@#$%^&*()_+-=[]{|\;}:',./<>?`~1234567890 ",
                       "ABCDEFGHI@#$%^&*()_+-=[]{|\;}:',./<>?`~JKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!1234567890 ",
@@ -32,7 +32,7 @@ class Encrytion:
         self.init_key = 2
         self.space = "   "
 
-    def encrypter(self, message, password, key,init_key):
+    def encrypter(self, message, password, key,init_key,request_encrypt_key):
         if init_key:
             slot_num = init_key
             random_number = init_key
@@ -50,6 +50,10 @@ class Encrytion:
             message += self.split_key + str(password)
         if key:
             message += self.split_key + str(key)
+
+        if request_encrypt_key:
+            message += self.split_key + str(self.request_key)
+
 
         for word in message:
             word_location = slot.find(word)
@@ -86,17 +90,17 @@ class Encrytion:
 
     
 
-    def single_encryption(self, message, password):
+    def single_encryption(self, message, password,request_encrypt_key):
 
 
         
-        single_encrypted_message, key = self.encrypter(message, password=None, key=None,init_key=None)
+        single_encrypted_message, key = self.encrypter(message, password=None, key=None,init_key=None,request_encrypt_key=None)
 
-        double_encrypted_data, double_key = self.encrypter(single_encrypted_message, password, key,init_key=None)
+        double_encrypted_data, double_key = self.encrypter(single_encrypted_message, password, key,init_key=None,request_encrypt_key)
         return double_encrypted_data, double_key
 
-    def single_decryption(self, message, key, password):
-        single_decrypted_message = self.decrypter(message, key,False)
+    def single_decryption(self, message, key, password ,request_encrypt_key):
+        single_decrypted_message = self.decrypter(message, key,False,False)
         if not single_decrypted_message:
             
             return 405
@@ -187,27 +191,31 @@ class Encrytion:
     def unhashing(self,data):
         return self.decrypter(data,False,self.init_key)
 
-    def encryption(self,message, password):
+    def encryption(self,message, password,request_encrypt_key):
         if len(message)<self.split_amount:
             return self.single_encryption(message,password)
         else:
             message_list = self.split_plain_text(message)
             password_list = [password for i in range((len(message)//self.split_amount)+1)]
+            if request_encrypt_key not None:
+                request_encrypt_key_list = [request_encrypt_key for i in range((len(message)//self.split_amount)+1)]
             with concurrent.futures.ThreadPoolExecutor() as executor:
                 Encrypted_list=list(executor.map(self.single_encryption, message_list,password_list))
 
                 
             return self.merge_cipher(Encrypted_list),self.encrypt_key(Encrypted_list)
     
-    def decryption(self,message, key, password):
+    def decryption(self,message, key, password,request_encrypt_key):
         if self.split_cipher_text(message) == False:
             return self.single_decryption(message, key, password)
         else:
             cipher_text_list = self.split_cipher_text(message)
             key_list = self.decrypt_key(key)
             password_list = [password for i in range((len(message)//self.split_amount)+1)]
+            if request_encrypt_key not None:
+                request_encrypt_key_list = [request_encrypt_key for i in range((len(message)//self.split_amount)+1)]
             with concurrent.futures.ThreadPoolExecutor() as executor:
-               plain_text_list=list(executor.map(self.single_decryption, cipher_text_list,key_list,password_list))
+               plain_text_list=list(executor.map(self.single_decryption, cipher_text_list,key_list,password_list,request_encrypt_key_list))
             try:
                plain_text = "".join(plain_text_list)
                plain_text = list(plain_text)[:-(len(self.space)-1)]
