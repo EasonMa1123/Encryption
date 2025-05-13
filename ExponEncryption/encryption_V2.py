@@ -5,7 +5,7 @@ import concurrent.futures
 
 class Encrytion:
     
-    def __init__(self,split_amount = 100):
+    def __init__(self,split_amount = 10,request_key = None):
         
         self.slots = ["abcdefghijklmnMNOPQRSTUVWXYZopqrstuvwxyzABCDEFGHIJKL!@#$%^&*()_+-=[]{|\;}:',./<>?`~1234567890 ",
                       "ABCDEFGHI@#$%^&*()_+-=[]{|\;}:',./<>?`~JKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!1234567890 ",
@@ -25,18 +25,20 @@ class Encrytion:
                       ]
         
 
-
+        self.request_key = request_key
         self.letter = ""
         self.split_key = "~~123%67"
         self.split_amount = split_amount
         self.init_key = 2
         self.space = "   "
 
-    def encrypter(self, message, password, key,init_key):
+    def encrypter(self, message:str, password:str, key:str,init_key:str,requestKey=False):
         if init_key:
             slot_num = init_key
             random_number = init_key
         else:
+            if len(message)<2:
+                message += " "
             slot_num = random.randint(0, len(self.slots) - 1)
             random_number = random.randint(2, len(message))
 
@@ -50,6 +52,8 @@ class Encrytion:
             message += self.split_key + str(password)
         if key:
             message += self.split_key + str(key)
+        if self.request_key and requestKey:
+            message += self.split_key + str(self.request_key)
 
         for word in message:
             word_location = slot.find(word)
@@ -92,7 +96,7 @@ class Encrytion:
         
         single_encrypted_message, key = self.encrypter(message, password=None, key=None,init_key=None)
 
-        double_encrypted_data, double_key = self.encrypter(single_encrypted_message, password, key,init_key=None)
+        double_encrypted_data, double_key = self.encrypter(single_encrypted_message, password, key,init_key=None,requestKey=True)
         return double_encrypted_data, double_key
 
     def single_decryption(self, message, key, password):
@@ -102,10 +106,17 @@ class Encrytion:
             return 405
         
         correct = self.check_password(single_decrypted_message, password)
+
         if not correct:
             
             return 405
         
+        check = self.check_request_key(single_decrypted_message)
+
+        if not check:
+            
+            return 405
+
         second_key = self.get_second_key(single_decrypted_message)
         single_decrypted_message = self.remove_password(single_decrypted_message)
         
@@ -113,13 +124,22 @@ class Encrytion:
 
     def check_password(self, message, password):
         parts = message.split(self.split_key)
+        
         try:
-            return parts[-2] == password
+            return parts[-3] == password
+        except IndexError:
+            return False
+        
+
+    def check_request_key(self,message):
+        parts = message.split(self.split_key)
+        try:
+            return parts[-1] == self.request_key
         except IndexError:
             return False
 
     def get_second_key(self, message):
-        return message.split(self.split_key)[-1]
+        return message.split(self.split_key)[-2]
 
     def remove_password(self, message):
         return message.split(self.split_key)[0]
@@ -214,7 +234,4 @@ class Encrytion:
                #print(len(cipher_text_list),len(key_list))
                return "".join(plain_text)
             except:
-                print(key_list)
-                print((cipher_text_list))
-                print(len(cipher_text_list),len(key_list))
-                return "Invalid Password,unable to decrypte"
+                return "Invalid Password/request key,unable to decrypte"
