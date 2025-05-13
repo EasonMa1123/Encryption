@@ -5,7 +5,7 @@ import concurrent.futures
 
 class Encrytion:
     
-    def __init__(self,split_amount = 10,request_key = None):
+    def __init__(self,split_amount = 100,request_key = None):
         
         self.slots = ["abcdefghijklmnMNOPQRSTUVWXYZopqrstuvwxyzABCDEFGHIJKL!@#$%^&*()_+-=[]{|\;}:',./<>?`~1234567890 ",
                       "ABCDEFGHI@#$%^&*()_+-=[]{|\;}:',./<>?`~JKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!1234567890 ",
